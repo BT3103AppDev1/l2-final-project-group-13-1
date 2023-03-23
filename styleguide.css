@@ -1,0 +1,262 @@
+@import
+url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,500");
+
+.screen a {
+    display: contents;
+    text-decoration: none;
+}
+
+.container-center-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    pointer-events: none;
+    width:100%;
+}
+
+.container-center-horizontal > * {
+    flex-shrink: 0;
+    pointer-events: auto;
+}
+
+.valign-text-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+:root {
+    --black: rgba(0,0,0,1);
+    --statos: rgba(0,7,65,1);
+    --eerie-black: rgba(26,26,26,1);
+    --mine-shaft: rgba(51, 51, 51, 1);
+    --chateau-green: rgba(52, 168, 83, 1);
+    --gray: rgba(127, 127, 127, 1);
+    --bon-jour: rgba(224, 224, 224, 1);
+    --flamingo: rgba(241, 90, 40, 1);
+    --concrete: rgba(242, 242, 242, 1);
+    --blaze-orange: rgba(247, 91, 11, 1);
+    --white: rgba(255, 255, 255, 1);
+
+    --font-size-xs: 13px;
+    --font-size-s: 14px;
+    --font-size-m: 16px;
+    --font-size-l: 17px;
+    --font-size-xl: 55px;
+    --font-size-xxl: 22px;
+    --font-size-xxxl: 24px;
+    --font-size-12: 20px;
+
+    --font-family-poppins: "Poppins";
+    --font-family-poppins-light: "Poppins-Light";
+    --font-family-roboto: "Roboto";
+
+}
+
+
+.poppins-medium-white-16px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.poppins-normal-stratos-16px {
+    color: var(--stratos);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-normal-white-13px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-medium-white-17px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-l);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.poppins-light-gray-14px {
+    color: var(--gray);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-s);
+    font-weight: 300;
+    font-style: normal;
+}
+
+.poppins-normal-white-22px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxl);
+    font-weight: 400;
+    font-size: normal;
+}
+
+.poppins-bold-black-17px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-bold-flamingo-22px {
+    color: var(--flamingo);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-bold-flamingo-36px {
+    color: var(--flamingo);
+    font-family: var(--font-family-poppins);
+    font-size: 36px;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-medium-flamingo-14px {
+    color: var(--flamingo);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-s);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-normal-gray-14px {
+    color: var(--gray);
+    font-family: var(--font-family-roboto);
+    font-size: var(--font-size-s);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-bold-black-20px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-12);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-medium-mine-shaft-14px {
+    color: var(--mine-shaft);
+    font-family: var(--font-family-roboto);
+    font-size: var(--font-size-s);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-normal-mine-shaft-14px {
+    color: var(--mine-shaft);
+    font-family: var(--font-family-roboto);
+    font-size: var(--font-size-s);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-bold-white-22px {
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-normal-black-17px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-l);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-bold-concrete-16px {
+    color: var(--concrete);
+    font-family: var(--font-family-roboto);
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-normal-white-16px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-normal-black-20px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-12);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-normal-black-16px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.poppins-bold-chateau-green-24px {
+    color: var(--chateau-green);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxxl);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-light-gray-14px {
+    color: var(--gray);
+    font-family: var(--font-family-poppins-light);
+    font-size: var(--font-size-s);
+    font-weight: 300;
+    font-style: normal;
+}
+
+.poppins-normal-blaze-orange-22px {
+    color: var(--blaze-orange);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxl);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-medium-white-14px {
+    font-family: var(--font-family-roboto);
+    font-size: var(--font-size-s);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.poppins-bold-black-24px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-xxxl);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.poppins-bold-white-25px {
+    color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: 25px;
+    font-weight: 700;
+    font-style: normal;
+}
+
