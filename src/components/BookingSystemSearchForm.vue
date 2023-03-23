@@ -3,7 +3,7 @@
      <form class="search-form" @submit.prevent="search">
         <div class ="search-form-container">
             <div class ="search-form-container-location">
-                <!-- <div class="location"> -->
+                <div class="location"> 
                     <div class="search-form-container-location-box valign-text-middle">
                         <label>
                             <span class="roboto-medium-mine-shaft-14px">Location</span>
@@ -16,7 +16,7 @@
                             </select>
                             </div>
                     </div>
-                <!-- </div> -->
+                </div> 
             </div>
             <div class ="overlap-group1-1">
                 <div class="residence-1">
