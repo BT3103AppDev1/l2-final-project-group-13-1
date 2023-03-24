@@ -1,3 +1,4 @@
+
 <template>
     <div class = "booking-system-search-form">
      <form class="search-form" @submit.prevent="search">
@@ -11,7 +12,7 @@
                         </label>
                         <div class="search-form-container-location-input">
                             <img class="image-location" src="../assets/location.svg" alt="image-location" />
-                            <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px">
+                            <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
                                 <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
                             </select>
                             </div>
@@ -27,7 +28,11 @@
                         </label>
                     </div>
                         <div class="search-form-container-numpax-input">
-                            <input type="number" id="quantity" v-model.number="selectedNumPax" :min="4" :max="10" :step="2" class="valign-text-middle roboto-normal-gray-14px">
+                            <select v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" required>
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="10">10</option>
+                            </select>
                         </div>
                 </div> 
             </div>
@@ -41,6 +46,8 @@
                 </div>
                 <div class ="search-form-container-datetime-input">
                     <div class="data">
+                        <div>
+                        </div>
                         <div class="search-form-container-datetime-input-date">
                             <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
                             <span class="valign-text-middle roboto-normal-mine-shaft-14px">Mon 05/12</span>
@@ -61,11 +68,17 @@
                     </span>
                 </div>
                 <div class="search-form-container-duration-input">
-                    <span class=" valign-text-middle roboto-normal-gray-14px">1 Hour</span>
+                    <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
+                        <!-- We cap at 4 hours first -->
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hours</option>
+                                <option value="3">3 Hours</option>
+                                <option value="4">4 Hours</option>
+                    </select>
                 </div>
             </div>
             <div class="search-button-container">
-                <button class="search-button valign-text-middle roboto-bold-concrete-16px">Search</button>
+                <button class="search-button valign-text-middle roboto-bold-concrete-16px" @click="navigateToResultsPage">Search</button>
             </div>
             </div>   
         </form>
@@ -73,9 +86,13 @@
 </template>
 
 <script>
-    
+
+
 export default ({
   name: "DatePicker",
+  components: {
+
+  },
   props: ['locations'],
   data() {
     return { locations: ['White Sands','The Centrepoint','Kallang Wave Mall','Suntec City','Jcube','Causeway Point','The Star Vista'],
@@ -83,8 +100,17 @@ export default ({
              selectedNumPax: '',
              selectedDateTime: '',
              selectedDuration: '',
-           };
-  }
+             date: new Date().toISOString().substr(0, 10),
+             menu: false
+            };
+  },
+  methods: {
+    navigateToResultsPage() {
+        setTimeout(() => {
+            this.$router.push("/booking-system-search-results-page") 
+        }, 4000)
+    },
+  },
 }
 );
 </script>
@@ -224,6 +250,13 @@ export default ({
         padding: 18.4px 14.5px;
     }
 
+    .selectedNumPax  {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        display: flex;
+        width: 130px;
+    }
 
     /* End of NumPax Input */
 
@@ -335,6 +368,14 @@ export default ({
         min-width: 161px;
         padding: 18.4px 14.5px;
         align-items: center;
+    }
+
+    .selectedDuration {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        display: flex;
+        width: 130px;
     }
 
     /* For Search Button */

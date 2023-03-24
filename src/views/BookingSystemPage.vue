@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import DesktopHeader from './DesktopHeader.vue';
-import BookingSystemSearchForm from "./BookingSystemSearchForm.vue";
+import DesktopHeader from '../components/DesktopHeader.vue';
+import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
 // import BookingSearchResults
-import DesktopFooter from './DesktopFooter.vue';
+import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
         name: "BookingSystemPage",
         components: {
