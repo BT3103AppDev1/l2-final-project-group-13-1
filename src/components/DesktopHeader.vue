@@ -14,8 +14,7 @@
                         <button class="faq poppins-normal-black-16px">FAQ</button>
                     </div>
                     <div class="nav-bar-container-2">
-                        <!-- Add Button -->
-                        <button class="online-booking poppins-normal-white-13px">Online Booking</button>
+                        <button @click="$router.push('LogIn')">Book Now</button>
                     </div>
                     <div class="nav-bar-container-3">
                         <button class="contactUs poppins-normal-white-13px">Contact Us</button>
@@ -86,8 +85,7 @@
         height: 120px;
         margin-top: -26px;
         position: relative;
-        width: 1440px;
-    
+        width: 1440px;    
     }
 
     .header {
@@ -126,6 +124,7 @@
         text-align: center;
         /* width: 130px; */
         gap: 50px;
+        color:black;
     }
 
     .nav-bar-container-2 {
@@ -275,5 +274,4 @@
         white-space: nowrap;
         width: 484px;
     }
-    
 </style>
