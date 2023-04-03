@@ -46,7 +46,13 @@
                 </div>
                 <div class ="search-form-container-datetime-input">
                     <div class="data">
-                        <div>
+                        <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
+                        <img class="line" src="../assets/line-3.svg" alt="Line" />
+                        <img class="image-time" src="../assets/time.svg" alt="image-time" />
+
+                        <vue-flatpickr v-model="datetime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
+                    </div>
+                        <!-- <div>
                         </div>
                         <div class="search-form-container-datetime-input-date">
                             <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
@@ -56,9 +62,8 @@
                         <div class="search-form-container-datetime-input-hour">
                             <img class="image-time" src="../assets/time.svg" alt="image-time" />
                             <div class="valign-text-middle roboto-normal-mine-shaft-14px">10:00</div>
-                        </div>
-                    </div>
-                </div>
+                        </div> -->
+                </div> 
             </div>
             <div class="search-form-container-duration">
                 <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
@@ -86,12 +91,13 @@
 </template>
 
 <script>
-
+import VueFlatpickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
 export default ({
-  name: "DatePicker",
+  name: "BookingSystemSearchForm",
   components: {
-
+    VueFlatpickr,
   },
   props: ['locations'],
   data() {
@@ -100,9 +106,13 @@ export default ({
              selectedNumPax: '',
              selectedDateTime: '',
              selectedDuration: '',
-             date: new Date().toISOString().substr(0, 10),
+             datetime: null,
+             datetimeConfig: {
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
+             },
              menu: false
-            };
+           };
   },
   methods: {
     navigateToResultsPage() {
@@ -337,6 +347,11 @@ export default ({
         height: 14.41px;
         min-width: 14.13px;
         position: relative;
+    }
+
+    .dateTimePicker {
+        background: transparent;
+        border: 0px;
     }
 
     /* End of DateTime Input */
