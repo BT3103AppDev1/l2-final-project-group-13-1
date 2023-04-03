@@ -2,6 +2,7 @@
     <div class="container-center-horizontal">
         <div class="booking-system-page">
             <desktop-header/>
+            <desktop-header-welcome/>
             <booking-system-search-form/>
             <desktop-footer/>
         </div>
@@ -10,6 +11,7 @@
 
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
 // import BookingSearchResults
 import DesktopFooter from '../components/DesktopFooter.vue';
@@ -17,6 +19,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         name: "BookingSystemPage",
         components: {
             DesktopHeader,
+            DesktopHeaderWelcome,
             BookingSystemSearchForm,
             // BookingSearchResults,
             DesktopFooter,

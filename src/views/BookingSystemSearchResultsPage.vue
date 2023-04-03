@@ -2,6 +2,7 @@
     <div class="container-center-horizontal">
         <div class="booking-system-search-results-page">
             <desktop-header/>
+            <desktop-header-welcome/>
             <booking-system-search-form/>
             <booking-system-search-results/>
             <desktop-footer/>
@@ -14,6 +15,7 @@ import DesktopHeader from '../components/DesktopHeader.vue';
 import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
 import BookingSystemSearchResults from "../components/BookingSystemSearchResults.vue";
 import DesktopFooter from '../components/DesktopFooter.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
     export default {
         name: "BookingSystemPage",
         components: {
@@ -21,6 +23,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
             BookingSystemSearchForm,
             BookingSystemSearchResults,
             DesktopFooter,
+            DesktopHeaderWelcome,
         },
         props: {
             selectedDateTime: {
