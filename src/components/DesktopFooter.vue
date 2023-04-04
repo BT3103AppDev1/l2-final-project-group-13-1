@@ -1,21 +1,23 @@
 <template>
     <div class="desktop-footer">
         <div class="footer-container">
-            <div class="footer-container-black-background"></div>
             <div class="footer-container-columns">
                 <div class="footer-container-columns-1">
-                    <div class="flex-col poppins-normal-white-16px">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        <span class="footer-container-website">ktvteoheng.com</span>
-                    </div>
-                    <div class="footer-container-columns-2">
-                        <span class="poppins-medium-white-17px">About us</span>
-                        <span class="poppins-normal-white-16px" >Company<br>Portfolio<br>Careers<br>Contact us</span>
-                    </div>
+                    <span class="footer-container-columns-title-1 poppins-bold-white-25px">LOGO</span>
+                    <span class="poppins-normal-white-16px"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>            
+                    <span class="poppins-normal-white-16px">ktvteoheng.com</span>
+                </div>
+                <div class="footer-container-columns-2">
+                    <span class="footer-container-columns-title-2 poppins-medium-white-17px">About us</span>
+                    <span class="poppins-normal-white-16px" >Company</span>
+                    <span class="poppins-normal-white-16px" >Portfolio</span>
+                    <span class="poppins-normal-white-16px" >Careers</span>
+                    <span class="poppins-normal-white-16px" >Contact us</span>
+                </div>
                 <div class="footer-container-columns-3">
-                    <span class="poppins-medium-white-17px">Contact us</span>
-                    <p class="dummy-text poppins-normal-white-16px">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <span class="footer-container-contact-number poppins-normal-white-16px">6884 6266</span>
+                    <span class="footer-container-columns-title-3 poppins-medium-white-17px">Contact us</span>
+                    <span class="poppins-normal-white-16px">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                    <span class="poppins-normal-white-16px">6884 6266</span>
                 </div>
                 <div class="footer-container-logos">
                     <div class="footer-logo">
@@ -32,10 +34,8 @@
                     </div>
                 </div>
             </div>
-            <img class="footer-container-line" src="../assets/line-1.svg" alt="Line 1" />
-            <p class="footer-container-copyright poppins-normal-white-13px">Copyright © 2021 Company All rights reserved</p>
-        </div>
-        <span class="logo poppins-bold-white-25px">LOGO</span>
+            <img src="../assets/line-1.svg" alt="Line 1" />
+            <span class ="footer-container-copyright poppins-normal-white-13px">Copyright © 2021 Company All rights reserved</span>
     </div>
 </div>
 
@@ -50,110 +50,90 @@ export default {
 
 <style>
 .desktop-footer {
-    align-items: flex-start;
-    display:flex;
-    margin-left: 0;
-    /* margin-top: 438px; */
-    min-width: 1440px;
+    width: 100vw;
     bottom: 0;
     position: absolute;
+    margin: 0;
+    padding: 0;
 }
 
 .footer-container {
-    height: 376px;
+    min-height: 20%;
     position: relative;
-    width: 1442px;
+    width: 100vw;
+    background-color: var(--eerie-black);
+    display: flex;
+    flex-direction: column;
 }
 
-.footer-container-black-background {
-    background-color: var(--eerie-black);
-    height: 376px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 1440px;
+.footer-container-columns-title-1 {
+    padding-bottom: 0%;
+}
+
+.footer-container-columns-title-2 {
+    padding-bottom: 8%;
+}
+
+.footer-container-columns-title-3 {
+    padding-bottom: 0%;
 }
 
 .footer-container-columns {
-    align-items: center;
+    justify-content: center;
     display:flex;
-    flex-direction: column;
-    left: 0;
-    min-height: 268px;
-    position: absolute;
-    top: 79px;
-    width: 1442px;
+    flex-direction: row;
+    min-height: 20%;
+    position: relative;
+    width: 100vw;
+    padding: 3%;
 }
 
 .footer-container-columns-1 {
-    align-items: flex-end;
-    display: flex;
-    height: 161px;
-    margin-right: 21px;
-    min-width: 1219px;
-}
-
-.flex-col {
     align-items: flex-start;
     display: flex;
+    min-height: 20%;
+    justify-content: flex-start;
     flex-direction: column;
-    gap: 25px;
-    margin-bottom: 9px;
-    min-height: 106px;
-    width: 372px;
-}
-
-
-.footer-container-website {
-    letter-spacing: 0;
-    line-height: normal;
-    min-height: 23px;
-    width: 196px;
+    width: 40%;
+    text-align: start;
+    word-wrap: break-word;
+    padding-left: 5%;
+    padding-right: 5%;
+    gap: 10px;
 }
 
 .footer-container-columns-2 {
     align-items: flex-start;
-    align-self: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-left: 78px;
-    min-height: 158px;
-    width: 94px;
+    justify-content: flex-start;
+    word-wrap: break-word;
+    min-height: 20%;
+    width: 10%;
+    text-align: start;
+    gap: 10px;
 }
 
 .footer-container-columns-3 {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    margin-left: 126px;
-    min-height: 161px;
-    width: 288px;
-}
-
-.dummy-text {
-    letter-spacing: 0;
-    line-height: normal;
-    margin-top: 20px;
-    min-height: 76px;
-    width: 282px;
-}
-
-.footer-container-contact-number {
-    letter-spacing: 0;
-    line-height: normal;
-    margin-top: 11px;
-    min-height: 28px;
-    width: 141px;
+    justify-content: flex-start;
+    word-wrap: break-word;
+    min-height: 20%;
+    width: 25%;
+    text-align: start;
+    gap: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .footer-container-logos {
-    align-items: flex-start;
+    align-items: flex-end;
+    justify-content: center;
     display: flex;
     gap: 16px;
-    margin-bottom: 10px;
-    margin-left: 77px;
-    min-width: 184px;
+    min-width: 25%;
     position: relative;
 }
 
@@ -163,31 +143,16 @@ export default {
 }
 
 
-.footer-container-line {
-    height: 1px;
-    margin-right: 2px;
-    margin-top: 52px;
-    width: 1440px;
-}
-
 .footer-container-copyright {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
     letter-spacing: 0;
     line-height: 24.8px;
-    margin-right: 3px;
-    margin-top: 29px;
-    min-height: 25px;
-    min-width: 289px;
     white-space: nowrap;
+    padding: 1%;
 }
 
-.logo {
-    left: 101px;
-    letter-spacing: 0;
-    line-height: 38.8px;
-    position: absolute;
-    top: 66px;
-    white-space: nowrap;
-}
 
 .footer-logo {
     align-items: center;
