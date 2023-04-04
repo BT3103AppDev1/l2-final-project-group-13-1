@@ -69,7 +69,7 @@
   </template>
   
   <script>
-  import firebaseApp from "../firebase.js";
+  import firebaseApp from "@/firebase.js";
   import { getFirestore } from "firebase/firestore";
   import { collection, getDocs, query, orderBy} from "firebase/firestore";
   import VueFlatpickr from 'vue-flatpickr-component';
