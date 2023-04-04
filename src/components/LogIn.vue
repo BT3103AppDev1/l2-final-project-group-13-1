@@ -9,22 +9,34 @@
                     <div class="login-group-49">
                         <div class="login-welcome-to-teoheng">Welcome to TEOHENG KTV</div>
                         <div class="login-no-account-sign-up">
-                            <span class="login-span0">No account?<br/></span><span class="login-span1">Sign up</span>
+                            <span class="login-span0">No account?<br/></span><button class="login-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign up</button>
                         </div>
                     </div>
+                    <div class="login-with-google login-with">
+                        <button class="login-with-google-1 poppins-normal-thunder-16px" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithGoogle">Login with Google</button> 
+                    </div>
+                    <div class="login-with-facebook login-with">
+                        <img class="login-vector" src="../assets/Vector.png" alt="facebook logo" />
+                        <button class="login-with-facebook-1 poppins-normal-thunder-16px" style="background-color: transparent; border-color: transparent; cursor:pointer;">Login with Facebook</button> 
+                    </div>
+                    <div class="login-or">
+                        <img class="login-line-1-1" src="../assets/line-1-1.svg" alt="line 1" />
+                        <div class="login-or-1 poppins-normal-thunder-16px">OR</div>
+                        <img class="login-line-2 register-line" src="../assets/line-2.svg" alt="line 2" />
+                    </div>  
                     <div class="login-group-54">
                         <div class="login-enter-your poppins-normal-black-16px">Enter your email address</div>      
-                        <input type="text" class="login-overlap-group" id="loginEmail" placeholder="Email address"/>
+                        <input type="text" class="login-overlap-group" id="loginEmail" placeholder="Email address" v-model="email"/>
                     </div>
                     <div class="login-group-215">
                         <div class="login-group-55">
                             <div class="login-enter-your poppins-normal-black-16px">Enter your password</div>
-                                <input type="password" class="login-overlap-group-1" id="loginPassword" placeholder="Password"/>
+                                <input type="password" class="login-overlap-group-1" id="loginPassword" placeholder="Password" v-model="password"/>
                         </div>
-                        <button class="login-forgot-password">Forgot Password</button>
+                        <button class="login-forgot-password" style="background-color: transparent; border-color: transparent; cursor:pointer;">Forgot Password</button>
                     </div>
                     <div class="login-overlap-group1">
-                        <button class="login-sign-in"> Sign in</button>
+                        <button class="login-sign-in" style="background-color: transparent; border-color: transparent; cursor:pointer; white-space: nowrap;" @click="register"> Sign in</button>
                     </div>
                 </div>
                 <img class="login-eye-1" src="../assets/eye-1.svg" alt="icon-eye"/> 
@@ -34,18 +46,57 @@
             <img class="login-family-ktv-studiopng" src="../assets/family-ktv-studio-png@2x.png" alt="Family-ktv-studio"/>
             <img class="login-family-ktv-studiopng" src="../assets/family-ktv-studio-png@2x.png" alt="Family-ktv-studio"/>
             <div class="login-saly-24 saly"></div>
+            <img class="login-google-logo" src="../assets/google-logo.svg" alt="google logo" />
         </div>
     </div>
 </template>
 
-<!-- <script>
-export default {
-name: "LogIn",
-components: {
+<script setup>
+import { ref } from "vue";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useRouter } from 'vue-router';
 
-},
+
+const email = ref("");
+const password = ref("");
+
+const register = () => {
+    signInWithEmailAndPassword(getAuth(), email.value, password.value)
+        .then((data) => {
+            console.log("Successfully logged in!");
+            // router.push('/') redirect to page after sign up
+        })
+        .catch((error) => {
+            console.log(error.code);
+            switch(error.message) {
+                case "auth/invalid-email":
+                    errMsg.value = "Invalid email";
+                    break;
+                case "auth/user-not-found":
+                    errMsg.value = "No account with that email was found";
+                    break;
+                case "auth/wrong-password":
+                    errMsg.value = "Incorrect password";
+                    break;
+                dafult:
+                    errMsg.value = "Email or password is incorrect";
+                    break;
+            }
+        });
 };
-</script> -->
+
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            console.log(result.user);
+            // router.push('/') push to home page
+        })
+        .catch((error) => {
+            //handle error 
+        })
+};
+</script>
 
 <style>
 .login-v1 {
@@ -66,6 +117,41 @@ visibility: hidden;
 height:900px;
 position: relative;
 width: 1379px;
+}
+
+.login-v1 .login-with {
+    align-items: flex-start;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px #0000001c;
+    display: flex;
+    height: 42px;
+    justify-content: flex-end;
+    min-width: 451px;
+}
+
+.login-with-facebook-1 {
+    letter-spacing: 0;
+    line-height: 21.7px;
+    margin-top: 0.97px;
+    min-height: 12px;
+    white-space: nowrap;
+}
+
+.vector {
+    align-self: flex-end;
+    height: 17px;
+    width: 11px;
+}
+
+.login-v1 .login-line {
+    height: 1px;
+    object-fit: cover;
+}
+
+.login-line-2 {
+    margin-left: 11px;
+    width: 191px;
 }
 
 .login-v1 .saly{
@@ -100,7 +186,7 @@ width:450px;
 
 .login-overlap-group2 {
 border-radius: 40px;
-height: 628px;
+height: 752px;
 left: 450px;
 position: absolute;
 top: 79px;
@@ -115,8 +201,8 @@ box-shadow: 0px 4px 35px #00000014;
 display: flex;
 flex-direction: column;
 left: 0;
-min-height: 628px;
-padding: 52px 32px;
+min-height: 752px;
+padding: 38px 32px;
 position: absolute;
 top: 0;
 width: 539px;
@@ -135,7 +221,7 @@ width: 453px;
 
 .login-forgot-password {
 color: #ad3113;
-font-family: var(--font-family-poppings);
+font-family: var(--font-family-poppins);
 font-size: var(--font-size-s);
 font-weight: 400;
 letter-spacing: 0;
@@ -145,12 +231,37 @@ min-height: 20px;
 min-width: 108px;
 }
 
+.login-or {
+    align-items: flex-end;
+    display: flex;
+    height: 12px;
+    margin-right: 3.3px;
+    margin-top: 30px;
+    min-width: 448px;
+}
+
+.login-line-1-1 {
+    height: 1px;
+    object-fit: cover;
+    width: 193px;
+}
+
+.login-or-1 {
+    align-self: flex-start;
+    letter-spacing: 0;
+    line-height: 21.7px;
+    margin-left: 23px;
+    min-height: 12px;
+    white-space: nowrap;
+    width: 28px;
+}
+
 .login-group-54 {
 align-items: flex-start; 
 display:flex; 
 flex-direction: column;
 gap: 14px;
-margin-top: 102px;
+margin-top: 44px;
 min-height: 92px;
 width: 451px;
 }
@@ -182,6 +293,12 @@ display: flex;
 height: 57px;
 min-width: 451px;
 padding: 17px 24px;
+}
+
+.login-with-facebook {
+    gap: 13px;
+    margin-top: 14px;
+    padding: 10.4px 118px;
 }
 
 .login-enter-your {
@@ -217,11 +334,12 @@ display: flex;
 gap: 77px;
 height: 48px;
 min-width: 463px;
+margin-top: 14px;
 }
 
 .login-no-account-sign-up {
 color: transparent;
-font-family: var(--font-family-poppings);
+font-family: var(--font-family-poppins);
 font-size: var(--font-size-m);
 font-weight: 400;
 letter-spacing: 0;
@@ -240,7 +358,7 @@ color: #8d8d8d;
 
 .login-welcome-to-teoheng {
 color: var(--black);
-font-family: var(--font-family-poppings);
+font-family: var(--font-family-poppins);
 font-size: var(--font-size-xl2);
 font-weight: 400;
 letter-spacing: 0;
@@ -265,7 +383,7 @@ padding: 0 197px;
 
 .login-sign-in {
 color: var(--white);
-font-family: var(--font-family-poppings);
+font-family: var(--font-family-poppins);
 font-size: var(--font-size-m);
 font-weight: 500;
 letter-spacing: 0;
@@ -274,17 +392,30 @@ min-height: 24px;
 width: 56px;
 }
 
+.login-with-google {
+    margin-right: 6px;
+    margin-top: 86px;
+    padding: 10px 117px;
+}
+
+.login-with-google-1 {
+    letter-spacing: 0;
+    line-height: 21.7px;
+    min-height: 12px;
+    white-space: nowrap;
+}
+
 .login-eye-1 {
 height:19px;
 left: 455px;
 position: absolute;
-top: 386px;
+top: 555px;
 width: 22px;
 }
 
 .login-title {
 color: var(--black);
-font-family: var(--font-family-poppings);
+font-family: var(--font-family-poppins);
 font-size: var(--font-size-xl);
 font-weight: 500;
 left: 494px;
@@ -304,12 +435,18 @@ width: 731px;
 }
 
 .login-line-1 {
-height: 1px;
 left: 165px;
-object-fit: cover;
 position: absolute;
 top: 449px;
 width: 740px;
+}
+
+.login-google-logo {
+    height: 24px;
+    left: 634px;
+    position: absolute;
+    top: 275px;
+    width: 24px;
 }
 
 </style>
