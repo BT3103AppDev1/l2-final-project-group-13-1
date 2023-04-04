@@ -38,6 +38,9 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     --concrete: rgba(242, 242, 242, 1);
     --blaze-orange: rgba(247, 91, 11, 1);
     --white: rgba(255, 255, 255, 1);
+    --blue: rgba(24,119,242,1);
+    --blueberry: rgba(66, 133, 244, 1);
+    --thunder: rgba(46, 46, 46, 1);
 
     --font-size-xs: 13px;
     --font-size-s: 14px;
@@ -54,6 +57,13 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
 
 }
 
+.poppins-normal-thunder-16px {
+    color: var(--thunder);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    font-style: normal;
+}
 
 .poppins-medium-white-16px {
     color: var(--white);
