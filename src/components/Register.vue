@@ -1,8 +1,42 @@
 <script setup>
-const register = () => {
-    createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+import { ref } from "vue";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, collection, doc, setDoc, addDoc, orderBy, query,onSnapshot, deleteDoc } from "firebase/firestore";
+import { initializeApp } from "@firebase/app";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDwoM56GhJCUw-dguqvF5gDXuXAl3Ay7To",
+  authDomain: "bt3103l2g13.firebaseapp.com",
+  projectId: "bt3103l2g13",
+  storageBucket: "bt3103l2g13.appspot.com",
+  messagingSenderId: "495008255418",
+  appId: "1:495008255418:web:edc2e3eb46fd4c47cca183"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const email = ref("");
+const password = ref("");
+
+const registerAndAddUser = () => {
+    const email = document.getElementById("registerEmail").value;
+    const password = document.getElementById("registerPassword").value;
+    const name = document.getElementById("registerName").value;
+    const phoneNumber = document.getElementById("registerNumber").value;
+    const username = document.getElementById("registerUsername").value;
+
+    createUserWithEmailAndPassword(getAuth(), email, password)
         .then((data) => {
             console.log("Successfully registered!");
+            setDoc(doc(db, 'User', data.user.uid), {
+                email: email,
+                name: name,
+                phoneNumber: phoneNumber,
+                username: username,
+                walletBalance: 0
+            });
             // router.push('/') redirect to page after sign up
         })
         .catch((error) => {
@@ -10,6 +44,7 @@ const register = () => {
             alert(error.message);
         });
 };
+
 
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -22,6 +57,7 @@ const signInWithGoogle = () => {
             //handle error 
         })
 };
+
 </script>
 <template>
     <div class="register screen">
@@ -29,11 +65,11 @@ const signInWithGoogle = () => {
             <div class="register-rectangle-76"></div>
             <img class="register-line-1" src="../assets/line-1.svg" alt="line 1" />
             <div class="register-saly-2 register-saly"></div>
-            <form class="register-group-63 register-group" id="registerForm" @submit.prevent="handleSubmit">
+            <form class="register-group-63 register-group" id="registerForm">
                 <div class="register-flex-row">
                     <h1 class="register-title">Sign Up</h1>
                     <p class="register-have-an-account-sign-in">
-                        <span class="register-span0">Have an Account?<br/></span><button class="register-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign in</button>
+                        <span class="register-span0">Have an Account?<br/></span><button class="register-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="registerAndAddUser">Sign in</button>
                     </p>
                 </div>
                 <div class="register-continue-with-google-center-fixed">
