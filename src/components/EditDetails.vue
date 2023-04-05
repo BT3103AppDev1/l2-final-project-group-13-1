@@ -17,46 +17,41 @@
         
         <div class = "email-details">
             <div class = "email-entry">
-                <span class="poppins-bold-black-10px">Enter your email address<br></span>
+                <span class="poppins-bold-black-17px">Enter your email address<br></span>
             </div>
             <div class = "email-textbox">
-                <input type = "text" v-model = 'email' size = 112 placeholder="amy380@gmail.com">
+                <input type = "email" v-validate="'required|email'" v-model = 'email' size = 112 placeholder="amy380@gmail.com">
+                <!-- <span v-if="!isEmailValid">Please enter a valid email.</span> -->
             </div>
         </div>
 
         <div class = "number-details">
             <div class = "number-entry">
-                <span class="poppins-bold-black-10px">Enter your 8-digit phone number (+65 numbers only)<br></span>
+                <span class="poppins-bold-black-17px">Enter your 8-digit phone number (+65 numbers only)<br></span>
             </div>
             <div class = "number-textbox">
-                <input type = "text" v-model = "phoneNumber" size = 112 placeholder="98473825">
+                <input type = "number" v-model = "phoneNumber"  placeholder="98473825" maxlength="8" pattern="^[0-9]+$" >
             </div>
         </div>
 
-        <div class = "current-password-details">
-            <div class = "current-password-entry">
-                <span class="poppins-bold-black-10px">Enter your current password*<br></span>
-            </div>
-            <div class = "current-password-textbox">
-                <input type="password" v-model="currentPassword" size="112" placeholder="********">
+        <div class = "change-password-details">
+            <div class = "password-entry">
+                <span class="poppins-bold-black-17px">Want to change password?<br></span>
             </div>
         </div>
+        <div class = "change-password-options">
+            <button v-on:click="changePassword">Change Password</button> 
 
-        <div class = "new-password-details">
-            <div class = "new-password-entry">
-                <span class="poppins-bold-black-10px">Enter your new password<br></span>
-            </div>
-            <div class = "new-password-textbox">
-                <input type = "password"  v-model="newPassword" size = 112 placeholder="  ********">
-            </div>
         </div>
 
         <div class = "submit-options">
             <button v-on:click="submitForm">Submit</button> 
+
         </div>
 
         <div class = "back-options">
             <button v-on:click="">Back</button> 
+
         </div>
 
     </div>
@@ -64,23 +59,30 @@
 </template>
 
 <script>
+
+//import { defineRule } from 'vee-validate';
 import firebaseApp from "@/firebase.js";
+import {
+  sendPasswordResetEmail,
+
+} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
 import { getFirestore, getDoc } from "firebase/firestore";
 import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-
-const db = getFirestore(firebaseApp);
-const customerRef = collection(db, "User");
-
-
+const db = getFirestore(firebaseApp); 
+const customerRef = collection(db, "User"); 
+const auth = getAuth(firebaseApp)           
   
 export default {
 
     data() {
         return {
-            name:'', email:'', phoneNumber:''
+            name:'', email:'VinaXMM@xmm.com', phoneNumber:'', 
         };
     },
+
+    
 
 //    firebase.auth().onAuthStateChanged(function(user) {
 //   if (user) {
@@ -94,12 +96,38 @@ export default {
 // });
 
 
-methods: {
+methods: {   
+
+    validateEmail() {
+      const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+      return regex.test(this.email);
+    },
+
+    computed: {
+    isEmailValid() {
+      return this.validateEmail();
+    },
+  },
+
+    changePassword() { 
+        sendPasswordResetEmail(auth, this.email)
+    .then(() => {
+      alert(
+        "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
+      );
+    })
+    .catch((error) => {
+      alert(
+        "User not found in our database. Please sign up for an account instead."
+      );
+    });
+    },
+
     async submitForm() {
-  if (this.currentPassword === '') {
-    alert('Please enter your current password');
-    return;
-  }
+    //     if (this.currentPassword === '') {
+    //         alert('Please enter your current password');
+    //         return;
+    //     }
 
   const documentID = "xP3rCXxtjg3aRWiTNtNx"; // replace with actual customer ID
   const customerDocRef = doc(customerRef, documentID);
@@ -219,43 +247,33 @@ methods: {
         margin-left: 20px;
     }
 
-    .current-password-details {
-        margin-top: 920px;
-        margin-left: -800px;
+    .change-password-details {
+        margin-top: 150px;
+        margin-left: -465px;
     }
 
-    .current-password-entry {
-        margin-top: -400px;
-        margin-left: 20px;
-        height:30px;
+    .change-password-options {
+        margin-top: 250px;
+        margin-left: -240px;
+        height:50px;
+        font-family: 'Arial';
+        width: 250px;
+        background-color: grey;
+        border: none;
+        border-radius: 20px;
+        font-size: 200px ;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
     }
 
-    .current-password-textbox {
-        height: 100px;
-        text-align: left;
-        margin-left: 20px;
-    }
-
-    .new-password-details {
-        margin-top: 1070px;
-        margin-left: -800px;
-    }
-
-    .new-password-entry {
-        margin-top: -400px;
-        margin-left: 20px;
-        height:30px;
-    }
-
-    .new-password-textbox {
-        height: 100px;
-        text-align: left;
-        margin-left: 20px;
-    }
 
     .submit-options {
         margin-top: 490px;
-        margin-left: -650px;
+        margin-left: -100px;
         font-family: 'Arial';
         width: 250px;
         background-color: orangered;
