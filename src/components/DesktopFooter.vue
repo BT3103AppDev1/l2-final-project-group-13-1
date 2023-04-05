@@ -52,7 +52,7 @@ export default {
 .desktop-footer {
     width: 100vw;
     bottom: 0;
-    position: absolute;
+    position: relative;
     margin: 0;
     padding: 0;
 }

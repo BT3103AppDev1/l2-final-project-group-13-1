@@ -1,13 +1,25 @@
 <template>
-    <div class="container-center-horizontal">
+    
+    <!-- <div class="container-center-horizontal"> -->
+        
         <div class="booking-system-search-results-page">
             <desktop-header/>
             <desktop-header-welcome/>
             <booking-system-search-form/>
-            <booking-system-search-results/>
+            <!-- <div class="booking-room-card-container"> 
+                <booking-room-card v-for="(card, index) in BookingRoomCardDetails" :key="index" 
+                :room-type="card.roomType"
+                :num-pax="card.numPax"
+                :date="card.date"
+                :time="card.time"
+                :rate="card.rate"
+                />
+            </div> -->
+            <!-- <booking-system-search-results/> -->
+
             <desktop-footer/>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -16,6 +28,7 @@ import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
 import BookingSystemSearchResults from "../components/BookingSystemSearchResults.vue";
 import DesktopFooter from '../components/DesktopFooter.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
+import BookingRoomCard from '../components/BookingRoomCard.vue';
     export default {
         name: "BookingSystemPage",
         components: {
@@ -24,6 +37,7 @@ import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
             BookingSystemSearchResults,
             DesktopFooter,
             DesktopHeaderWelcome,
+            BookingRoomCard,
         },
         props: {
             selectedDateTime: {
@@ -42,6 +56,15 @@ import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
                 type: String,
                 required: true,
             },
+        },
+        data() {
+            return {
+                BookingRoomCardDetails: [
+                { roomType: 'SMALL ROOM', numPax: 4, date: '05 December 2023', time: '10:00 - 11.00', rate: '$13.00', },
+                { roomType: 'MEDIUM ROOM', numPax: 6, date: '05 December 2023', time: '10:00 - 11.00', rate: '$15.00', },
+                { roomType: 'LARGE ROOM', numPax: 10, date: '05 December 2023', time: '10:00 - 11.00', rate: '$25.00', },
+                ]
+            }
         }
     }
 </script>
@@ -50,11 +73,16 @@ import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 
 <style>
 
-    body {
+    html, body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
+        height: 100%;
+        min-height: 100vh;
+        /* width: 100%; */
+        /* min-height: 100vh; */
+
     }
 
     .booking-system-search-results-page {
@@ -63,10 +91,25 @@ import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
         border: 1px none;
         display: flex;
         flex-direction: column;
-        height: 1276px;
-        overflow: hidden;
+        justify-content: space-between;
+        /* height: 1276px; */
+        /* overflow: hidden; */
         position: relative;
-        width: 1440px;
+        width: 100vw;
+        height: 100vh;
+        /* width: 1440px; */
+        /* min-height: 100vh; */
     }
+
+    .booking-room-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+        /* top: -400px; */
+        /* left: -100px; */
+    }
+
 
 </style>
