@@ -1,26 +1,51 @@
+<script setup>
+const register = () => {
+    createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+        .then((data) => {
+            console.log("Successfully registered!");
+            // router.push('/') redirect to page after sign up
+        })
+        .catch((error) => {
+            console.log(error.code);
+            alert(error.message);
+        });
+};
+
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            console.log(result.user);
+            // router.push('/') push to home page
+        })
+        .catch((error) => {
+            //handle error 
+        })
+};
+</script>
 <template>
     <div class="register screen">
         <div class="register-overlap-group6">
             <div class="register-rectangle-76"></div>
             <img class="register-line-1" src="../assets/line-1.svg" alt="line 1" />
             <div class="register-saly-2 register-saly"></div>
-            <div class="register-group-63 register-group">
+            <form class="register-group-63 register-group" id="registerForm" @submit.prevent="handleSubmit">
                 <div class="register-flex-row">
                     <h1 class="register-title">Sign Up</h1>
                     <p class="register-have-an-account-sign-in">
-                        <span class="register-span0">Have an Account?<br/></span><div class="register-span1">Sign in</div>
+                        <span class="register-span0">Have an Account?<br/></span><button class="register-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign in</button>
                     </p>
                 </div>
                 <div class="register-continue-with-google-center-fixed">
                     <div class="register-frame-6">
                         <img class="register-x-logo" src="../assets/google-logo.svg" alt="google logo" />
-                        <div class="register-continue-with-google register-continue-with">Sign Up with Google</div>
+                        <button class="register-continue-with-google register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithGoogle">Sign Up with Google</button>
                     </div>
                 </div>
                 <div class="register-continue-with-facebook-centre-fixed">
                     <div class="register-frame-6-1">
                         <img class="register-x-logo" src="../assets/facebook-logo.svg" alt="facebook logo" />
-                        <div class="register-continue-with-facebook register-continue-with">Sign Up with Facebook</div>
+                        <button class="register-continue-with-facebook register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" >Sign Up with Facebook</button>
                     </div>
                 </div>
                 <div class="register-or">
@@ -28,32 +53,32 @@
                     <div class="register-or-1">OR</div>
                     <img class="register-line-2 register-line" src="../assets/line-2.svg" alt="line 2" />
                 </div>  
-            </div>
+            </form>
             <div class="register-saly-24 register-saly"></div>
             <div class="register-welcome-to-teoheng-ktv">Welcome to TEOHENG KTV</div>
             <img class="register-family-ktv-studiopng" src="../assets/family-ktv-studio-png@2x.png" alt="Family-ktv-studio"/>
             <div class="register-overlap-group-2 register-overlap-group-3">
-                <div class="register-sign-up">Sign up</div>
+                <button class="register-sign-up" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="register">Sign up</button>
             </div>
             <div class="register-group-56 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your Password</div>
-                <input type="password" class="register-overlap-group" id="registerPassword" placeholder="Password" required/>
+                <input type="password" class="register-overlap-group" id="registerPassword" placeholder="Password" required v-model="password"/>
             </div>
             <div class="register-group-55 register-group">
                 <p class="register-enter-your poppins-normal-black-16px">Enter Your 8-digit phone number(+65 numbers only)</p>
-                <input type="tel" class="register-overlap-group" id="registerNumber" placeholder="Phone Number" pattern="[0-9]{8}" required/>
+                <input type="tel" class="register-overlap-group" id="registerNumber" placeholder="Phone Number" pattern="[0-9]{8}" required v-model="phone"/>
             </div>
             <div class="register-group-58 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your email address</div>
-                <input type="email" class="register-overlap-group" id="registerEmail" placeholder="Email Address" required/>
+                <input type="email" class="register-overlap-group" id="registerEmail" placeholder="Email Address" required v-model="email"/>
             </div>
             <div class="register-group-54 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your Username</div>
-                <input type="text" class="register-overlap-group" id="registerUsername" placeholder="Username" required/>
+                <input type="text" class="register-overlap-group" id="registerUsername" placeholder="Username" required v-model="username"/>
             </div>
             <div class="register-group-57 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter your Name</div>
-                <input type="text" class="register-overlap-group" id="registerName" placeholder="Name" required/>
+                <input type="text" class="register-overlap-group" id="registerName" placeholder="Name" required v-model="name"/>
             </div>
         </div>
     </div>
@@ -264,6 +289,7 @@
     padding: 15px;
     gap: 15px;
     position: relative;
+    height: 20px;
 }
 
 .register-continue-with-facebook { 
@@ -292,7 +318,6 @@
     width: 145px;
     overflow: hidden;
     white-space: nowrap;
-
 }
 
 .register-span1 {
