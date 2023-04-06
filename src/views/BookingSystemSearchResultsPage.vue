@@ -71,17 +71,11 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
     html, body {
         margin: 0;
         padding: 0;
-        /* left: -35px; */
-        /* position: absolute; */
-        /* height: 100%; */
-        /* min-height: 100vh; */
-        /* width: 100%; */
-        /* min-height: 100vh; */
-
     }
 
     body {
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .booking-system-search-results-page {
@@ -99,8 +93,6 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
     }
 
     .cards {
-        /* min-height: 20%; */
-        /* width: 100vw; */
         display: flex;
         flex-direction: row;
         position: relative;

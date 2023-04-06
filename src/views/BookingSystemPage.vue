@@ -34,20 +34,23 @@ import DesktopFooter from '../components/DesktopFooter.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
     }
 
     .booking-system-page {
+        max-width: 100vw;
+
         align-items: center;
         background-color: var(--white);
         border: 1px none;
         display: flex;
         flex-direction: column;
-        height: 1276px;
         overflow: hidden;
+        justify-content: space-between;
         position: relative;
-        width: 1440px;
+        width: 100vw;
+        height: 100vh;
+        gap: 50px;
+
     }
 
 </style>
