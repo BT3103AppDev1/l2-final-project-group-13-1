@@ -141,9 +141,10 @@ export default {
     this.startTime = sessionStorage.getItem('startTime') || '';
     this.endTime = sessionStorage.getItem('endTime') || '';
     this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
-    this.noOfPax = sessionStorage.getItem('noOfPax') || '';
-    this.price = sessionStorage.getItem('price') || '';
-    this.duration = sessionStorage.getItem('duration') || '';
+    this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
+    this.price = sessionStorage.getItem('price') || 0;
+    this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
+    this.location = parseFloat(sessionStorage.getItem('location')) || 0;
     this.location = sessionStorage.getItem('location') || '';
     
   },
@@ -176,7 +177,7 @@ export default {
     computed: {
     totalPrice() {
         const totalPrice = this.price * this.duration
-        sessionStorage.setItem('totalPrice', totalPrice)
+        sessionStorage.setItem('totalPrice', Number(totalPrice))
         return totalPrice;
     },
 
