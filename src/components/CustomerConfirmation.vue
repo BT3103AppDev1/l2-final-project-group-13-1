@@ -175,7 +175,9 @@ export default {
     
     computed: {
     totalPrice() {
-        return this.price * this.duration;
+        const totalPrice = this.price * this.duration
+        sessionStorage.setItem('totalPrice', totalPrice)
+        return totalPrice;
     },
 
     formattedDate() {
