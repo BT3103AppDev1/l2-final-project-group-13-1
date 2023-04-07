@@ -3,7 +3,7 @@
         <div class="booking-system-page">
             <desktop-header/>
             <desktop-header-welcome/>
-            <booking-system-search-form/>
+            <payment-method-customers/>
             <desktop-footer/>
         </div>
     </div>
@@ -12,16 +12,15 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
-// import BookingSearchResults
+import PaymentMethodCustomers from '../components/PaymentMethodCustomers.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
+
     export default {
-        name: "BookingSystemPage",
+        name: "PaymentMethodCustomersPage",
         components: {
             DesktopHeader,
             DesktopHeaderWelcome,
-            BookingSystemSearchForm,
-            // BookingSearchResults,
+            PaymentMethodCustomers,
             DesktopFooter,
         },
     }
@@ -30,8 +29,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
 
 
 <style>
-
-    body {
+body {
         margin: 0;
         padding: 0;
         left: -35px;

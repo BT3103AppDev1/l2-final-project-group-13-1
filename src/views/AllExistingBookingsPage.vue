@@ -1,9 +1,11 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="booking-system-page">
+        <div class="all-existing-bookings-page">
             <desktop-header/>
             <desktop-header-welcome/>
-            <booking-system-search-form/>
+            <br>
+            <p class="poppins-bold-black-24px">Your Existing Bookings</p>
+            <all-existing-bookings-table/>
             <desktop-footer/>
         </div>
     </div>
@@ -12,16 +14,14 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
-// import BookingSearchResults
+import AllExistingBookingsTable from '../components/AllExistingBookingsTable.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
-        name: "BookingSystemPage",
+        name: "AllExistingBookingsPage",
         components: {
             DesktopHeader,
             DesktopHeaderWelcome,
-            BookingSystemSearchForm,
-            // BookingSearchResults,
+            AllExistingBookingsTable,
             DesktopFooter,
         },
     }
@@ -38,7 +38,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         position: absolute;
     }
 
-    .booking-system-page {
+    .all-existing-bookings-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;
