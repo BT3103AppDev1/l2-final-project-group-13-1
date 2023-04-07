@@ -1,7 +1,7 @@
 <template>
     <div class="existing-booking-table">
         <div class="ebt-title">
-            <h3 class="ebt-header" style="color:black">Booking Summary | ID SC12345</h3>
+            <h3 class="ebt-header" style="color:black">Booking Summary</h3>
         </div>
         <div class = "ebt-date">
             <p class="ebt-header">Date</p>
