@@ -120,7 +120,8 @@ import router from "@/router/router"
                 name: '',
                 phoneNumber: '',
                 email: '',
-                branchLocation: ''
+                branchLocation: '',
+                totalPrice: 0
             }
         },
 
