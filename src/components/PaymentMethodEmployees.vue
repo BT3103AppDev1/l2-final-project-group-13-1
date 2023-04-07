@@ -75,15 +75,32 @@
     
         </div>      
         <div class= "next-button">
-            <button v-on:click="" style:>Next</button> 
+            <button v-on:click="">Next</button> 
         </div>
         <div class ="back-button">
-            <button v-on:click="" style:>Back</button> 
+            <button style="font-size:17px;color:white;" @click="goBack()">Back</button>
         </div>
         
     </div>
     
   </template>
+
+
+<script>
+import router from "@/router/router"
+
+export default {
+    data() {
+        
+    },
+    methods: {
+        goBack() {
+            this.$router.go(-1);
+        }
+    }
+}
+
+</script>
 
 <style>
     table {
