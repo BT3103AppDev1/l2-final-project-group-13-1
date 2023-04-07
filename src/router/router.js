@@ -6,6 +6,7 @@ import PaymentMethodCustomersPage from '../views/PaymentMethodCustomersPage.vue'
 import AllExistingBookingsPage from "@/views/AllExistingBookingsPage.vue"
 import ExistingBookingDetails from "@/views/ExistingBookingDetails.vue"
 import BookingDeletedPage from "@/views/BookingDeletedPage.vue"
+import SummaryDetails from "@/views/SummaryDetails.vue"
 
 const routes = [
     {
@@ -38,7 +39,12 @@ const routes = [
     },
     {path:'/BookingDeletedPage',
     name: 'BookingDeletedPage',
-    component: BookingDeletedPage}
+    component: BookingDeletedPage},
+
+    { path: '/BookingSummary', 
+    name: 'BookingSummary', 
+    component: SummaryDetails
+    },
     
 ]
 const router = createRouter({
