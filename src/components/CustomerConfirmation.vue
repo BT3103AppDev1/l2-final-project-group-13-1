@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="proceed-options">
-            <button style="font-size:17px;color:white;">Proceed to Payment Method</button>
+            <button @click="redirectToPayment()" style="font-size:17px; color:white"> Proceed to Payment Method</button>
         </div>
 
         <div class= "back-options">
@@ -95,6 +95,25 @@
         </div>
     </div>
 </template>
+
+<script>
+
+import router from "@/router/router"
+
+export default {
+    data() {
+        
+    },
+
+    methods : {
+    redirectToPayment(){
+    router.push({ path: '/customer-payment-page'})
+    }
+}
+}
+
+</script>
+
 
 <style>
 
