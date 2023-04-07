@@ -12,8 +12,9 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import DesktopFooter from '../components/DesktopFooter.vue';
 import PaymentMethodCustomers from '../components/PaymentMethodCustomers.vue';
+import DesktopFooter from '../components/DesktopFooter.vue';
+
     export default {
         name: "PaymentMethodCustomersPage",
         components: {
