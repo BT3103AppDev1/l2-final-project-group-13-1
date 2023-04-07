@@ -21,7 +21,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
             DesktopHeader,
             DesktopHeaderWelcome,
             PaymentMethodCustomers,
-            DesktopFooter,
+            //DesktopFooter,
         },
     }
 </script>
