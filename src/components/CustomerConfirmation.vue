@@ -92,9 +92,9 @@
 
         <div class= "back-options">
             <button style="font-size:17px;color:white;" @click="goBack">Back</button>
-        </div>
     </div>
 </template>
+
 
 <script>
 
