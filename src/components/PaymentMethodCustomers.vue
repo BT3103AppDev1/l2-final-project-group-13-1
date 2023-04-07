@@ -182,14 +182,6 @@ import router from "@/router/router"
     });
     },
 
-    formattedPrice() {
-        if (this.price == 13 || this.price == 15 || this.price == 17) {
-            return `Happy Hour $${parseFloat(this.price).toFixed(2)} w/GST`;
-        } else if (this.price == 19 || this.price == 22 || this.price == 25) {
-            return `Peak Hour $${parseFloat(this.price).toFixed(2)} w/GST`;
-        }
-    },
-
     formattedTime() {
     const formatTime = (timeString) => {
       let [hour, minute] = timeString.split(':');
