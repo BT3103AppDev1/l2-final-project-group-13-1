@@ -5,24 +5,25 @@
                 <label>
                 <span class="poppins-bold-black-20px">Your Details<br></span>
                 </label>
+                
                 <div class = "enter-name">
                     <span class="poppins-normal-black-20px">Name:<br></span>
                 </div>
                 <div class = "name-textbox">
-                    <input type = "text" size = 20 placeholder="  amy">
+                    <input type = "text" size = 20 v-model="name">
                 </div>
                  
                 <div class = "enter-phone-number">
                     <span class="poppins-normal-black-20px">Phone Number:<br></span>
                     <div class = "phone-number-textbox">
-                        <input type = "text" size = 20  placeholder="  98237486">
+                        <input type = "text" size = 20  v-model="phoneNumber" placeholder="  98237486">
                     </div>
                 </div>
 
                 <div class = "enter-email-address">
                     <span class="poppins-normal-black-20px">Email Address:<br></span>
                     <div class = "email-address-textbox">
-                        <input type = "text" size = 20  placeholder="  xxx@gmail.com">
+                        <input type = "text" size = 20  v-model="email" placeholder="  xxx@gmail.com">
                     </div>
                 </div>
 
@@ -103,8 +104,32 @@ import router from "@/router/router"
 
 export default {
     data() {
+        return {
+            name: '',
+            phoneNumber: '',
+            email: ''
+        }
         
     },
+
+    created() {
+    this.name = sessionStorage.getItem('name') || '';
+    this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
+    this.email = sessionStorage.getItem('email') || '';
+    
+  },
+  
+  watch: {
+    name(newValue) {
+      sessionStorage.setItem('name', newValue);
+    },
+    phoneNumber(newValue) {
+      sessionStorage.setItem('phoneNumber', newValue);
+    },
+    email(newValue){
+        sessionStorage.setItem('email', newValue);
+    },
+},
 
     methods : {
     redirectToPayment(){
@@ -114,7 +139,6 @@ export default {
     goBack() {
         this.$router.go(-1);
     }
-
 }
 }
 
