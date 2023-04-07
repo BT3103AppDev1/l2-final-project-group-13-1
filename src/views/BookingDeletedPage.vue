@@ -2,6 +2,7 @@
     <div class="container-center-horizontal">
         <div class="booking-deleted-page">
             <desktop-header/>
+            <desktop-header-welcome/>
             <br>
             <p class="poppins-bold-black-24px">Booking Deleted!</p>
             <booking-deleted-table/>
@@ -12,12 +13,14 @@
 
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import BookingDeletedTable from '../components/BookingDeletedTable.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
         name: "ExistingBookingDetails",
         components: {
             DesktopHeader,
+            DesktopHeaderWelcome,
             BookingDeletedTable,
             DesktopFooter,
         },

@@ -2,6 +2,7 @@
     <div class="container-center-horizontal">
         <div class="existing-booking-details">
             <desktop-header/>
+            <desktop-header-welcome/>
             <br>
             <p class="poppins-bold-black-24px">Your Booking Details</p>
             <existing-booking-table/>
@@ -12,12 +13,14 @@
 
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import ExistingBookingTable from '../components/ExistingBookingTable.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
         name: "ExistingBookingDetails",
         components: {
             DesktopHeader,
+            DesktopHeaderWelcome,
             ExistingBookingTable,
             DesktopFooter,
         },
