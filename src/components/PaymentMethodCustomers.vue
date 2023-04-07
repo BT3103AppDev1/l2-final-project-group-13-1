@@ -37,7 +37,7 @@
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Remarks</p>
-                <p>I'm retarded</p>               
+                <p>{{remarks}}</p>               
             </div>
         </div>
         <div class = "ebt-container">
@@ -47,7 +47,7 @@
             </div>
             <div class = "box2">
                 <span class="poppins-bold-black-10px"><br></span>
-                <span class="poppins-bold-black-20px">SGD$13.00<br></span>
+                <span class="poppins-bold-black-20px">SGD${{ totalPrice.toFixed(2) }}<br></span>
                 
             </div>
         </div>
@@ -132,11 +132,12 @@ import router from "@/router/router"
             this.startTime = sessionStorage.getItem('startTime') || '';
             this.endTime = sessionStorage.getItem('endTime') || '';
             this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
-            this.noOfPax = sessionStorage.getItem('noOfPax') || '';
-            this.price = sessionStorage.getItem('price') || '';
-            this.duration = sessionStorage.getItem('duration') || '';
-            this.location = sessionStorage.getItem('location') || '';
-            this.totalPrice = sessionStorage.getItem('totalPrice') || '';
+            this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
+            this.price = sessionStorage.getItem('price') || 0;
+            this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
+            this.location = parseFloat(sessionStorage.getItem('location')) || 0;
+            this.totalPrice = parseFloat(sessionStorage.getItem('totalPrice')) || 0;
+            this.remarks = sessionStorage.getItem('remarks') || '';
             this.fetchBranchName();
     
         },
