@@ -26,7 +26,7 @@
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Name</p>
-                <p>Bryan Tan</p>
+                <p>{{name}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Location</p>
@@ -34,7 +34,7 @@
             </div>
             <div class = "box">
                 <p class="ebt-header">Phone Number</p>
-                <p>12345666</p>
+                <p>{{phoneNumber}}</p>
             </div>
         </div>
         <br>
@@ -118,9 +118,20 @@ import router from "@/router/router"
     export default {
         data() {
             return {
-                selectedOption: ''
+                name: '',
+                phoneNumber: '',
+                email: ''
             }
         },
+
+        created() {
+        this.name = sessionStorage.getItem('name') || '';
+        this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
+        this.email = sessionStorage.getItem('email') || '';
+    
+        },
+
+
         methods: {
         goBack() {
             this.$router.go(-1);
