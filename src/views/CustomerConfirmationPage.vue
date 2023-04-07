@@ -2,23 +2,24 @@
     <div class="container-center-horizontal">
         <div class="booking-system-page">
             <desktop-header/>
-            <booking-system-search-form/>
+            <desktop-header-welcome/>
+            <customer-confirmation/>
             <desktop-footer/>
         </div>
     </div>
 </template>
 
 <script>
-import DesktopHeader from './DesktopHeader.vue';
-import BookingSystemSearchForm from "./BookingSystemSearchForm.vue";
-// import BookingSearchResults
-import DesktopFooter from './DesktopFooter.vue';
+import DesktopHeader from '../components/DesktopHeader.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
+import DesktopFooter from '../components/DesktopFooter.vue';
+import CustomerConfirmation from '../components/CustomerConfirmation.vue';
     export default {
-        name: "BookingSystemPage",
+        name: "CustomerConfirmationPage",
         components: {
             DesktopHeader,
-            BookingSystemSearchForm,
-            // BookingSearchResults,
+            DesktopHeaderWelcome,
+            CustomerConfirmation,
             DesktopFooter,
         },
     }

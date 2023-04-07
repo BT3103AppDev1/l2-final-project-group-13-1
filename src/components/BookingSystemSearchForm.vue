@@ -1,3 +1,4 @@
+
 <template>
     <div class = "booking-system-search-form">
      <form class="search-form" @submit.prevent="search">
@@ -11,86 +12,122 @@
                         </label>
                         <div class="search-form-container-location-input">
                             <img class="image-location" src="../assets/location.svg" alt="image-location" />
-                            <select v-model="selectedLocation" class="so-paulo-so-paulo-brasil valign-text-middle roboto-normal-mine-shaft-14px">
-                                <option v-for = "(location, index) in locations" :key="index" >{{ location }}</option>
+                            <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
+                                <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
                             </select>
                             </div>
                     </div>
                 </div> 
             </div>
-            <div class ="overlap-group1-1">
-                <div class="residence-1">
-                    <div class="number-of-pax valign-text-middle roboto-medium-white-14px">
+            <div class ="search-form-container-numpax">
+                <div class="numpax">
+                    <div class="search-form-container-numpax-box valign-text-middle roboto-medium-white-14px">
                         <label>
-                            <span class ="span-2 roboto-medium-mine-shaft-14px">Number of Pax</span>
-                            <span class="span-2 roboto-medium-flamingo-14px">*</span>
+                            <span class ="roboto-medium-mine-shaft-14px">Number of Pax</span>
+                            <span class="roboto-medium-flamingo-14px">*</span>
                         </label>
                     </div>
-                    <div class="country">
-                        <div class="country-1">
-                            <div class="overlap-group-1">
-                                <input type="number" id="quantity" v-model.number="selectedQuantity" :min="4" :max="10" :step="2" class="brasil valign-text-middle roboto-normal-gray-14px">
-                            </div>
+                        <div class="search-form-container-numpax-input">
+                            <select v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" required>
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="10">10</option>
+                            </select>
                         </div>
-                    </div>
                 </div> 
             </div>
             <!-- Change to datetime form -->
-            <div class="pick-up">
-                <div class="date-and-time valign-text-middle roboto-medium-white-14px">
+            <div class="search-form-container-datetime">
+                <div class="search-form-container-datetime-box valign-text-middle roboto-medium-white-14px">
                     <label>
                     <span class="roboto-medium-mine-shaft-14px">Date and Time</span>
                      <span class="roboto-medium-flamingo-14px">*</span>
                     </label>
                 </div>
-                <div class ="box-retirada">
+                <div class ="search-form-container-datetime-input">
                     <div class="data">
-                        <div class="date">
+                        <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
+                        <img class="line" src="../assets/line-3.svg" alt="Line" />
+                        <img class="image-time" src="../assets/time.svg" alt="image-time" />
+
+                        <vue-flatpickr v-model="datetime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
+                    </div>
+                        <!-- <div>
+                        </div>
+                        <div class="search-form-container-datetime-input-date">
                             <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
-                            <span class="mon-0512 valign-text-middle roboto-normal-mine-shaft-14px">Mon 05/12</span>
+                            <span class="valign-text-middle roboto-normal-mine-shaft-14px">Mon 05/12</span>
                         </div>
                         <img class="line" src="../assets/line-3.svg" alt="Line" />
-                        <div class="hour">
-                            <img class="vector-3" src="../assets/time.svg" alt="Vector" />
-                            <div class="text-2 valign-text-middle roboto-normal-mine-shaft-14px">10:00</div>
-                        </div>
-                    </div>
+                        <div class="search-form-container-datetime-input-hour">
+                            <img class="image-time" src="../assets/time.svg" alt="image-time" />
+                            <div class="valign-text-middle roboto-normal-mine-shaft-14px">10:00</div>
+                        </div> -->
+                </div> 
+            </div>
+            <div class="search-form-container-duration">
+                <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
+                    <span>
+                        <span class ="roboto-medium-mine-shaft-14px">Duration</span>
+                        <span class="roboto-medium-flamingo-14px">*</span>
+                    </span>
+                </div>
+                <div class="search-form-container-duration-input">
+                    <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
+                        <!-- We cap at 4 hours first -->
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hours</option>
+                                <option value="3">3 Hours</option>
+                                <option value="4">4 Hours</option>
+                    </select>
                 </div>
             </div>
-            <div class="overlap-group2">
-                <div class="residence-1">
-                    <div class="number-of-pax valign-text-middle roboto-medium-white-14px">
-                        <span>
-                            <span class ="span-2 roboto-medium-mine-shaft-14px">Duration</span>
-                            <span class="span-2 roboto-medium-flamingo-14px">*</span>
-                        </span>
-                    </div>
-                    <div class="country">
-                        <div class="country-1">
-                            <div class="overlap-group-1">
-                                <span class="brasil valign-text-middle roboto-normal-gray-14px">1 Hour</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="search-button-container">
+                <button class="search-button valign-text-middle roboto-bold-concrete-16px" @click="navigateToResultsPage">Search</button>
             </div>
-            <div class="call-to-action">
-                <span class="pesquisar valign-text-middle roboto-bold-concrete-16px">Search</span>
-                </div>
             </div>   
         </form>
     </div> 
 </template>
 
 <script>
-    
+import VueFlatpickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+
 export default ({
-  name: "DatePicker",
+  name: "BookingSystemSearchForm",
+  components: {
+    VueFlatpickr,
+  },
+  props: ['locations'],
+  data() {
+    return { locations: ['White Sands','The Centrepoint','Kallang Wave Mall','Suntec City','Jcube','Causeway Point','The Star Vista'],
+             selectedLocation: '',
+             selectedNumPax: '',
+             selectedDateTime: '',
+             selectedDuration: '',
+             datetime: null,
+             datetimeConfig: {
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
+             },
+             menu: false
+           };
+  },
+  methods: {
+    navigateToResultsPage() {
+        setTimeout(() => {
+            this.$router.push("/booking-system-search-results-page") 
+        }, 4000)
+    },
+  },
 }
 );
 </script>
 
 <style>
+
+    /* For Page Body */
     .booking-system-search-form {
         align-items: flex-start;
         display: flex;
@@ -119,6 +156,10 @@ export default ({
         position: relative;
     }
 
+    /* End of Page Body */
+
+    /* For Location Input */
+
     .search-form-container-location {
         height: 88px;
         margin-top: 1px;
@@ -146,15 +187,43 @@ export default ({
         margin-top: 25px;
     }
 
-    .vector {
-        height: 8px;
-        left: 383px;
-        position: absolute;
-        top: 59px;
-        width: 14px;
+    .search-form-container-location-input {
+        align-items: center;
+        background-color: var(--bon-jour);
+        border-radius: 5px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        padding: 7px 18px;
+        position: relative;
+        width: 415px;
+        margin-top: 8px;
     }
 
-    .overlap-group1-1 {
+    .image-location {
+        height: 14.23px;
+        min-width: 11px;
+        position: relative;
+    }
+
+    .selectedLocation {
+        background-color: transparent;
+        border: 0;
+        height: 37px;
+        letter-spacing: 0;
+        display: flex;
+        align-items: center;
+        line-height: 37px;
+        padding: 9px;
+        /* margin: auto; */
+        position: relative;
+        width: 360px;
+    }
+    /* End of Location Input */
+
+    /* For NumPax Input */
+
+    .search-form-container-numpax {
         height: 88px;
         margin-left: 5px;
         margin-top: 1px;
@@ -162,23 +231,48 @@ export default ({
         width: 163px;
     }
 
-    .vector-1 {
-        height: 8px;
-        left: 134px;
-        position: absolute;
-        top: 70px;
-        width: 14px;
+    .numpax {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    min-height: 88px;
+    position: absolute;
+    top: 0;
+    width: 163px;
     }
 
-    .vector-2 {
-        height: 8px;
-        left: 134px;
-        position: absolute;
-        top: 44px;
-        width: 14px;
+    .search-form-container-numpax-box {
+        height: 37px;
+        letter-spacing: 0;
+        line-height: normal;
+        width: 104px;
+        margin-top: -4.5px;
     }
 
-    .pick-up {
+    .search-form-container-numpax-input {
+        align-items: flex-start;
+        background-color: var(--bon-jour);
+        border-radius: 5px;
+        display: flex;
+        height: 51px;
+        min-width: 161px;
+        padding: 18.4px 14.5px;
+    }
+
+    .selectedNumPax  {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        display: flex;
+        width: 130px;
+    }
+
+    /* End of NumPax Input */
+
+    /* For DateTime Input */
+
+    .search-form-container-datetime {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -188,7 +282,7 @@ export default ({
         width: 299px;
     }
 
-    .date-and-time {
+    .search-form-container-datetime-box {
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
@@ -196,7 +290,7 @@ export default ({
         width: 282px;
     }
 
-    .box-retirada {
+    .search-form-container-datetime-input {
         align-items: flex-start;
         background-color: var(--bon-jour);
         border-radius: 5px;
@@ -220,7 +314,7 @@ export default ({
         width: 238px;
     }
 
-    .date {
+    .search-form-container-datetime-input-date {
         align-items: center;
         display: flex;
         gap: 8px;
@@ -235,22 +329,13 @@ export default ({
         position: relative;
     }
 
-    .mon-0512 {
-        height: 15px;
-        letter-spacing: 0;
-        line-height: normal;
-        margin-top: -1px;
-        position: relative;
-        width: 69px;
-    }
-
     .line {
         height: 20.4px;
         min-width: 1px;
         position: relative;
     }
 
-    .hour {
+    .search-form-container-datetime-input-hour {
         align-items: center;
         display: flex;
         gap: 8px;
@@ -258,92 +343,38 @@ export default ({
         width: fit-content;
     }
 
-    .vector-3 {
+    .image-time {
         height: 14.41px;
         min-width: 14.13px;
         position: relative;
     }
 
-    .text-2 {
-        height: 13px;
-        letter-spacing: 0;
-        line-height: normal;
-        margin-top: -0.3px;
-        position: relative;
-        width: 35px;
+    .dateTimePicker {
+        background: transparent;
+        border: 0px;
     }
 
-    .overlap-group2 {
+    /* End of DateTime Input */
+
+    /* For Duration Input */
+
+    .search-form-container-duration {
         height: 88px;
         margin-left: 5px;
         position: relative;
         width: 163px;
     }
 
-    .vector-4 {
-        height: 8px;
-        left: 132px;
-        position: absolute;
-        top: 59px;
-        width: 14px;
-    }
-
-
-    .search-form-container-location-input {
-        align-items: center;
-        background-color: var(--bon-jour);
-        border-radius: 5px;
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        padding: 7px 18px;
-        position: relative;
-        width: 415px;
-        margin-top: 8px;
-    }
-
-    .image-location {
-        height: 14.23px;
-        min-width: 11px;
-        position: relative;
-    }
-
-    .so-paulo-so-paulo-brasil {
-        background-color: transparent;
-        border: 0;
-        height: 37px;
-        letter-spacing: 0;
-        line-height: normal;
-        margin-top: 0;
-        position: relative;
-        width: 360px;
-    }
-
-    .residence-1 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    min-height: 88px;
-    position: absolute;
-    top: 0;
-    width: 163px;
-    }
-
-    .number-of-pax {
+    .search-form-container-duration-box {
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
         width: 104px;
-        margin-top: -4.5px;
-    }
-
-    .residence-1.residence .number-of-pax {
-        width: 75px;
+        margin-top: -3px;
     }
 
 
-    .overlap-group-1 {
+    .search-form-container-duration-input {
         align-items: flex-start;
         background-color: var(--bon-jour);
         border-radius: 5px;
@@ -351,9 +382,19 @@ export default ({
         height: 51px;
         min-width: 161px;
         padding: 18.4px 14.5px;
+        align-items: center;
     }
 
-    .call-to-action {
+    .selectedDuration {
+        background-color: transparent;
+        border: none;
+        position: relative;
+        display: flex;
+        width: 130px;
+    }
+
+    /* For Search Button */
+    .search-button-container {
         align-items: center;
         align-self: center;
         background-color: var(--mine-shaft);
@@ -369,7 +410,7 @@ export default ({
         width: 153px;
     }
 
-    .pesquisar {
+    .search-button {
         letter-spacing: 0;
         line-height: normal;
         margin-top: -1px;
@@ -377,4 +418,7 @@ export default ({
         text-align: center;
         width: fit-content;
     }
+
+    /* End of Search Button */
+
 </style>
