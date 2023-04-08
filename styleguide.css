@@ -54,6 +54,8 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     --font-family-poppins: "Poppins";
     --font-family-poppins-light: "Poppins-Light";
     --font-family-roboto: "Roboto";
+    --font-family-roboto-medium: "Roboto-Medium";
+    --font-family-inter: "Inter";
 
 }
 
@@ -67,6 +69,14 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
 
 .poppins-medium-white-16px {
     color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.poppins-medium-black-16px {
+    color: var(--black);
     font-family: var(--font-family-poppins);
     font-size: var(--font-size-m);
     font-weight: 500;
@@ -271,3 +281,18 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     font-style: normal;
 }
 
+.inter-semi-bold-black-24px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-weight: 600;
+    font-style: normal;
+}
+
+.inter-semi-bold-black-20px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xl2);
+    font-weight: 600;
+    font-style: normal;
+}
