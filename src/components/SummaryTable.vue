@@ -46,7 +46,8 @@
         </div>
     </div>
     <br>
-    <br>
+
+    <button class="back-to-home" @click="goToHome">Back to Home</button>
   </template>
 
 <script>
@@ -101,6 +102,10 @@ export default {
                 console.log('Error getting document:', error);
             }
         },
+
+    goToHome() {
+        this.$router.push('/customer-home');
+    },
     },
 
     computed: {
@@ -171,6 +176,16 @@ td {
     border: 1px rgb(196, 194, 194);
     border-style: groove;
     padding: 1.5em
+}
+
+.back-to-home {
+    font-family: poppins;
+    color: white;
+    background-color: orangered;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 </style>
