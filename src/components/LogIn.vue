@@ -78,7 +78,7 @@ const register = () => {
                 case "auth/wrong-password":
                     errMsg.value = "Incorrect password";
                     break;
-                dafult:
+                default:
                     errMsg.value = "Email or password is incorrect";
                     break;
             }
