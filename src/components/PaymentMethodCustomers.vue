@@ -73,7 +73,7 @@
                     <img class="icon" src="../assets/ewallet.jpg"  style="width: 30px; height: 20px;;">
                 </button> 
             </div>
-            <div class = 'payment-method'>
+            <!-- <div class = 'payment-method'>
                 <span class="poppins-bold-black-10px"><br></span> 
                 <span class="poppins-bold-black-20px">TEOHENG Wallet Credits<br></span> 
             </div>
@@ -85,19 +85,19 @@
             <div class = 'payment-method'>
                 <span class="poppins-bold-black-10px"><br></span> 
                 <span class="poppins-bold-black-20px">PayNow/PayLah<br></span>
-            </div>
+            </div> -->
         </div>  
         <div class = "radio-button">
             <input type="radio" name= "option1" value="option1" v-model="selectedOption">
         </div> 
-        <div class = "radio-button2">
+        <!-- <div class = "radio-button2">
             <input type="radio" name="option2" value="option2" v-model="selectedOption">
         </div>
         
         <div class = "radio-button3">                    
             <input type="radio" name = "option3" value="option3" v-model="selectedOption">
         </div>   
-        
+         -->
         <div class= "next-button">
             <button v-on:click="" style:>Next</button> 
         </div>

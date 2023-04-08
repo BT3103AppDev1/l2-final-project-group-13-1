@@ -76,16 +76,20 @@
                         <input type = "text" style = "width:500px; height: 70px;"  v-model="remarks" placeholder="  Input Remarks If Any">
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="proceed-options">
-            <button @click="redirectToPayment()" style="font-size:17px; color:white"> Proceed to Payment Method</button>
-        </div>
+                <div class="flex-container">
+                <div class="proceed-options">
+                    <button @click="redirectToPayment()" style="color:white"> Proceed to Payment Method</button>
+                </div>
 
-        <div class= "back-options">
-            <button style="font-size:17px;color:white;" @click="goBack">Back</button>
-        </div>
+                <div class= "back-options">
+                    <button style="font-size:17px;color:white;" @click="goBack">Back</button>
+                </div>
+            </div>
+            </div>
+    
+        </div>        
     </div>
+    
 </template>
 
 
@@ -256,7 +260,7 @@ export default {
         font-family: Arial;
         border-radius:25px;
         padding: 10px 20px;
-        height: 445px;
+        height: 500px;
         width: 1100px;
         margin-top: 15px;
         margin-left: 0px;
@@ -321,10 +325,12 @@ export default {
         vertical-align: top;
     }
 
-    .proceed-options {
-        margin-top: -70px;
-        margin-bottom: 700px;
+    .flex-container {
+        display: flex;
         margin-left: 150px;
+    }
+
+    .proceed-options {
         font-family:'Arial';
         color:white;
         width: 300px;
@@ -336,12 +342,10 @@ export default {
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
+        margin: 70px 0px 0px 0px;
     }
 
     .back-options {
-        margin-top: -747px;
-        margin-bottom: -200px;
-        margin-left: 650px;
         font-family:'Arial';
         color:white;
         width: 300px;
