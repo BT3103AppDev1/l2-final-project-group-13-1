@@ -1,15 +1,20 @@
 <template>
-  <booking-system-page/>
+  <router-view></router-view>
 </template>
 
 <script>
-import BookingSystemPage from "./components/BookingSystemPage.vue";
 
   export default {
     name: "App",
     components: {
-      BookingSystemPage,
     },
   }
 
 </script>
+
+<style>
+  #app {
+    justify-content: center;
+    align-items: center;
+  }
+</style>
