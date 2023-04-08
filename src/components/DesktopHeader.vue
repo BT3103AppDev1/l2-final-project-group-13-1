@@ -34,8 +34,7 @@
                         <button class="faq poppins-normal-black-16px">FAQ</button>
                     </div>
                     <div class="nav-bar-container-2">
-                        <!-- Add Button -->
-                        <button class="online-booking poppins-normal-white-13px">Online Booking</button>
+                        <button @click="$router.push('LogIn')">Book Now</button>
                     </div>
                     <div class="nav-bar-container-3">
                         <button class="contactUs poppins-normal-white-13px">Contact Us</button>
@@ -125,6 +124,7 @@
         text-align: center;
         /* width: 130px; */
         gap: 50px;
+        color:black;
     }
 
     .nav-bar-container-2 {
@@ -263,5 +263,34 @@
         position: relative;
         /* top: 59px; */
         width: 180px;
+    }
+
+    .welcome-message {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-left: 4px;
+        margin-top: 25px;
+        min-height: 93px;
+        width: 1128px;
+    }
+
+    .welcome-message-1 {
+        letter-spacing: 0;
+        line-height: 55.9px;
+        margin-right: 4px;
+        min-height: 56px;
+        text-align: center;
+        white-space: nowrap;
+        width: 1124px;
+    }
+
+    .welcome-message-2 {
+        letter-spacing: 0;
+        line-height: 37.2px;
+        margin-right: 4px;
+        text-align: center;
+        white-space: nowrap;
+        width: 484px;
     }
 </style>

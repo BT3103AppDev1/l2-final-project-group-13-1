@@ -38,6 +38,9 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     --concrete: rgba(242, 242, 242, 1);
     --blaze-orange: rgba(247, 91, 11, 1);
     --white: rgba(255, 255, 255, 1);
+    --blue: rgba(24,119,242,1);
+    --blueberry: rgba(66, 133, 244, 1);
+    --thunder: rgba(46, 46, 46, 1);
 
     --font-size-xs: 13px;
     --font-size-s: 14px;
@@ -51,12 +54,29 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     --font-family-poppins: "Poppins";
     --font-family-poppins-light: "Poppins-Light";
     --font-family-roboto: "Roboto";
+    --font-family-roboto-medium: "Roboto-Medium";
+    --font-family-inter: "Inter";
 
 }
 
+.poppins-normal-thunder-16px {
+    color: var(--thunder);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    font-style: normal;
+}
 
 .poppins-medium-white-16px {
     color: var(--white);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    font-style: normal;
+}
+
+.poppins-medium-black-16px {
+    color: var(--black);
     font-family: var(--font-family-poppins);
     font-size: var(--font-size-m);
     font-weight: 500;
@@ -261,3 +281,18 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     font-style: normal;
 }
 
+.inter-semi-bold-black-24px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-weight: 600;
+    font-style: normal;
+}
+
+.inter-semi-bold-black-20px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xl2);
+    font-weight: 600;
+    font-style: normal;
+}
