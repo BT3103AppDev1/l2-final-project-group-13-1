@@ -1,53 +1,142 @@
 <template>
     <div class="summary-booking-table">
         <div class="sbt-title">
-            <h3 class="sbt-header">Booking Summary | ID SC12345</h3>
+            <h3 class="sbt-header">Booking Summary | ID {{bookingID}}</h3>
         </div>
         <div class = "sbt-date">
             <p class="sbt-header">Date</p>
-            <p>15 December 2023</p>
+            <p>{{formattedDate}}</p>
         </div>
         <br>
         <div class = "sbt-container">
             <div class = "box">
                 <p class="sbt-header">Time</p>
-                <p>10:00-12:00</p>
+                <p>{{formattedTime}}</p>
             </div>
             <div class = "box">
                 <p class="sbt-header">Room Type</p>
-                <p>Small</p>
+                <p>{{bookingData.roomType}}</p>
             </div>
             <div class = "box">
                 <p class="sbt-header">Payment</p>
-                <p>TEOHENG Wallet Credits</p>
+                <p>{{bookingData.paymentMethod}}</p>
             </div>
         </div>
         <br>
         <div class = "sbt-container">
             <div class = "box">
                 <p class="sbt-header">Name</p>
-                <p>Bryan Tan</p>
+                <p>{{bookingData.name}}</p>
             </div>
             <div class = "box">
                 <p class="sbt-header">Location</p>
-                <p>Raffles Hall</p>
+                <p>{{branchLocation}}</p>
             </div>
             <div class = "box">
                 <p class="sbt-header">Phone Number</p>
-                <p>12345666</p>
+                <p>{{bookingData.phoneNumber}}</p>
             </div>
         </div>
         <br>
         <div class = "sbt-container">
             <div class = "box">
                 <p class="sbt-header">Remarks</p>
-                <p>I'm retarded</p>
+                <p>{{bookingData.remarks}}</p>
             </div>
         </div>
     </div>
     <br>
     <br>
   </template>
+
+<script>
+import firebaseApp from "@/firebase.js";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+
+export default {
+    data(){
+        return {
+            bookingID :'',
+            bookingData: {},
+            branchLocation:'',
+        };
+    },
+
+    async created() {
+        this.bookingID = this.$route.params.bookingID;
+        const db = getFirestore(firebaseApp);
+        const bookingDocRef = doc(db, 'Bookings', this.bookingID);
+        try {
+            const docSnap = await getDoc(bookingDocRef);
+            if (docSnap.exists()) {
+            // Set the bookingData object in your component data
+            this.bookingData = docSnap.data();
+            await this.fetchBranchName();
+            } else {
+            console.log('No such document');
+            }
+        } catch (error) {
+            console.error('Error getting document:', error);
+        }
+    },
+
+    methods: {
+    async fetchBranchName() {
+            const db = getFirestore(firebaseApp);
+            const branchID = this.bookingData.branchID;
+
+            try {
+                const branchCollection = collection(db, 'Branch');
+                const branchQuery = query(branchCollection, where('branchID', '==', parseInt(branchID)));
+                const querySnapshot = await getDocs(branchQuery);
+
+                if (!querySnapshot.empty) {
+                querySnapshot.forEach(doc => {
+                    this.branchLocation = doc.data().branchLocation;
+                });
+                } else {
+                console.log('No such document!');
+                }
+            } catch (error) {
+                console.log('Error getting document:', error);
+            }
+        },
+    },
+
+    computed: {
+
+        formattedDate() {
+        const date = this.bookingData.date;
+        return new Date(date).toLocaleDateString("en-SG", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        });
+        },
+
+        formattedTime() {
+            const formatTime = (timeString) => {
+                if (!timeString) return '';
+
+                let [hour, minute] = timeString.split(':');
+                hour = parseInt(hour, 10);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour || 12; // the hour '0' should be '12'
+                return `${hour}:${minute} ${ampm}`;
+            };
+
+            const formattedStartTime = formatTime(this.bookingData.startTime);
+            const formattedEndTime = formatTime(this.bookingData.endTime);
+
+            return `${formattedStartTime} - ${formattedEndTime}`;
+        },
+    }
+
+
+}
+</script>
+
 
 <style>
 table {

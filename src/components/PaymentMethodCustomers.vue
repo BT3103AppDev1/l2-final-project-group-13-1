@@ -99,7 +99,7 @@
         </div>   
          -->
         <div class= "next-button">
-            <button v-on:click="" style:>Next</button> 
+            <button v-on:click="submitBooking" style="color:white;">Next</button> 
         </div>
         <div class ="back-button">
             <button style="font-size:17px;color:white;" @click="goBack">Back</button>
@@ -112,16 +112,13 @@
 <script>
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, query, where} from "firebase/firestore";
+import { collection, getDocs, query, where, addDoc} from "firebase/firestore";
 import router from "@/router/router"
     export default {
         data() {
             return {
-                name: '',
-                phoneNumber: '',
-                email: '',
-                branchLocation: '',
-                totalPrice: 0
+                bookingID:"",
+                branchLocation:'',
             }
         },
 
@@ -133,6 +130,7 @@ import router from "@/router/router"
             this.startTime = sessionStorage.getItem('startTime') || '';
             this.endTime = sessionStorage.getItem('endTime') || '';
             this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
+            this.roomID = sessionStorage.getItem('roomID') || 1;
             this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
             this.price = sessionStorage.getItem('price') || 0;
             this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
@@ -169,6 +167,43 @@ import router from "@/router/router"
                 console.log('Error getting document:', error);
             }
         },
+
+        async submitBooking() {
+            const bookingData = {
+                name: this.name,
+                phoneNumber: this.phoneNumber,
+                email: this.email,
+                date: this.date,
+                startTime: this.startTime,
+                endTime: this.endTime,
+                roomID: this.roomID,
+                roomType: this.selectedRoomType,
+                numberOfPax: this.noOfPax,
+                price: this.price,
+                bookingDuration: this.duration,
+                branchID: this.location,
+                totalPrice: this.totalPrice,
+                remarks: this.remarks,
+                userID: "xP3rCXxtjg3aRWiTNtNx", //hard-coded. Need to change to current user
+                paymentMethod: "In Store",
+                paymentStatus: "Pending"
+            };
+
+            const db = getFirestore(firebaseApp);
+            const bookingCollection = collection(db, "Bookings");
+            try {
+                const docRef = await addDoc(bookingCollection, bookingData);
+                const docId = docRef.id;
+                alert("Booking submitted successfully");
+                // Redirect to a different page if necessary
+                this.$router.push({ name: 'BookingSummary',
+                params: {bookingID: docId}
+            });
+            } catch (error) {
+                console.error("Error adding booking:", error);
+                alert("There was an error submitting your booking");
+            }
+        }
     },
 
     computed: {

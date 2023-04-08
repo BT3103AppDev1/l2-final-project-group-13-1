@@ -97,7 +97,7 @@ const routes = [
     name: 'BookingDeletedPage',
     component: BookingDeletedPage},
 
-    { path: '/BookingSummary', 
+    { path: '/BookingSummary/:bookingID', 
     name: 'BookingSummary', 
     component: SummaryDetails
     },
