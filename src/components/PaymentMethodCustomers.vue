@@ -1,47 +1,43 @@
 <template>
     <div class="existing-booking-table">
         <div class="ebt-title">
-            <h3 class="ebt-header">Booking Summary | ID SC12345</h3>
+            <h3 class="ebt-header" style="color:black">Booking Summary</h3>
         </div>
         <div class = "ebt-date">
             <p class="ebt-header">Date</p>
-            <p>15 December 2023</p>
+            <p>{{formattedDate}}</p>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Time</p>
-                <p>10:00-12:00</p>
+                <p>{{formattedTime}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Room Type</p>
-                <p>Small</p>
-            </div>
-            <div class = "box">
-                <p class="ebt-header">Payment</p>
-                <p>TEOHENG Wallet Credits</p>
+                <p>{{selectedRoomType}}</p>
             </div>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Name</p>
-                <p>Bryan Tan</p>
+                <p>{{name}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Location</p>
-                <p>Raffles Hall</p>
+                <p>{{branchLocation}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Phone Number</p>
-                <p>12345666</p>
+                <p>{{phoneNumber}}</p>
             </div>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Remarks</p>
-                <p>I'm retarded</p>               
+                <p>{{remarks}}</p>               
             </div>
         </div>
         <div class = "ebt-container">
@@ -51,7 +47,7 @@
             </div>
             <div class = "box2">
                 <span class="poppins-bold-black-10px"><br></span>
-                <span class="poppins-bold-black-20px">SGD$13.00<br></span>
+                <span class="poppins-bold-black-20px">SGD${{ totalPrice.toFixed(2) }}<br></span>
                 
             </div>
         </div>
@@ -106,7 +102,7 @@
             <button v-on:click="" style:>Next</button> 
         </div>
         <div class ="back-button">
-            <button v-on:click="" style:>Back</button> 
+            <button style="font-size:17px;color:white;" @click="goBack">Back</button>
         </div>
         
     </div>
@@ -114,12 +110,95 @@
   </template>
 
 <script>
+import firebaseApp from "@/firebase.js";
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, query, where} from "firebase/firestore";
+import router from "@/router/router"
     export default {
         data() {
             return {
-                selectedOption: ''
+                name: '',
+                phoneNumber: '',
+                email: '',
+                branchLocation: '',
+                totalPrice: 0
             }
-        }
+        },
+
+        created() {
+            this.name = sessionStorage.getItem('name') || '';
+            this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
+            this.email = sessionStorage.getItem('email') || '';
+            this.date = sessionStorage.getItem('date') || '';
+            this.startTime = sessionStorage.getItem('startTime') || '';
+            this.endTime = sessionStorage.getItem('endTime') || '';
+            this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
+            this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
+            this.price = sessionStorage.getItem('price') || 0;
+            this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
+            this.location = parseFloat(sessionStorage.getItem('location')) || 0;
+            this.totalPrice = parseFloat(sessionStorage.getItem('totalPrice')) || 0;
+            this.remarks = sessionStorage.getItem('remarks') || '';
+            this.fetchBranchName();
+    
+        },
+
+
+        methods: {
+        goBack() {
+            this.$router.go(-1);
+        },
+
+        async fetchBranchName() {
+            const db = getFirestore(firebaseApp);
+            const branchID = this.location;
+
+            try {
+                const branchCollection = collection(db, 'Branch');
+                const branchQuery = query(branchCollection, where('branchID', '==', parseInt(branchID)));
+                const querySnapshot = await getDocs(branchQuery);
+
+                if (!querySnapshot.empty) {
+                querySnapshot.forEach(doc => {
+                    this.branchLocation = doc.data().branchLocation;
+                });
+                } else {
+                console.log('No such document!');
+                }
+            } catch (error) {
+                console.log('Error getting document:', error);
+            }
+        },
+    },
+
+    computed: {
+
+    formattedDate() {
+    const date = this.date;
+    return new Date(date).toLocaleDateString("en-SG", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    },
+
+    formattedTime() {
+    const formatTime = (timeString) => {
+      let [hour, minute] = timeString.split(':');
+      hour = parseInt(hour, 10);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      hour = hour % 12;
+      hour = hour || 12; // the hour '0' should be '12'
+      return `${hour}:${minute} ${ampm}`;
+    };
+
+    const formattedStartTime = formatTime(this.startTime);
+    const formattedEndTime = formatTime(this.endTime);
+
+    return `${formattedStartTime} - ${formattedEndTime}`;
+    },
+
+    },
 
     }
 </script>
