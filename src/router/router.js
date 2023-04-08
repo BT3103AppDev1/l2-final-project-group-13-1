@@ -14,6 +14,8 @@ import CustomerPostLoginPage from "@/views/CustomerPostLoginPage.vue"
 import EditProfilePage from "@/views/EditDetailsPage.vue"
 import WalletDetailsPage from "@/views/WalletDetailsPage.vue"
 import CheckProfileAndWalletPage from "@/views/CheckProfileWalletPage.vue"
+import EmployeePostLoginPage from "@/views/EmployeePostLoginPage.vue"
+import EmployeeSearchBookingPage from "@/views/EmployeeBookingSystemPage.vue"
 
 const routes = [
     {
@@ -32,9 +34,19 @@ const routes = [
         component: RegisterPage
     },
     {
-        path: '/home',
+        path: '/customer-home',
         name: 'CustomerPostLoginPage',
         component: CustomerPostLoginPage
+    },
+    {
+        path: '/employee-home',
+        name: 'EmployeePostLoginPage',
+        component: EmployeePostLoginPage
+    },
+    {
+        path: '/employee-booking-system-page',
+        name: 'EmployeeSearchBookingPage',
+        component: EmployeeSearchBookingPage
     },
     {
         path: '/check-details',

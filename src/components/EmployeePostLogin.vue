@@ -18,6 +18,14 @@
     </div>
 </template>
 
+<script>
+
+export default{
+    name:"EmployeePostLogin"
+}
+</script>
+
+
 <style scoped>
 .employee-post-login {
     align-items: center;

@@ -1,4 +1,9 @@
 <script>
+
+export default {
+    name: "EmployeeSearchBooking"
+}
+
 //   export default {
 //     data() {
 //       return {
@@ -168,6 +173,8 @@
   </div>
 </div>
 </template>
+
+
 
 <style scoped>
 .employee-check-existing-booking {
