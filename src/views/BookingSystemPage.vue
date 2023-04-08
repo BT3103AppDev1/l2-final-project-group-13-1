@@ -2,9 +2,11 @@
     <div class="container-center-horizontal">
         <div class="booking-system-page">
             <desktop-header/>
-            <desktop-header-welcome/>
+            <!-- <desktop-header-welcome/> -->
             <booking-system-search-form/>
-            <desktop-footer/>
+            <!-- <desktop-footer/> -->
+            <!-- <test-function/> -->
+
         </div>
     </div>
 </template>
@@ -13,6 +15,7 @@
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
+import TestFunction from '../components/testfunction.vue';
 // import BookingSearchResults
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
@@ -23,6 +26,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
             BookingSystemSearchForm,
             // BookingSearchResults,
             DesktopFooter,
+            TestFunction,
         },
     }
 </script>

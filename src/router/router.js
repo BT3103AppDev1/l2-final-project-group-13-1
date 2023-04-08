@@ -9,9 +9,11 @@ const routes = [
         component: BookingSystemPage
     },
     {
+        // path: '/booking-system-search-results-page/:selectedLocation/:selectedNumPax/:selectedDateTime/:selectedDuration/:roomList',
         path: '/booking-system-search-results-page',
         name: 'BookingSystemSearchResultsPage',
-        component: BookingSystemSearchResultsPage
+        component: BookingSystemSearchResultsPage,
+        props: route => ({ uniqueRoomTypes: route.query.uniqueRoomTypes }),
     },
 ]
 const router = createRouter({

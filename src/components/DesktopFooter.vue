@@ -51,10 +51,17 @@ export default {
 <style>
 .desktop-footer {
     width: 100vw;
-    bottom: 0;
+    /* bottom: 0; */
+    /* top: 0; */
     position: relative;
     margin: 0;
     padding: 0;
+    /* display: flex; */
+    /* flex-direction: column; */
+    min-width: 1440px;
+    /* left: 0; */
+    margin-left: auto;
+
 }
 
 .footer-container {
@@ -64,6 +71,10 @@ export default {
     background-color: var(--eerie-black);
     display: flex;
     flex-direction: column;
+    min-width: 1440px;
+    /* left: 0; */
+
+
 }
 
 .footer-container-columns-title-1 {
@@ -79,13 +90,17 @@ export default {
 }
 
 .footer-container-columns {
-    justify-content: center;
+    /* justify-content: center; */
+    left: 0;
     display:flex;
     flex-direction: row;
     min-height: 20%;
     position: relative;
     width: 100vw;
     padding: 3%;
+    min-width: 1440px;
+    justify-content: flex-start;
+
 }
 
 .footer-container-columns-1 {
@@ -100,6 +115,7 @@ export default {
     padding-left: 5%;
     padding-right: 5%;
     gap: 10px;
+    min-width: 576px;
 }
 
 .footer-container-columns-2 {
@@ -112,6 +128,7 @@ export default {
     width: 10%;
     text-align: start;
     gap: 10px;
+    min-width: 144px;
 }
 
 .footer-container-columns-3 {
@@ -126,6 +143,7 @@ export default {
     gap: 20px;
     padding-left: 2%;
     padding-right: 2%;
+    min-width: 360px;
 }
 
 .footer-container-logos {
@@ -135,6 +153,7 @@ export default {
     gap: 16px;
     min-width: 25%;
     position: relative;
+    min-width: 360px;
 }
 
 .icon {

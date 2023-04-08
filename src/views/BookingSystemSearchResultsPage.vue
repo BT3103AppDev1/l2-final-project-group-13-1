@@ -1,21 +1,25 @@
 <template>       
         <div class="booking-system-search-results-page">
             <desktop-header/>
-            <desktop-header-welcome/>
+            <!-- <desktop-header-welcome/>
 
-            <booking-system-search-form/>
+            <booking-system-search-form/> -->
 
-            <div class="cards">
-                <booking-room-card v-for="(card, index) in BookingRoomCardDetails" :key="index" 
+            <!-- <div class="cards">
+                <booking-room-card v-for="(card, index) in uniqueRoomTypes" :key="index" 
                 :room-type="card.roomType"
                 :num-pax="card.numPax"
                 :date="card.date"
                 :time="card.time"
                 :rate="card.rate"
                 />
-            </div>
+            </div> -->
+            <booking-room-cards v-if="uniqueRoomTypes" :uniqueRoomTypes="uniqueRoomTypes"/>
+            <h1> Results for {{ uniqueRoomTypes }}</h1>
+            <!-- <test-function/> -->
+            <!-- <booking-room-cards :uniqueRoomTypes="uniqueRoomTypes"/> -->
+            <!-- <desktop-footer/> -->
 
-            <desktop-footer/>
         </div>
 </template>
 
@@ -25,6 +29,7 @@ import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
 import DesktopFooter from '../components/DesktopFooter.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import BookingRoomCard from '../components/BookingRoomCard.vue';
+import BookingRoomCards from '../components/BookingRoomCards.vue';
     export default {
         name: "BookingSystemPage",
         components: {
@@ -33,6 +38,7 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
             DesktopFooter,
             DesktopHeaderWelcome,
             BookingRoomCard,
+            BookingRoomCards,
         },
         props: {
             selectedDateTime: {
@@ -51,6 +57,10 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
                 type: String,
                 required: true,
             },
+            uniqueRoomTypes: {
+                type: Array,
+                required: true,
+            }
         },
         data() {
             return {
@@ -58,9 +68,9 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
                 { roomType: 'SMALL ROOM', numPax: 4, date: '05 December 2023', time: '10:00 - 11.00', rate: '$13.00', },
                 { roomType: 'MEDIUM ROOM', numPax: 6, date: '05 December 2023', time: '10:00 - 11.00', rate: '$15.00', },
                 { roomType: 'LARGE ROOM', numPax: 10, date: '05 December 2023', time: '10:00 - 11.00', rate: '$25.00', },
-                ]
+                ],
             }
-        }
+        },
     }
 </script>
 
@@ -92,11 +102,6 @@ import BookingRoomCard from '../components/BookingRoomCard.vue';
 
     }
 
-    .cards {
-        display: flex;
-        flex-direction: row;
-        position: relative;
-        gap: 50px;
-    }
+
 
 </style>
