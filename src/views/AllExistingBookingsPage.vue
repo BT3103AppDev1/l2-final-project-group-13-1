@@ -1,12 +1,12 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="booking-system-page">
+        <div class="all-existing-bookings-page">
             <desktop-header/>
-            <!-- <desktop-header-welcome/> -->
-            <booking-system-search-form/>
-            <!-- <desktop-footer/> -->
-            <!-- <test-function/> -->
-
+            <desktop-header-welcome/>
+            <br>
+            <p class="poppins-bold-black-24px">Your Existing Bookings</p>
+            <all-existing-bookings-table/>
+            <desktop-footer/>
         </div>
     </div>
 </template>
@@ -14,19 +14,15 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
-import TestFunction from '../components/testfunction.vue';
-// import BookingSearchResults
+import AllExistingBookingsTable from '../components/AllExistingBookingsTable.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
-        name: "BookingSystemPage",
+        name: "AllExistingBookingsPage",
         components: {
             DesktopHeader,
             DesktopHeaderWelcome,
-            BookingSystemSearchForm,
-            // BookingSearchResults,
+            AllExistingBookingsTable,
             DesktopFooter,
-            TestFunction,
         },
     }
 </script>
@@ -38,23 +34,20 @@ import DesktopFooter from '../components/DesktopFooter.vue';
     body {
         margin: 0;
         padding: 0;
+        left: -35px;
+        position: absolute;
     }
 
-    .booking-system-page {
-        max-width: 100vw;
-
+    .all-existing-bookings-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;
         display: flex;
         flex-direction: column;
+        height: 1276px;
         overflow: hidden;
-        justify-content: space-between;
         position: relative;
-        width: 100vw;
-        height: 100vh;
-        gap: 50px;
-
+        width: 1440px;
     }
 
 </style>

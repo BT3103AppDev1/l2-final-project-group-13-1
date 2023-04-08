@@ -1,42 +1,36 @@
 
 <template>
     <div class = "booking-system-search-form">
-     <form class="search-form" @submit.prevent="search">
-        <div class ="search-form-container">
+         <form class="search-form" @submit.prevent="search">
             <div class ="search-form-container-location">
-                <div class="location"> 
                     <div class="search-form-container-location-box valign-text-middle">
                         <label>
                             <span class="roboto-medium-mine-shaft-14px">Location</span>
                             <span class="roboto-medium-flamingo-14px">*</span>
                         </label>
-                        <div class="search-form-container-location-input">
-                            <img class="image-location" src="../assets/location.svg" alt="image-location" />
-                            <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
-                                <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
-                            </select>
-                            </div>
                     </div>
-                </div> 
+                    <div class="search-form-container-location-input">
+                        <img class="image-location" src="../assets/location.svg" alt="image-location" />
+                        <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
+                            <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
+                        </select>
+                    </div>
             </div>
             <div class ="search-form-container-numpax">
-                <div class="numpax">
                     <div class="search-form-container-numpax-box valign-text-middle roboto-medium-white-14px">
                         <label>
                             <span class ="roboto-medium-mine-shaft-14px">Number of Pax</span>
                             <span class="roboto-medium-flamingo-14px">*</span>
                         </label>
                     </div>
-                        <div class="search-form-container-numpax-input">
-                            <select v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" required>
-                                <option value="4">4</option>
-                                <option value="6">6</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                </div> 
+                    <div class="search-form-container-numpax-input">
+                        <select v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" required>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
             </div>
-            <!-- Change to datetime form -->
             <div class="search-form-container-datetime">
                 <div class="search-form-container-datetime-box valign-text-middle roboto-medium-white-14px">
                     <label>
@@ -46,19 +40,13 @@
                 </div>
                 <div class ="search-form-container-datetime-input">
                     <div class="data">
-                        <div>
-                        </div>
-                        <div class="search-form-container-datetime-input-date">
-                            <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
-                            <span class="valign-text-middle roboto-normal-mine-shaft-14px">Mon 05/12</span>
-                        </div>
+                        <img class="icon-calendar" src="../assets/calendar.svg" alt="icon-calendar" />
                         <img class="line" src="../assets/line-3.svg" alt="Line" />
-                        <div class="search-form-container-datetime-input-hour">
-                            <img class="image-time" src="../assets/time.svg" alt="image-time" />
-                            <div class="valign-text-middle roboto-normal-mine-shaft-14px">10:00</div>
-                        </div>
+                        <img class="image-time" src="../assets/time.svg" alt="image-time" />
+
+                        <vue-flatpickr v-model="datetime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
                     </div>
-                </div>
+                </div> 
             </div>
             <div class="search-form-container-duration">
                 <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
@@ -80,18 +68,24 @@
             <div class="search-button-container">
                 <button class="search-button valign-text-middle roboto-bold-concrete-16px" @click="navigateToResultsPage">Search</button>
             </div>
-            </div>   
-        </form>
-    </div> 
+         </form>
+        </div>   
 </template>
 
 <script>
+import VueFlatpickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+import firebaseApp from "@/firebase.js";
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, query, orderBy} from "firebase/firestore";
+// import VueFlatpickr from 'vue-flatpickr-component';
+// import 'flatpickr/dist/flatpickr.css';
+const db = getFirestore(firebaseApp);
 
-
-export default ({
-  name: "DatePicker",
+export default {
+  name: "BookingSystemSearchForm",
   components: {
-
+    VueFlatpickr,
   },
   props: ['locations'],
   data() {
@@ -100,51 +94,139 @@ export default ({
              selectedNumPax: '',
              selectedDateTime: '',
              selectedDuration: '',
-             date: new Date().toISOString().substr(0, 10),
+             roomType: [],
+             uniqueRoomTypes: [],
+             datetime: null,
+                datetimeConfig: {
+                enableTime: true,
+                dateFormat: 'Y-m-d H:i',
+             },
              menu: false
-            };
+           };
   },
-  methods: {
-    navigateToResultsPage() {
-        setTimeout(() => {
-            this.$router.push("/booking-system-search-results-page") 
-        }, 4000)
-    },
-  },
-}
-);
+  mounted() {
+        async function display() {
+        const roomRef = collection(db, "Room");
+        const sortedQuery = query(roomRef, orderBy("roomType", "desc"));
+        let allDocuments = await getDocs(sortedQuery);
+        const fetchedTypes = [];
+        allDocuments.forEach((doc) => {
+            let documentData = doc.data();
+            fetchedTypes.push({
+            id: doc.id,
+            ...documentData,
+            });
+        });
+        this.roomType = fetchedTypes;
+
+        const roomTypesSet = new Set();
+        this.roomType.forEach((eachRoom) => {
+            roomTypesSet.add(eachRoom.roomType);
+        });
+        this.uniqueRoomTypes = Array.from(roomTypesSet);
+        }
+        display.call(this);
+        }, 
+        methods: {
+            getPrice(type) {
+
+                const dateTime = new Date(this.datetime);
+                const hour = dateTime.getHours();
+
+                if (type === 'Small') {
+                if (hour >= 12 && hour < 19) {
+                    return "Happy Hour $13.00 w/GST";
+                } else if (hour >= 19) {
+                    return "Peak Hours $19.00 w/GST"
+                }
+                } else if (type === 'Medium') {
+                    if (hour >= 12 && hour < 19) {
+                    return "Happy Hour $15.00 w/GST";
+                } else if (hour >= 19) {
+                    return "Peak Hours $22.00 w/GST"
+                }
+                } else if (type === 'Large') {
+                    if (hour >= 12 && hour < 19) {
+                    return "Happy Hour $17.00 w/GST";
+                } else if (hour >= 19) {
+                    return "Peak Hours $25.00 w/GST"
+                }
+                }
+
+                return '';
+            },
+            navigateToResultsPage() {
+            this.$router.push({
+                name: "BookingSystemSearchResultsPage",
+                query: {
+                    uniqueRoomTypes: this.uniqueRoomTypes,
+                },
+            })
+        },
+        },
+        computed: {
+            dateFormatted() {
+                if (this.datetime) {
+                const dateTime = new Date(this.datetime);
+                const options = {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                    
+                };
+                return dateTime.toLocaleString("en-UK", options);
+                }
+                return "No date selected";
+            },
+
+            timeRange() {
+            if (this.datetime && this.selectedDuration) {
+                const startDateTime = new Date(this.datetime);
+                const endDateTime = new Date(startDateTime);
+                endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+                
+                const options = {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+                };
+                
+                const startTime = startDateTime.toLocaleString("en-UK", options);
+                const endTime = endDateTime.toLocaleString("en-UK", options);
+                
+                return `${startTime} - ${endTime}`;
+            }
+            return "No time selected";
+            },
+        },
+    }
+
+
 </script>
 
-<style>
+<style scoped>
 
     /* For Page Body */
     .booking-system-search-form {
-        align-items: flex-start;
-        display: flex;
-        height: 140px;
-        margin-top: -50px;
-        min-width: 1280px;
+        min-width: 70%;
+        justify-content: center;
+        align-content: center;
+        margin: auto;
     }
 
     form {
         align-items: flex-start;
         display: flex;
-        height: 140px;
-        margin-top: 77px;
-        min-width: 1280px;
+        flex-direction: row;
+        min-width: 70%;
+        padding: 10px 20px 20px 20px;
+        justify-content: center;
+        background-color: var(--concrete);
+        box-shadow: 20px 20px 120px 15px #0000000d;
+        border-radius: 10px;
+        gap: 5px;
     }
 
-    .search-form-container {
-        align-items: flex-start;
-        background-color: var(--concrete);
-        border-radius: 10px;
-        box-shadow: 20px 20px 120px 15px #0000000d;
-        display: flex;
-        height: 125px;
-        min-width: 1280px;
-        padding: 6px 23px;
-        position: relative;
-    }
 
     /* End of Page Body */
 
@@ -152,32 +234,26 @@ export default ({
 
     .search-form-container-location {
         height: 88px;
-        margin-top: 1px;
         position: relative;
-        width: 417px;
-
-    }
-
-    .location {
-        align-items: flex-start;
+        min-width: 30%;
         display: flex;
         flex-direction: column;
-        left: 0;
-        min-height: 88px;
-        position: absolute;
-        top: 0;
-        width: 417px;
+
     }
 
     .search-form-container-location-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: flex-start;
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
-        width: 194px;
-        margin-top: 25px;
     }
 
     .search-form-container-location-input {
+        display: flex;
+        flex-direction: row;
         align-items: center;
         background-color: var(--bon-jour);
         border-radius: 5px;
@@ -186,8 +262,6 @@ export default ({
         justify-content: center;
         padding: 7px 18px;
         position: relative;
-        width: 415px;
-        margin-top: 8px;
     }
 
     .image-location {
@@ -205,7 +279,6 @@ export default ({
         align-items: center;
         line-height: 37px;
         padding: 9px;
-        /* margin: auto; */
         position: relative;
         width: 360px;
     }
@@ -214,47 +287,41 @@ export default ({
     /* For NumPax Input */
 
     .search-form-container-numpax {
+        display: flex;
+        flex-direction: column;
         height: 88px;
-        margin-left: 5px;
-        margin-top: 1px;
         position: relative;
+        min-width: 15%;
         width: 163px;
     }
 
-    .numpax {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    min-height: 88px;
-    position: absolute;
-    top: 0;
-    width: 163px;
-    }
-
     .search-form-container-numpax-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: flex-start;
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
-        width: 104px;
-        margin-top: -4.5px;
     }
 
     .search-form-container-numpax-input {
-        align-items: flex-start;
+        align-items: center;
         background-color: var(--bon-jour);
         border-radius: 5px;
         display: flex;
+        flex-direction: row;
         height: 51px;
         min-width: 161px;
-        padding: 18.4px 14.5px;
+        justify-content: center;
     }
 
     .selectedNumPax  {
+        display: flex;
+        align-content: flex-end;
         background-color: transparent;
         border: none;
         position: relative;
-        display: flex;
         width: 130px;
     }
 
@@ -263,21 +330,22 @@ export default ({
     /* For DateTime Input */
 
     .search-form-container-datetime {
-        align-items: center;
+        align-items: flex-start;
         display: flex;
         flex-direction: column;
-        margin-left: 5px;
-        margin-top: -3.0px;
         min-height: 88px;
         width: 299px;
+        min-width: 25%;
     }
 
     .search-form-container-datetime-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: flex-start;
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
-        margin-right: 7.04px;
-        width: 282px;
     }
 
     .search-form-container-datetime-input {
@@ -286,10 +354,8 @@ export default ({
         border-radius: 5px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
         height: 51px;
         justify-content: center;
-        margin-right: 2px;
         padding: 15px 24px;
         position: relative;
         width: 297px;
@@ -304,15 +370,7 @@ export default ({
         width: 238px;
     }
 
-    .search-form-container-datetime-input-date {
-        align-items: center;
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        position: relative;
-        width: fit-content;
-    }
-
+    
     .icon-calendar {
         height: 11.97px;
         min-width: 11.74px;
@@ -325,13 +383,6 @@ export default ({
         position: relative;
     }
 
-    .search-form-container-datetime-input-hour {
-        align-items: center;
-        display: flex;
-        gap: 8px;
-        position: relative;
-        width: fit-content;
-    }
 
     .image-time {
         height: 14.41px;
@@ -339,23 +390,33 @@ export default ({
         position: relative;
     }
 
+    .dateTimePicker {
+        background: transparent;
+        border: 0px;
+    }
+
     /* End of DateTime Input */
 
     /* For Duration Input */
 
     .search-form-container-duration {
+        display: flex;
+        flex-direction: column;
         height: 88px;
-        margin-left: 5px;
         position: relative;
-        width: 163px;
+        /* width: 163px; */
+        min-width: 15%;
+
     }
 
     .search-form-container-duration-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-content: flex-start;
         height: 37px;
         letter-spacing: 0;
         line-height: normal;
-        width: 104px;
-        margin-top: -3px;
     }
 
 
@@ -365,9 +426,10 @@ export default ({
         border-radius: 5px;
         display: flex;
         height: 51px;
-        min-width: 161px;
-        padding: 18.4px 14.5px;
+        /* min-width: 161px; */
+        padding: 18.4px 5px;
         align-items: center;
+        margin: 0;
     }
 
     .selectedDuration {
@@ -381,24 +443,20 @@ export default ({
     /* For Search Button */
     .search-button-container {
         align-items: center;
-        align-self: center;
+        align-self: flex-end;
         background-color: var(--mine-shaft);
         border-radius: 5px;
         display:flex;
-        gap: 10px;
         justify-content: center;
-        margin-left: 23px;
-        margin-top: 2px;
-        overflow: hidden;
         padding: 16px 40px;
         position: relative;
         width: 153px;
+        min-width: 15%;
     }
 
     .search-button {
         letter-spacing: 0;
         line-height: normal;
-        margin-top: -1px;
         position: relative;
         text-align: center;
         width: fit-content;

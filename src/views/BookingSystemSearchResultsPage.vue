@@ -1,26 +1,44 @@
-<template>
-    <div class="container-center-horizontal">
+<template>       
         <div class="booking-system-search-results-page">
             <desktop-header/>
-            <booking-system-search-form/>
-            <booking-system-search-results/>
-            <desktop-footer/>
+            <!-- <desktop-header-welcome/>
+
+            <booking-system-search-form/> -->
+
+            <!-- <div class="cards">
+                <booking-room-card v-for="(card, index) in uniqueRoomTypes" :key="index" 
+                :room-type="card.roomType"
+                :num-pax="card.numPax"
+                :date="card.date"
+                :time="card.time"
+                :rate="card.rate"
+                />
+            </div> -->
+            <booking-room-cards v-if="uniqueRoomTypes" :uniqueRoomTypes="uniqueRoomTypes"/>
+            <h1> Results for {{ uniqueRoomTypes }}</h1>
+            <!-- <test-function/> -->
+            <!-- <booking-room-cards :uniqueRoomTypes="uniqueRoomTypes"/> -->
+            <!-- <desktop-footer/> -->
+
         </div>
-    </div>
 </template>
 
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import BookingSystemSearchForm from "../components/BookingSystemSearchForm.vue";
-import BookingSystemSearchResults from "../components/BookingSystemSearchResults.vue";
 import DesktopFooter from '../components/DesktopFooter.vue';
+import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
+import BookingRoomCard from '../components/BookingRoomCard.vue';
+import BookingRoomCards from '../components/BookingRoomCards.vue';
     export default {
         name: "BookingSystemPage",
         components: {
             DesktopHeader,
             BookingSystemSearchForm,
-            BookingSystemSearchResults,
             DesktopFooter,
+            DesktopHeaderWelcome,
+            BookingRoomCard,
+            BookingRoomCards,
         },
         props: {
             selectedDateTime: {
@@ -39,7 +57,20 @@ import DesktopFooter from '../components/DesktopFooter.vue';
                 type: String,
                 required: true,
             },
-        }
+            uniqueRoomTypes: {
+                type: Array,
+                required: true,
+            }
+        },
+        data() {
+            return {
+                BookingRoomCardDetails: [
+                { roomType: 'SMALL ROOM', numPax: 4, date: '05 December 2023', time: '10:00 - 11.00', rate: '$13.00', },
+                { roomType: 'MEDIUM ROOM', numPax: 6, date: '05 December 2023', time: '10:00 - 11.00', rate: '$15.00', },
+                { roomType: 'LARGE ROOM', numPax: 10, date: '05 December 2023', time: '10:00 - 11.00', rate: '$25.00', },
+                ],
+            }
+        },
     }
 </script>
 
@@ -47,11 +78,14 @@ import DesktopFooter from '../components/DesktopFooter.vue';
 
 <style>
 
-    body {
+    html, body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+    }
+
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .booking-system-search-results-page {
@@ -60,10 +94,14 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         border: 1px none;
         display: flex;
         flex-direction: column;
-        height: 1276px;
-        overflow: hidden;
+        justify-content: space-between;
         position: relative;
-        width: 1440px;
+        width: 100vw;
+        height: 100vh;
+        gap: 50px;
+
     }
+
+
 
 </style>
