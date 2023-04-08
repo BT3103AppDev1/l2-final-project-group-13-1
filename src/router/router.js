@@ -11,6 +11,9 @@ import LandingPage from "@/views/LandingPage.vue"
 import LoginPage from "@/views/LoginPage.vue"
 import RegisterPage from "@/views/RegisterPage.vue"
 import CustomerPostLoginPage from "@/views/CustomerPostLoginPage.vue"
+import EditProfilePage from "@/views/EditDetailsPage.vue"
+import WalletDetailsPage from "@/views/WalletDetailsPage.vue"
+import CheckProfileAndWalletPage from "@/views/CheckProfileWalletPage.vue"
 
 const routes = [
     {
@@ -32,6 +35,21 @@ const routes = [
         path: '/home',
         name: 'CustomerPostLoginPage',
         component: CustomerPostLoginPage
+    },
+    {
+        path: '/check-details',
+        name: 'CheckProfileAndWalletPage',
+        component: CheckProfileAndWalletPage
+    },
+    {
+        path: '/edit-profile',
+        name: 'EditProfilePage',
+        component: EditProfilePage
+    },
+    {
+        path: '/wallet',
+        name: 'WalletDetailsPage',
+        component: WalletDetailsPage
     },
     {
         path: '/customer-booking-system-page',

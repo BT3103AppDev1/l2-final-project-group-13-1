@@ -75,10 +75,10 @@ const customerRef = collection(db, "User");
 const auth = getAuth(firebaseApp)           
   
 export default {
-
+    name: "EditProfile",
     data() {
         return {
-            name:'', email:'VinaXMM@xmm.com', phoneNumber:'', 
+            name:'', email:'', phoneNumber:'', 
         };
     },
 

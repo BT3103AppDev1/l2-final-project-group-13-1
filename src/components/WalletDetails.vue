@@ -61,6 +61,13 @@
 
 </template>
 
+<script>
+export default {
+    name: "WalletDetails"
+}
+</script>
+
+
 
 
 <style>

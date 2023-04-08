@@ -25,11 +25,12 @@
 <script> 
 
 export default {
+    name: "CheckProfileAndWallet",
 
     methods: {
     navigateToWalletPage() {
         setTimeout(() => {
-            this.$router.push("/customer-wallet-profile") 
+            this.$router.push("/wallet") 
         }, 1000)
     },
 
@@ -37,7 +38,7 @@ export default {
 
     navigateToEditProfilePage() {
         setTimeout(() => {
-            this.$router.push("/customer-edit-details") 
+            this.$router.push("/edit-profile") 
         }, 1000)
     },
   },

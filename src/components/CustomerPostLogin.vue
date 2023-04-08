@@ -21,7 +21,7 @@
         </div>
         <div class="rectangle-profile-wallet">
             <span class="poppins-bold-black-10px"><br></span>
-            <p>Want to check your profit and TEOHENG wallet balance?</p>
+            <p>Want to check your profile and TEOHENG wallet balance?</p>
             <span class="poppins-bold-black-10px"><br></span>
             <p>Click below to view!</p>
         </div>
@@ -38,7 +38,7 @@ export default {
     methods: {
     navigateToProfilePage() {
         setTimeout(() => {
-            this.$router.push("/wallet") 
+            this.$router.push("/check-details") 
         }, 4000)
     },
   },
