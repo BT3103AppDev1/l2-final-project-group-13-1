@@ -68,11 +68,11 @@
                 <span class="poppins-bold-black-10px"><br></span> 
                 <span class="poppins-bold-black-20px">Payment in Store<br></span> 
             </div>
-            <div class="ewallet-logo">
+            <!-- <div class="ewallet-logo">
                 <button class= "image-button" v-on:click="" style:>
                     <img class="icon" src="../assets/ewallet.jpg"  style="width: 30px; height: 20px;;">
                 </button> 
-            </div>
+            </div> -->
             <!-- <div class = 'payment-method'>
                 <span class="poppins-bold-black-10px"><br></span> 
                 <span class="poppins-bold-black-20px">TEOHENG Wallet Credits<br></span> 
@@ -87,9 +87,9 @@
                 <span class="poppins-bold-black-20px">PayNow/PayLah<br></span>
             </div> -->
         </div>  
-        <div class = "radio-button">
+        <!-- <div class = "radio-button">
             <input type="radio" name= "option1" value="option1" v-model="selectedOption">
-        </div> 
+        </div>  -->
         <!-- <div class = "radio-button2">
             <input type="radio" name="option2" value="option2" v-model="selectedOption">
         </div>
@@ -244,7 +244,7 @@ import router from "@/router/router"
         font-family: Arial;
         border-radius:10px;
         padding: 10px 20px;
-        height: 200px;
+        height: 100px;
         width: 375px;
         margin-top: 15px;
         margin-left: 0px;
