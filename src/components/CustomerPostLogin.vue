@@ -34,10 +34,11 @@
 <script> 
 
 export default {
+    name: "CustomerPostLogin",
     methods: {
     navigateToProfilePage() {
         setTimeout(() => {
-            this.$router.push("/wallet-profile") 
+            this.$router.push("/wallet") 
         }, 4000)
     },
   },

@@ -10,6 +10,7 @@ import SummaryDetails from "@/views/SummaryDetails.vue"
 import LandingPage from "@/views/LandingPage.vue"
 import LoginPage from "@/views/LoginPage.vue"
 import RegisterPage from "@/views/RegisterPage.vue"
+import CustomerPostLoginPage from "@/views/CustomerPostLoginPage.vue"
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
         path: '/register',
         name: 'RegisterPage',
         component: RegisterPage
+    },
+    {
+        path: '/home',
+        name: 'CustomerPostLoginPage',
+        component: CustomerPostLoginPage
     },
     {
         path: '/customer-booking-system-page',
