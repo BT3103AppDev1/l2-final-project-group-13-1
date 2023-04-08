@@ -98,6 +98,13 @@ const signInWithGoogle = () => {
 };
 </script>
 
+<script>
+export default {
+    name: "LogIn"
+}
+</script>
+
+
 <style>
 .login-v1 {
 align-items: flex-start;

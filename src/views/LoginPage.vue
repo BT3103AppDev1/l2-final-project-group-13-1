@@ -1,10 +1,10 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="customer-payment-page">
-            <desktop-header/>
-            <desktop-header-welcome/>
-            <payment-method-customers/>
-            <desktop-footer/>
+        <div class="landing-page">
+            <!-- <desktop-header/> -->
+            <!-- <desktop-header-welcome/> -->
+            <log-in/>
+            <!-- <desktop-footer/> -->
         </div>
     </div>
 </template>
@@ -12,15 +12,14 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import PaymentMethodCustomers from '../components/PaymentMethodCustomers.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
-
+import LogIn from '../components/LogIn.vue';
     export default {
-        name: "PaymentMethodCustomersPage",
+        name: "LandingPage",
         components: {
-            DesktopHeader,
-            DesktopHeaderWelcome,
-            PaymentMethodCustomers,
+            //DesktopHeader,
+            //DesktopHeaderWelcome,
+            LogIn,
             //DesktopFooter,
         },
     }
@@ -29,14 +28,15 @@ import DesktopFooter from '../components/DesktopFooter.vue';
 
 
 <style>
-body {
+
+    body {
         margin: 0;
         padding: 0;
         left: -35px;
         position: absolute;
     }
 
-    .customer-payment-page {
+    .landing-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;

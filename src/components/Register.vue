@@ -59,6 +59,14 @@ const signInWithGoogle = () => {
 };
 
 </script>
+
+<script>
+
+export default {
+    name: "Register"
+}
+</script>
+
 <template>
     <div class="register screen">
         <div class="register-overlap-group6">

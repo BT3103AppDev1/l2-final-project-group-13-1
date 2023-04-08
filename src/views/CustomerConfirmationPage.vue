@@ -1,6 +1,6 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="booking-system-page">
+        <div class="customer-confirmation-page">
             <desktop-header/>
             <desktop-header-welcome/>
             <customer-confirmation/>
@@ -20,7 +20,7 @@ import CustomerConfirmation from '../components/CustomerConfirmation.vue';
             DesktopHeader,
             DesktopHeaderWelcome,
             CustomerConfirmation,
-            DesktopFooter,
+            //DesktopFooter,
         },
     }
 </script>
@@ -36,7 +36,7 @@ import CustomerConfirmation from '../components/CustomerConfirmation.vue';
         position: absolute;
     }
 
-    .booking-system-page {
+    .customer-confirmation-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;

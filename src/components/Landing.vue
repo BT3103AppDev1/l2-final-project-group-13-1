@@ -2,7 +2,7 @@
     <DesktopHeader/>
     <div class="landing">
         <div class="landing-overlap-group4">
-            <img class="vector-2" src="../assets/vector-2.svg" alt="vector 2"/><img
+            <img
                 class ="vector-1"
                 src="../assets/vector-1.svg"
                 alt="Vector 1"
@@ -14,7 +14,7 @@
                 class ="vector-3"
                 src="../assets/vector-3.svg"
                 alt="Vector 3"
-            /><img class="polygon-2 polygon" src="../assets/polygon-2.svg" alt ="polygon 2"/>
+            />
             <div class ="ellipse-1 ellipse"></div>
             <div class ="ellipse-2 ellipse"></div>
             <div class="landing-overlap-group1">

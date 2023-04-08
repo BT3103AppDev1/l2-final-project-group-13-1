@@ -7,10 +7,28 @@ import AllExistingBookingsPage from "@/views/AllExistingBookingsPage.vue"
 import ExistingBookingDetails from "@/views/ExistingBookingDetails.vue"
 import BookingDeletedPage from "@/views/BookingDeletedPage.vue"
 import SummaryDetails from "@/views/SummaryDetails.vue"
+import LandingPage from "@/views/LandingPage.vue"
+import LoginPage from "@/views/LoginPage.vue"
+import RegisterPage from "@/views/RegisterPage.vue"
 
 const routes = [
     {
         path: '/',
+        name: 'LandingPage',
+        component: LandingPage
+    },
+    {
+        path: '/login',
+        name: 'LoginPage',
+        component: LoginPage
+    },
+    {
+        path: '/register',
+        name: 'RegisterPage',
+        component: RegisterPage
+    },
+    {
+        path: '/customer-booking-system-page',
         name: 'BookingSystemPage',
         component: BookingSystemPage
     },

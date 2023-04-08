@@ -1,9 +1,9 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="customer-payment-page">
+        <div class="landing-page">
             <desktop-header/>
             <desktop-header-welcome/>
-            <payment-method-customers/>
+            <landing/>
             <desktop-footer/>
         </div>
     </div>
@@ -12,15 +12,14 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import PaymentMethodCustomers from '../components/PaymentMethodCustomers.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
-
+import Landing from '../components/Landing.vue';
     export default {
-        name: "PaymentMethodCustomersPage",
+        name: "LandingPage",
         components: {
             DesktopHeader,
             DesktopHeaderWelcome,
-            PaymentMethodCustomers,
+            Landing,
             //DesktopFooter,
         },
     }
@@ -29,14 +28,15 @@ import DesktopFooter from '../components/DesktopFooter.vue';
 
 
 <style>
-body {
+
+    body {
         margin: 0;
         padding: 0;
         left: -35px;
         position: absolute;
     }
 
-    .customer-payment-page {
+    .landing-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;
