@@ -20,7 +20,7 @@ import CustomerConfirmation from '../components/CustomerConfirmation.vue';
             DesktopHeader,
             DesktopHeaderWelcome,
             CustomerConfirmation,
-            //DesktopFooter,
+            DesktopFooter,
         },
     }
 </script>
@@ -32,8 +32,8 @@ import CustomerConfirmation from '../components/CustomerConfirmation.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .customer-confirmation-page {
@@ -46,6 +46,7 @@ import CustomerConfirmation from '../components/CustomerConfirmation.vue';
         overflow: hidden;
         position: relative;
         width: 1440px;
+        justify-content: space-between;
     }
 
 </style>

@@ -11,10 +11,3 @@
   }
 
 </script>
-
-<style>
-  #app {
-    justify-content: center;
-    align-items: center;
-  }
-</style>

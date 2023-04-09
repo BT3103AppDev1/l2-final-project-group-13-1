@@ -112,6 +112,7 @@ background-color: #fffdf8;
 border:1px none;
 display: flex;
 width: 1440px;
+max-width: 100vw;
 }
 
 .hidden,
