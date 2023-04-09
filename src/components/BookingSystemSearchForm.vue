@@ -44,7 +44,7 @@
                         <img class="line" src="../assets/line-3.svg" alt="Line" />
                         <img class="image-time" src="../assets/time.svg" alt="image-time" />
 
-                        <vue-flatpickr v-model="datetime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
+                        <vue-flatpickr v-model="selectedDateTime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
                     </div>
                 </div> 
             </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="search-button-container">
-                <button class="search-button valign-text-middle roboto-bold-concrete-16px" @click="navigateToResultsPage">Search</button>
+                <button class="search-button valign-text-middle roboto-bold-concrete-16px"  @click="submit">Search</button>
             </div>
          </form>
         </div>   
@@ -78,6 +78,7 @@ import 'flatpickr/dist/flatpickr.css';
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, query, orderBy} from "firebase/firestore";
+import { ref, computed } from 'vue';
 // import VueFlatpickr from 'vue-flatpickr-component';
 // import 'flatpickr/dist/flatpickr.css';
 const db = getFirestore(firebaseApp);
@@ -87,21 +88,34 @@ export default {
   components: {
     VueFlatpickr,
   },
+//   setup() {
+//     const selectedLocation = ref('')
+//     const selectedDuration = ref('')
+//     const selectedNumPax = ref('')
+//     const selectedDateTime = ref('')
+
+//     const isFormValid = computed(() => {
+//         return selectedLocation.value && selectedDuration.value && selectedNumPax.value && selectedDateTime.value
+//     })
+
+//     return {selectedLocation, selectedDuration, selectedNumPax, selectedDateTime, isFormValid}
+
+//   },
   props: ['locations'],
   data() {
     return { locations: ['White Sands','The Centrepoint','Kallang Wave Mall','Suntec City','Jcube','Causeway Point','The Star Vista'],
              selectedLocation: '',
              selectedNumPax: '',
-             selectedDateTime: '',
              selectedDuration: '',
              roomType: [],
              uniqueRoomTypes: [],
-             datetime: null,
-                datetimeConfig: {
+             selectedDateTime: null,
+             datetimeConfig: {
                 enableTime: true,
                 dateFormat: 'Y-m-d H:i',
+                minTime: "12:00",
+                maxTime: "00:00",
              },
-             menu: false
            };
   },
   mounted() {
@@ -126,36 +140,36 @@ export default {
         this.uniqueRoomTypes = Array.from(roomTypesSet);
         }
         display.call(this);
-        }, 
-        methods: {
-            getPrice(type) {
+    }, 
+    methods: {
+        getPrice(type) {
 
-                const dateTime = new Date(this.datetime);
-                const hour = dateTime.getHours();
+            const dateTime = new Date(this.datetime);
+            const hour = dateTime.getHours();
 
-                if (type === 'Small') {
+            if (type === 'Small') {
+            if (hour >= 12 && hour < 19) {
+                return "Happy Hour $13.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $19.00 w/GST"
+            }
+            } else if (type === 'Medium') {
                 if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $13.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $19.00 w/GST"
-                }
-                } else if (type === 'Medium') {
-                    if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $15.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $22.00 w/GST"
-                }
-                } else if (type === 'Large') {
-                    if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $17.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $25.00 w/GST"
-                }
-                }
+                return "Happy Hour $15.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $22.00 w/GST"
+            }
+            } else if (type === 'Large') {
+                if (hour >= 12 && hour < 19) {
+                return "Happy Hour $17.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $25.00 w/GST"
+            }
+            }
 
-                return '';
-            },
-            navigateToResultsPage() {
+            return '';
+        },
+        navigateToResultsPage() {
             this.$router.push({
                 name: "BookingSystemSearchResultsPage",
                 query: {
@@ -163,43 +177,64 @@ export default {
                 },
             })
         },
+        submit() {
+            
+            //Save Selected Field Values in Session Storage
+            sessionStorage.setItem('date', this.selectedDateTime);
+            sessionStorage.setItem('noOfPax', this.selectedNumPax);
+            sessionStorage.setItem('duration', this.selectedDuration);
+            sessionStorage.setItem('location', this.selectedLocation);
+            
+            //Moves to Next Page
+            this.navigateToResultsPage();
         },
-        computed: {
-            dateFormatted() {
-                if (this.datetime) {
-                const dateTime = new Date(this.datetime);
-                const options = {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                    
-                };
-                return dateTime.toLocaleString("en-UK", options);
-                }
-                return "No date selected";
-            },
-
-            timeRange() {
-            if (this.datetime && this.selectedDuration) {
-                const startDateTime = new Date(this.datetime);
-                const endDateTime = new Date(startDateTime);
-                endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+    },
+    computed: {
+        dateFormatted() {
+            if (this.datetime) {
+            const dateTime = new Date(this.datetime);
+            const options = {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
                 
-                const options = {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-                };
-                
-                const startTime = startDateTime.toLocaleString("en-UK", options);
-                const endTime = endDateTime.toLocaleString("en-UK", options);
-                
-                return `${startTime} - ${endTime}`;
+            };
+            return dateTime.toLocaleString("en-UK", options);
             }
-            return "No time selected";
-            },
+            return "No date selected";
         },
-    }
+
+        timeRange() {
+        if (this.datetime && this.selectedDuration) {
+            const startDateTime = new Date(this.datetime);
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+            
+            const options = {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+            };
+            
+            const startTime = startDateTime.toLocaleString("en-UK", options);
+            const endTime = endDateTime.toLocaleString("en-UK", options);
+            
+            return `${startTime} - ${endTime}`;
+        }
+        return "No time selected";
+        },
+
+        roomType() {
+            if (this.selectedNumPax == 4) {
+                return "Small"
+            } else if (this.selectedNumPax == 6) {
+                return "Medium"
+            } else if (this.selectedNumPax == 10) {
+                return "Large"
+            }
+        }
+    },
+}
 
 
 </script>

@@ -16,12 +16,13 @@
 
             <span>
                 <span class="poppins-bold-black-17px">Hourly Rate: </span>
-                <span class="poppins-normal-black-17px">Happy Hour {{ rate }} w/GST</span>
+                <span class="poppins-normal-black-17px">{{ rate }}</span>
+
             </span>
         </div>
         <div class="select-button-container">
             <!-- Add Function -->
-            <button class="select-button poppins-medium-white-16px">Choose</button>
+            <button class="select-button poppins-medium-white-16px" @click="choose">Choose</button>
         </div>
         </div>
 </template>
@@ -51,7 +52,155 @@
                 required: true,
             },
         },
-    }
+        data() {
+            return { 
+                selectedLocation: '',
+                selectedDuration: '',
+                selectedDateTime: null,
+                datetimeConfig: {
+                    enableTime: true,
+                    dateFormat: 'Y-m-d H:i',
+                },
+            };
+        },
+        mounted() {
+            //Retrieve Session Storage Items
+            const selectedLocation = sessionStorage.getItem('location');
+            // const selectedNumPax = sessionStorage.getItem('noOfPax');
+            const selectedDuration = sessionStorage.getItem('duration');
+            const selectedDateTime = sessionStorage.getItem('date');
+
+            //Update Component Data with Retrieved Items
+            this.selectedLocation = selectedLocation;
+            // this.selectedNumPax = selectedNumPax;
+            this.selectedDuration = selectedDuration;
+            this.selectedDateTime = selectedDateTime;
+            
+            }, 
+            methods: {
+
+                //Computes Price based on Time and Room Type
+                getPrice(type) {
+
+                    const dateTime = new Date(this.selectedDateTime);
+                    const hour = dateTime.getHours();
+
+                    if (type === 'Small') {
+                    if (hour >= 12 && hour < 19) {
+                        return "13.00";
+                    } else if (hour >= 19) {
+                        return "19.00"
+                    }
+                    } else if (type === 'Medium') {
+                        if (hour >= 12 && hour < 19) {
+                        return "15.00";
+                    } else if (hour >= 19) {
+                        return "22.00"
+                    }
+                    } else if (type === 'Large') {
+                        if (hour >= 12 && hour < 19) {
+                        return "17.00";
+                    } else if (hour >= 19) {
+                        return "25.00"
+                    }
+                    }
+
+                    return '';
+                },
+                navigateToConfirmationPage() {
+                    this.$router.push({
+                        name: "CustomerConfirmationPage",
+                    })
+                },
+                choose() {
+                    
+                    //Save Selected Field Values in Session Storage
+                    sessionStorage.setItem('date', this.selectedDateTime);
+                    sessionStorage.setItem('startTime', this.getStartTime);
+                    sessionStorage.setItem('endTime', this.getEndTime);
+                    sessionStorage.setItem('selectedRoomType', this.roomType);
+                    sessionStorage.setItem('noOfPax', this.numPax);
+                    sessionStorage.setItem('price', this.getPrice(this.roomType));
+                    sessionStorage.setItem('duration', this.selectedDuration);
+                    sessionStorage.setItem('location', this.selectedLocation);
+                    //I think the function cant choose roomID yet
+                    // sessionStorage.setItem('roomID', roomID);
+
+                    //Moves to Next Page
+                    this.navigateToConfirmationPage();
+                },
+            },
+            computed: {
+                dateFormatted() {
+                    if (this.datetime) {
+                    const dateTime = new Date(this.datetime);
+                    const options = {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                        
+                    };
+                    return dateTime.toLocaleString("en-UK", options);
+                    }
+                    return "No date selected";
+                },
+
+                //Compute Start Time in format HH:mm
+                getStartTime() {
+                    if (this.selectedDateTime && this.selectedDuration) {
+                        const startDateTime = new Date(this.selectedDateTime);
+                        
+                        const options = {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                        };
+                        
+                        const startTime = startDateTime.toLocaleString("en-UK", options);
+                        
+                        const formatTime = (timeString) => {
+                        let [hour, minute] = timeString.split(':');
+                        hour = parseInt(hour, 10);
+                        const ampm = hour >= 12 ? 'PM' : 'AM';
+                        hour = hour || 12; // the hour '0' should be '12'
+                        return `${hour}:${minute}`;
+                        };
+
+                        const formattedStartTime = formatTime(startTime);
+                        return `${formattedStartTime}`;
+                    }
+                },
+                
+                //Compute End Time in format HH:mm
+                getEndTime() {
+                    if (this.selectedDateTime && this.selectedDuration) {
+                        const endDateTime = new Date(this.selectedDateTime);
+                        endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+                        
+                        const options = {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                        };
+                        
+                        const endTime = endDateTime.toLocaleString("en-UK", options);
+                        
+                        const formatTime = (timeString) => {
+                        let [hour, minute] = timeString.split(':');
+                        hour = parseInt(hour, 10);
+                        const ampm = hour >= 12 ? 'PM' : 'AM';
+                        hour = hour || 12; // the hour '0' should be '12'
+                        return `${hour}:${minute}`;
+                        };
+
+                        const formattedEndTime = formatTime(endTime);
+                        return `${formattedEndTime}`;
+                    }
+                },
+            },
+        }
+
+
 </script>
 
 <style>

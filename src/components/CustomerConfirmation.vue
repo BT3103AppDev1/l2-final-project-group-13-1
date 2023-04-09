@@ -109,33 +109,33 @@ export default {
     },
 
     created() {
-    const userID = "hpjalgGsESU8OVsdbc73r619ypl1"
-    const walletBalance = 0;
-    const name = "bobo";
-    const phoneNumber = "98765432";
-    const email = "bobo@gmail.com";
-    const date = "2023-04-08";
-    const startTime = "13:00";
-    const endTime = "14:00";
-    const selectedRoomType = "Small";
-    const noOfPax = 1;
-    const price = 13;
-    const duration = 1;
-    const location = 1;
-    const roomID = 1;
+    // const userID = "hpjalgGsESU8OVsdbc73r619ypl1"
+    // const walletBalance = 0;
+    // const name = "bobo";
+    // const phoneNumber = "98765432";
+    // const email = "bobo@gmail.com";
+    // const date = "2023-04-08";
+    // const startTime = "13:00";
+    // const endTime = "14:00";
+    // const selectedRoomType = "Small";
+    // const noOfPax = 1;
+    // const price = 13;
+    // const duration = 1;
+    // const location = 1;
+    // const roomID = 1;
     
-    sessionStorage.setItem('name', name);
-    sessionStorage.setItem('phoneNumber', phoneNumber);
-    sessionStorage.setItem('email', email);
-    sessionStorage.setItem('date', date);
-    sessionStorage.setItem('startTime', startTime);
-    sessionStorage.setItem('endTime', endTime);
-    sessionStorage.setItem('selectedRoomType', selectedRoomType);
-    sessionStorage.setItem('noOfPax', noOfPax);
-    sessionStorage.setItem('price', price);
-    sessionStorage.setItem('duration', duration);
-    sessionStorage.setItem('location', location);
-    sessionStorage.setItem('roomID', roomID);
+    // sessionStorage.setItem('name', name);
+    // sessionStorage.setItem('phoneNumber', phoneNumber);
+    // sessionStorage.setItem('email', email);
+    // sessionStorage.setItem('date', date);
+    // sessionStorage.setItem('startTime', startTime);
+    // sessionStorage.setItem('endTime', endTime);
+    // sessionStorage.setItem('selectedRoomType', selectedRoomType);
+    // sessionStorage.setItem('noOfPax', noOfPax);
+    // sessionStorage.setItem('price', price);
+    // sessionStorage.setItem('duration', duration);
+    // sessionStorage.setItem('location', location);
+    // sessionStorage.setItem('roomID', roomID);
     
 
     this.name = sessionStorage.getItem('name') || '';
