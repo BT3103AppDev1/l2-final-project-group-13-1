@@ -34,8 +34,8 @@ import DesktopFooter from '../components/DesktopFooter.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .all-existing-bookings-page {
@@ -48,6 +48,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         overflow: hidden;
         position: relative;
         width: 1440px;
+        justify-content: space-between;
     }
 
 </style>

@@ -32,8 +32,8 @@ import Register from '../components/Register.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .landing-page {

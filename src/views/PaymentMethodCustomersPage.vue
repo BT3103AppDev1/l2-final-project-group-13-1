@@ -21,7 +21,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
             DesktopHeader,
             DesktopHeaderWelcome,
             PaymentMethodCustomers,
-            //DesktopFooter,
+            DesktopFooter,
         },
     }
 </script>
@@ -32,8 +32,8 @@ import DesktopFooter from '../components/DesktopFooter.vue';
 body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .customer-payment-page {
@@ -46,6 +46,7 @@ body {
         overflow: hidden;
         position: relative;
         width: 1440px;
+        justify-content: space-between;
     }
 
 </style>

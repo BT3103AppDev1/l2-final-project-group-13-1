@@ -13,8 +13,8 @@
 </script>
 
 <style>
-  #app {
+#app {
     justify-content: center;
     align-items: center;
-  }
+}
 </style>
