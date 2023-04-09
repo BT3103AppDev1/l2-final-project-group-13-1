@@ -5,31 +5,34 @@
             <span class="poppins-bold-black-10px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
             <p>Check TEOHENG wallet balance</p>
+            <div class = "check-wallet-balance">
+                <button @click= "navigateToWalletPage" style="font-size:17px; color:white;">Check TEOHENG wallet balance</button> 
+            </div>
         </div>
-        <div class = "check-existing-booking">
-            <button @click= "navigateToWalletPage" style="font-size:17px; color:white;">Check TEOHENG wallet balance</button> 
-        </div>
+        
 
         <div class="rectangle-edit-profile">
             <span class="poppins-bold-black-10px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
             <p>Edit your profile</p>
+            <div class = "edit-profile"> 
+                <button @click= "navigateToEditProfilePage" style="font-size:17px;color:white;">Edit profile</button> 
+            </div>
         </div>
-        <div class = "edit-profile"> 
-            <button @click= "navigateToEditProfilePage" style="font-size:17px;color:white;">Edit profile</button> 
-        </div>
+        
     </div>
 </template>
 
 <script> 
 
 export default {
+    name: "CheckProfileAndWallet",
 
     methods: {
     navigateToWalletPage() {
         setTimeout(() => {
-            this.$router.push("/customer-wallet-profile") 
+            this.$router.push("/wallet") 
         }, 1000)
     },
 
@@ -37,7 +40,7 @@ export default {
 
     navigateToEditProfilePage() {
         setTimeout(() => {
-            this.$router.push("/customer-edit-details") 
+            this.$router.push("/edit-profile") 
         }, 1000)
     },
   },
@@ -51,7 +54,7 @@ export default {
         background-color:white;
         margin-top: 0px;
         display: flex;
-        height: 1000px;
+        height: 700px;
         margin-top: 100px;
         width: 1000px;
     }
@@ -70,10 +73,10 @@ export default {
         
     }
 
-    .check-existing-booking {
-        margin-top: 225px;
+    .check-wallet-balance {
+        margin-top: 50px;
         margin-bottom:700px;
-        margin-left: -450px;
+        margin-left: 7px;
         font-family:'Arial';
         color:white;
         width: 400px;
@@ -103,9 +106,9 @@ export default {
     }
 
     .edit-profile {
-        margin-top: 225px;
+        margin-top: 50px;
         margin-bottom: 700px;
-        margin-left: -455px;
+        margin-left: 7px;
         font-family:'Arial';
         color:white;
         width: 400px;
