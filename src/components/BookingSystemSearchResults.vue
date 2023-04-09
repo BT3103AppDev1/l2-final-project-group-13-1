@@ -1,12 +1,11 @@
 <template>
     <div class="booking-system-available-room-types-container">
         <div class="booking-system-available-room-types-box">
-            
         </div>
         
     </div>
-
     <span class="available-room-types">Available Room Types</span>
+
 
     <div class="small-room-container">
         <p class="room-container-text poppins-bold-black-20px">

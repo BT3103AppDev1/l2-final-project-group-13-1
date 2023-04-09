@@ -44,15 +44,13 @@
             <img class="nav-bar-logo" src="../assets/family-ktv-studio-png@2x.png" alt="Family-KTV-Studio.png" />
         </div>
     </div>
-
-    <div class="welcome-message">
+    <!-- <div class="welcome-message">
         <h1 class="welcome-message-1 poppins-bold-flamingo-36px">Welcome to TEOHENG KTV Online Booking System</h1>
         <p class="welcome-message-2 poppins-bold-black-24px">Book Your Room & Sing With Us Today!</p>
-    </div>
+    </div> -->
 </template>
 
 <script>
-
     export default {
         name: "DesktopHeader",
     }
@@ -246,7 +244,7 @@
         top: 59px;
         width: 180px;
     }
-
+/* 
     .welcome-message {
         align-items: center;
         display: flex;
@@ -275,5 +273,5 @@
         white-space: nowrap;
         width: 484px;
     }
-    
+     */
 </style>
