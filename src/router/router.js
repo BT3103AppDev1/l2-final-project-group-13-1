@@ -3,10 +3,13 @@ import BookingSystemPage from '../views/BookingSystemPage.vue'
 import BookingSystemSearchResultsPage from '../views/BookingSystemSearchResultsPage.vue'
 import CustomerConfirmationPage from '../views/CustomerConfirmationPage.vue'
 import PaymentMethodCustomersPage from '../views/PaymentMethodCustomersPage.vue'
+import AllExistingBookingsPage from "@/views/AllExistingBookingsPage.vue"
+import ExistingBookingDetails from "@/views/ExistingBookingDetails.vue"
+import BookingDeletedPage from "@/views/BookingDeletedPage.vue"
 
 const routes = [
     {
-        path: '/',
+        path: '/BookingSystemPage',
         name: 'BookingSystemPage',
         component: BookingSystemPage
     },
@@ -25,6 +28,18 @@ const routes = [
         name: 'PaymentMethodCustomersPage',
         component: PaymentMethodCustomersPage
     },
+    {path:'/BookingDeletedPage',
+    name: 'BookingDeletedPage',
+    component: BookingDeletedPage},
+    { path: '/', 
+      name: 'AllExistingBookingsPage', 
+      component: AllExistingBookingsPage 
+    },
+    { path: '/ExistingBookingDetails', 
+    name: 'ExistingBookingDetails', 
+    component: ExistingBookingDetails
+    }
+
 ]
 const router = createRouter({
     history: createWebHistory(),
