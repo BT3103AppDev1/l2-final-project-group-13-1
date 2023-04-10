@@ -32,9 +32,9 @@ export default {
     let index = 1
     value.forEach((d) => {
           let documentData = d.data()
+          let bookingID = d.id
           let userID =  documentData.userID
           if (userID == "E2HEyNJWY5maFTIu6YEs") {
-            let name = documentData.name
             let branchID = documentData.branchID
             let date = documentData.date
             let time = documentData.startTime
@@ -52,7 +52,7 @@ export default {
             let cell7 = row.insertCell(6)
             let cell8 = row.insertCell(7)
             cell1.innerHTML = index
-            cell2.innerHTML = name
+            cell2.innerHTML = bookingID
             cell3.innerHTML = branchID
             cell4.innerHTML = date
             cell5.innerHTML = time
