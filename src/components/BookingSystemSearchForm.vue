@@ -12,7 +12,13 @@
                     <div class="search-form-container-location-input">
                         <img class="image-location" src="../assets/location.svg" alt="image-location" />
                         <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
-                            <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
+                            <option value="1">Causeway Point</option>
+                            <option value="2">Jcube</option>
+                            <option value="3">Kallang Wave Mall</option>
+                            <option value="4">Suntec City</option>
+                            <option value="5">The Centrepoint</option>
+                            <option value="6">The Star Vista</option>
+                            <option value="7">White Sands</option>
                         </select>
                     </div>
             </div>
@@ -103,7 +109,7 @@ export default {
 //   },
   props: ['locations'],
   data() {
-    return { locations: ['White Sands','The Centrepoint','Kallang Wave Mall','Suntec City','Jcube','Causeway Point','The Star Vista'],
+    return { 
              selectedLocation: '',
              selectedNumPax: '',
              selectedDuration: '',
@@ -177,18 +183,51 @@ export default {
                 },
             })
         },
+        checkFormValid() {
+            if (this.selectedLocation && this.selectedDateTime && this.selectedDuration && this.selectedNumPax)
+            {
+                const endDateTime = new Date(this.selectedDateTime);
+                endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+            
+                const options = {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+                };
+            
+                const endTime = endDateTime.toLocaleString("en-UK", options);
+                
+                let [hour, minute] = endTime.split(':');
+                
+                hour = parseInt(hour, 10);
+                
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                    
+                if(hour > 1 && ampm === 'AM') {
+                    alert("ERROR: Duration exceeds Opening Hours");
+                    return false;
+                } else {
+                    return true;
+                }
+             } else {
+                alert("ERROR: Form is not complete");
+                return false;
+             }
+        },
         submit() {
-            
-            //Save Selected Field Values in Session Storage
-            sessionStorage.setItem('date', this.selectedDateTime);
-            sessionStorage.setItem('noOfPax', this.selectedNumPax);
-            sessionStorage.setItem('duration', this.selectedDuration);
-            sessionStorage.setItem('location', this.selectedLocation);
-            
-            //Moves to Next Page
-            this.navigateToResultsPage();
+            if (this.checkFormValid()) {
+                //Save Selected Field Values in Session Storage
+                sessionStorage.setItem('date', this.selectedDateTime);
+                sessionStorage.setItem('noOfPax', this.selectedNumPax);
+                sessionStorage.setItem('duration', this.selectedDuration);
+                sessionStorage.setItem('location', this.selectedLocation);
+                
+                //Moves to Next Page
+                this.navigateToResultsPage();
+            } 
         },
     },
+        
     computed: {
         dateFormatted() {
             if (this.datetime) {
