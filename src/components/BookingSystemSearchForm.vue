@@ -299,6 +299,8 @@ export default {
         box-shadow: 20px 20px 120px 15px #0000000d;
         border-radius: 10px;
         gap: 5px;
+        /* I have no choice */
+        margin-bottom: 400px;
     }
 
 
