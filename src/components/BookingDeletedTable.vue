@@ -47,7 +47,7 @@
     </div>
     <br>
     <br>
-         <button class = "bdt-button" style="color: white;"><router-link to="/" color="white">Back to Home</router-link></button>
+         <button class = "bdt-button" style="color: white;"><router-link to="/allexistingbookingspage" color="white">Back to Home</router-link></button>
   </template>
 
 <style>

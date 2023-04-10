@@ -85,7 +85,7 @@ const routes = [
         name: 'PaymentMethodCustomersPage',
         component: PaymentMethodCustomersPage
     },
-    { path: '/allexitingbookingspage', 
+    { path: '/allexistingbookingspage', 
       name: 'AllExistingBookingsPage', 
       component: AllExistingBookingsPage 
     },
