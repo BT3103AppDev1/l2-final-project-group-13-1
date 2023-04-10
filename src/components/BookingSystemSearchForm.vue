@@ -22,6 +22,27 @@
                         </select>
                     </div>
             </div>
+            <!-- <div class ="search-form-container-location">
+                    <div class="search-form-container-location-box valign-text-middle">
+                        <label>
+                            <span class="roboto-medium-mine-shaft-14px">Location</span>
+                            <span class="roboto-medium-flamingo-14px">*</span>
+                        </label>
+                    </div>
+                    <div class="search-form-container-location-input">
+                        <img class="image-location" src="../assets/location.svg" alt="image-location" />
+                        <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
+                            <option value="1">Causeway Point</option>
+                            <option value="2">Jcube</option>
+                            <option value="3">Kallang Wave Mall</option>
+                            <option value="4">Suntec City</option>
+                            <option value="5">The Centrepoint</option>
+                            <option value="6">The Star Vista</option>
+                            <option value="7">White Sands</option>
+                        </select>
+                    </div>
+            </div> -->
+            
             <div class ="search-form-container-numpax">
                     <div class="search-form-container-numpax-box valign-text-middle roboto-medium-white-14px">
                         <label>
@@ -37,6 +58,23 @@
                         </select>
                     </div>
             </div>
+            <div class="search-form-container-duration">
+                <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
+                    <span>
+                        <span class ="roboto-medium-mine-shaft-14px">Duration</span>
+                        <span class="roboto-medium-flamingo-14px">*</span>
+                    </span>
+                </div>
+                <div class="search-form-container-duration-input">
+                    <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hours</option>
+                                <option value="3">3 Hours</option>
+                                <option value="4">4 Hours</option>
+                    </select>
+                </div>
+            </div> 
+            
             <div class="search-form-container-datetime">
                 <div class="search-form-container-datetime-box valign-text-middle roboto-medium-white-14px">
                     <label>
@@ -54,6 +92,7 @@
                     </div>
                 </div> 
             </div>
+<!--                         
             <div class="search-form-container-duration">
                 <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
                     <span>
@@ -63,14 +102,16 @@
                 </div>
                 <div class="search-form-container-duration-input">
                     <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
-                        <!-- We cap at 4 hours first -->
                                 <option value="1">1 Hour</option>
                                 <option value="2">2 Hours</option>
                                 <option value="3">3 Hours</option>
                                 <option value="4">4 Hours</option>
                     </select>
                 </div>
-            </div>
+            </div> 
+             -->
+             
+
             <div class="search-button-container">
                 <button class="search-button valign-text-middle roboto-bold-concrete-16px"  @click="submit">Search</button>
             </div>
@@ -299,8 +340,6 @@ export default {
         box-shadow: 20px 20px 120px 15px #0000000d;
         border-radius: 10px;
         gap: 5px;
-        /* I have no choice */
-        margin-bottom: 400px;
     }
 
 
@@ -497,15 +536,15 @@ export default {
 
 
     .search-form-container-duration-input {
-        align-items: flex-start;
+        padding: 18.4px 5px;
+        align-items: center;
         background-color: var(--bon-jour);
         border-radius: 5px;
         display: flex;
+        flex-direction: row;
         height: 51px;
-        /* min-width: 161px; */
-        padding: 18.4px 5px;
-        align-items: center;
-        margin: 0;
+        min-width: 161px;
+        justify-content: center;
     }
 
     .selectedDuration {
@@ -528,6 +567,9 @@ export default {
         position: relative;
         width: 153px;
         min-width: 15%;
+        /* align-content: center; */
+        /* I cant fix it */
+        margin-left: -110px;
     }
 
     .search-button {
