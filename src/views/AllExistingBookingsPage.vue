@@ -3,7 +3,6 @@
         <div class="all-existing-bookings-page">
             <desktop-header/>
             <desktop-header-welcome/>
-            <br>
             <p class="poppins-bold-black-24px">Your Existing Bookings</p>
             <all-existing-bookings-table/>
             <desktop-footer/>
