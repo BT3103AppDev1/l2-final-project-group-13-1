@@ -44,13 +44,19 @@ export default {
     
     name: "CustomerPostLogin",
     mounted() {
-            const auth = getAuth()
+            const auth = getAuth(firebaseApp)
             onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // console.log(user)
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
                 this.user = user
                 this.useremail = user.email
             }
+
         })
         },
     methods: {
