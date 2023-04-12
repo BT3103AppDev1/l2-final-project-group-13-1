@@ -114,6 +114,10 @@ import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, query, where, addDoc} from "firebase/firestore";
 import router from "@/router/router"
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+const db = getFirestore(firebaseApp); 
+const customerRef = collection(db, "User"); 
+const auth = getAuth(firebaseApp)  
     export default {
         data() {
             return {
@@ -140,6 +144,23 @@ import router from "@/router/router"
             this.fetchBranchName();
     
         },
+
+        mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+    },
 
 
         methods: {

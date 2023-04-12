@@ -121,7 +121,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         /* height: 120px; */
         /* margin-top: -26px; */
         position: relative;
-        width: 100vw;
+        width:100%;
         height: 10%;
         display: flex;
         flex-direction: column;
@@ -138,13 +138,14 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         /* height: 70px; */
         /* height: 5%; */
         left: 0;
-        min-width: 1440px;
-        width: 100vw;
+        /* min-width: 1440px; */
+        
         padding: 12.7px 26.2px;
         /* position: absolute; */
         position: relative;
         /* top: 50px; */
         /* width: auto; */
+        width:100%;
     }
 
     .nav-bar-container {
@@ -157,6 +158,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         justify-content: flex-end;
         margin-left: auto;
         gap: 2%;
+        width:100%;
 
     }
 
@@ -193,7 +195,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         min-height: 24px;
         text-align: center;
         width: 130px;
-        justify-content: center;
+        
     }
 
     .nav-bar-container-3 {
@@ -210,7 +212,8 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         line-height: normal;
         min-height: 24px;
         text-align: center;
-        width: 130px;
+        /* width: 130px; */
+        
     }
 
     .notification-bar {
@@ -228,6 +231,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         /* position:absolute; */
         position: relative;
         top: 0;
+        width:100%;
     }
 
     .notification-bar-left {
@@ -242,6 +246,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         white-space: nowrap;
         /* width: 351px; */
         position: relative;
+        width:100%;
     }
 
     .notification-bar-right {
@@ -254,6 +259,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         /* margin-top: 7px; */
         /* min-width: 570px; */
         position: relative;
+        width:100%;
 
     }
 
@@ -314,7 +320,6 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         position: relative;
         /* top: 59px; */
         width: 180px;
-        cursor: pointer;
     }
 
 </style>

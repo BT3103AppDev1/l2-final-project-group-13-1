@@ -7,11 +7,11 @@
             <span class="poppins-bold-black-10px">$20.00<br></span>
         </div>
         <div class = "Top-Up-options">
-            <button v-on:click="">Top-Up</button> 
+            <button style="color:white" v-on:click="">Top-Up</button> 
         </div>
 
         <div class = "back-options">
-            <button v-on:click="">Back</button> 
+            <button style="color:white" v-on:click="">Back</button> 
         </div>  
     </div>
 
@@ -29,7 +29,7 @@
     <div class="rectangle-action">
         <p>Action</p>
     </div>
-    <div class="rectangle-amount">
+    <div class="rectangle-amount1">
         <p>Amount</p>
     </div> 
 
@@ -62,9 +62,33 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
+
+const db = getFirestore(firebaseApp); 
+const customerRef = collection(db, "User"); 
+const auth = getAuth(firebaseApp)  
+
 export default {
-    name: "WalletDetails"
+    name: "WalletDetails",
+
+    mounted() {
+            const auth = getAuth()
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+        })
+        },
 }
+
+
+
+
 </script>
 
 
@@ -77,7 +101,9 @@ export default {
     }
     .wallet-balance {
         align-items: top;
-        background-color: #F5F5F5;
+        box-shadow: 0px 4px 35px #00000014;
+        background-color: var(--white);
+        border-radius: 40px;
         margin-top: 0px;
         display: flex;
         height: 130px;
@@ -99,13 +125,14 @@ export default {
     }
 
     .Top-Up-options {
-        margin-top: 70px;
-        margin-left: -305px;
+        margin-top: 75px;
+        margin-left: -385px;
         font-family: 'Arial';
-        width: 200px;
+        width: 300px;
         background-color: orangered;
         border: none;
         border-radius: 20px;
+        height:50px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
@@ -116,10 +143,11 @@ export default {
     }
 
     .back-options {
-        margin-top: 70px;
-        margin-left: 130px;
+        margin-top: 75px;
+        margin-left: 100px;
         font-family: 'Arial';
-        width: 200px;
+        width: 300px;
+        height:50px;
         background-color: orange;
         border: none;
         border-radius: 20px;
@@ -166,7 +194,7 @@ export default {
     
         color: light black;
         padding: 10px 20px;
-        height: 55px;
+        height: 60px;
         width: 800px;
     }
 
@@ -174,10 +202,10 @@ export default {
         background-color: #EEEEEE;
         color: light black;
         padding: 10px 20px;
-        height: 55px;
-        width: 800px;
-        margin-top:-55px;
-        margin-left: 130px;
+        height: 50px;
+        width: 200px;
+        margin-top:-105px;
+        margin-left: -370px;
         font-size: 30px
         
     }
@@ -187,32 +215,29 @@ export default {
     
         color: light black;
         padding: 10px 20px;
-        height: 55px;
+        height: 50px;
         width: 100px;
-        margin-left:20px;
-        margin-top:-55px;
+        margin-left:70px;
+        margin-top:-95px;
         font-size:30px;
         
     }
 
-    .rectangle-amount {
+    .rectangle-amount1 {
         background-color: #EEEEEE;
-    
         color: light black;
-        padding: 10px 20px;
-        height: 55px;
-        width: 100px;
-        margin-right:-570px;
-        margin-top:-55px;
+        padding: 10px 0px;
+        height: 50px;
+        width: 0px;
+        margin-right:-490px;
+        margin-top:-95px;
         font-size:30px;
         
     }
 
     
 
-    .rectangle p {
-        margin: 0;
-    }
+
 
 
 </style>

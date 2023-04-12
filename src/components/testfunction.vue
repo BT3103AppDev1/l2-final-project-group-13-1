@@ -74,7 +74,11 @@
   import { collection, getDocs, query, orderBy} from "firebase/firestore";
   import VueFlatpickr from 'vue-flatpickr-component';
   import 'flatpickr/dist/flatpickr.css';
-  const db = getFirestore(firebaseApp);
+  import { getAuth, onAuthStateChanged } from 'firebase/auth'
+  
+  const db = getFirestore(firebaseApp); 
+  const customerRef = collection(db, "User"); 
+  const auth = getAuth(firebaseApp)  
   
   export default {
 
@@ -90,6 +94,23 @@
         selectedDuration: 1,
     };
   },
+
+  mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+    },
 
   components: {
     VueFlatpickr,

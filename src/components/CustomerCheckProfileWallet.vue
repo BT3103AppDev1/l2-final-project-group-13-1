@@ -6,7 +6,7 @@
             <span class="poppins-bold-black-20px"><br></span>
             <p>Check TEOHENG wallet balance</p>
         </div>
-        <div class = "check-existing-booking">
+        <div class = "check-wallet-balance">
             <button @click= "navigateToWalletPage" style="font-size:17px; color:white;">Check TEOHENG wallet balance</button> 
         </div>
 
@@ -24,8 +24,24 @@
 
 <script> 
 
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
+
 export default {
     name: "CheckProfileAndWallet",
+
+    mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+        })
+        },
 
     methods: {
     navigateToWalletPage() {
@@ -52,7 +68,7 @@ export default {
         background-color:white;
         margin-top: 0px;
         display: flex;
-        height: 1000px;
+        height: 700px;
         margin-top: 100px;
         width: 1000px;
     }
@@ -65,19 +81,20 @@ export default {
         height: 300px;
         width: 600px;
         margin-top: 25px;
-        margin-left: 0px;
+        margin-left: -60px;
         font-size: 19px;
         text-align:center;
         
     }
 
-    .check-existing-booking {
+    .check-wallet-balance {
         margin-top: 225px;
         margin-bottom:700px;
-        margin-left: -450px;
+        margin-left: -430px;
         font-family:'Arial';
         color:white;
         width: 400px;
+        height:50px;
         background-color: orangered;
         border: none;
         border-radius: 20px;
@@ -95,7 +112,7 @@ export default {
         padding: 10px 20px;
         height: 300px;
         width: 600px;
-        margin-left: 100px;
+        margin-left: 180px;
         margin-top: 25px;
         font-size:19px;
         border-radius:50px;
@@ -106,7 +123,8 @@ export default {
     .edit-profile {
         margin-top: 225px;
         margin-bottom: 700px;
-        margin-left: -455px;
+        margin-left: -425px;
+        height:50px;
         font-family:'Arial';
         color:white;
         width: 400px;

@@ -56,7 +56,7 @@ export default {
 
 <style>
 .desktop-footer {
-    width: 100vw;
+
     /* bottom: 0; */
     /* top: 0; */
     position: relative;
@@ -64,20 +64,20 @@ export default {
     padding: 0;
     /* display: flex; */
     /* flex-direction: column; */
-    min-width: 1440px;
+    width:100%;
+    /* max-width:1440px; */
     /* left: 0; */
     margin-left: auto;
-
+    min-width:500px;
 }
 
 .footer-container {
     min-height: 20%;
     position: relative;
-    width: 100vw;
     background-color: var(--eerie-black);
     display: flex;
     flex-direction: column;
-    min-width: 1440px;
+    width:100%;
     /* left: 0; */
 
 
@@ -89,6 +89,7 @@ export default {
 
 .footer-container-columns-title-2 {
     padding-bottom: 8%;
+    padding-right:8%;
 }
 
 .footer-container-columns-title-3 {
@@ -102,9 +103,9 @@ export default {
     flex-direction: row;
     min-height: 20%;
     position: relative;
-    width: 100vw;
+    width: 100%;
     padding: 3%;
-    min-width: 1440px;
+    /* min-width: 1440px; */
     justify-content: flex-start;
 
 }
@@ -115,13 +116,13 @@ export default {
     min-height: 20%;
     justify-content: flex-start;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
     text-align: start;
     word-wrap: break-word;
     padding-left: 5%;
     padding-right: 5%;
     gap: 10px;
-    min-width: 576px;
+    /* min-width:400px; */
 }
 
 .footer-container-columns-2 {
@@ -131,10 +132,11 @@ export default {
     justify-content: flex-start;
     word-wrap: break-word;
     min-height: 20%;
-    width: 10%;
+    width: 30%;
     text-align: start;
     gap: 10px;
-    min-width: 144px;
+    margin-left:100px;
+    /* min-width:144px; */
 }
 
 .footer-container-columns-3 {
@@ -144,12 +146,12 @@ export default {
     justify-content: flex-start;
     word-wrap: break-word;
     min-height: 20%;
-    width: 25%;
+    width:40%;
     text-align: start;
     gap: 20px;
     padding-left: 2%;
     padding-right: 2%;
-    min-width: 360px;
+    /* min-width: 200px;  */
 }
 
 .footer-container-logos {
@@ -189,7 +191,39 @@ export default {
     min-width: 34px;
     padding: 0 11px;
 }
+@media screen and (max-width: 767px) and (max-height:1280px) {
+
+.desktop-footer {
+  position: static;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.footer-container-columns {
+  flex-direction: column;
+  padding: 3% 5%;
+}
+
+.footer-container-columns-1,
+.footer-container-columns-2,
+.footer-container-columns-3 {
+  width: 100%;
+  text-align: center;
+  padding: 5% 0;
+  gap: 5%;
+}
+
+.footer-container-logos {
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 8%;
+  margin-bottom: 5%;
+}
+
+}
+
 
 
 
 </style>
+

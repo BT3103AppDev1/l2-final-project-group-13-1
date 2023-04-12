@@ -96,6 +96,10 @@
 <script>
 
 import router from "@/router/router"
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 
 export default {
     data() {
@@ -107,6 +111,16 @@ export default {
         }
         
     },
+    mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+        })
+        },
 
     created() {
     // const userID = "hpjalgGsESU8OVsdbc73r619ypl1"
