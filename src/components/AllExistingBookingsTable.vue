@@ -26,10 +26,7 @@ export default {
    },
 
 async created() {
-},
-   
-async mounted() {
-    this.fetchBranchName();
+  this.fetchBranchName();
     let value = await getDocs(collection(db, "Bookings"))
     let index = 1
     value.forEach((d) => {
@@ -65,6 +62,24 @@ async mounted() {
             index += 1
           }
         })
+},
+   
+async mounted() {
+    const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+    
    },
 
    methods: {
