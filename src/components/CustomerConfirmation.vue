@@ -3,7 +3,7 @@
         <div class = "your-details">
             <div class = "rectangle-your-details">
                 <label>
-                <span class="poppins-bold-black-20px">Your Details<br></span>
+                <span class="poppins-bold-black-24px">Your Details<br></span>
                 </label>
                 <div class = "name-phonenumber-email-fields">
                     <div class ="name" style="margin-left: 200px;">
@@ -24,7 +24,7 @@
 
         <div class = "booking-details">
             <div class = 'rectangle-your-booking-details'>
-                <span class="poppins-bold-black-17px">Here Are Your Booking Details:<br></span>
+                <span class="poppins-bold-black-24px">Here Are Your Booking Details:<br></span>
                 <div class = "date-details">
                     <span class="poppins-bold-black-20px">Date:<br></span>
                     <div class = "the-date">
@@ -35,7 +35,7 @@
                 <div class = "time-details">
                     <span class="poppins-bold-black-20px">Time:<br></span>
                     <div class = "the-time">
-                        <span class="poppins-normal-black-20px">{{ formattedTime }}<br></span>
+                        <span class="poppins-normal-black-20px">{{ timeRange }}<br></span>
                     </div>
                 </div>
 
@@ -129,34 +129,11 @@ export default {
         },
 
     created() {
-    // const userID = "hpjalgGsESU8OVsdbc73r619ypl1"
-    // const walletBalance = 0;
-    // const name = "bobo";
-    // const phoneNumber = "98765432";
-    // const email = "bobo@gmail.com";
-    // const date = "2023-04-08";
-    // const startTime = "13:00";
-    // const endTime = "14:00";
-    // const selectedRoomType = "Small";
-    // const noOfPax = 1;
-    // const price = 13;
-    // const duration = 1;
-    // const location = 1;
-    // const roomID = 1;
     
-    // sessionStorage.setItem('name', name);
-    // sessionStorage.setItem('phoneNumber', phoneNumber);
-    // sessionStorage.setItem('email', email);
-    // sessionStorage.setItem('date', date);
-    // sessionStorage.setItem('startTime', startTime);
-    // sessionStorage.setItem('endTime', endTime);
-    // sessionStorage.setItem('selectedRoomType', selectedRoomType);
-    // sessionStorage.setItem('noOfPax', noOfPax);
-    // sessionStorage.setItem('price', price);
-    // sessionStorage.setItem('duration', duration);
-    // sessionStorage.setItem('location', location);
-    // sessionStorage.setItem('roomID', roomID);
-    
+    const selectedDuration = sessionStorage.getItem('duration');
+    const selectedDateTime = sessionStorage.getItem('date');
+    this.selectedDuration = selectedDuration;
+    this.selectedDateTime = selectedDateTime;
 
     this.name = sessionStorage.getItem('name') || '';
     this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
@@ -222,29 +199,58 @@ export default {
         }
     },
 
-    formattedTime() {
-    const formatTime = (timeString) => {
-      let [hour, minute] = timeString.split(':');
-      hour = parseInt(hour, 10);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      hour = hour % 12;
-      hour = hour || 12; // the hour '0' should be '12'
-      return `${hour}:${minute} ${ampm}`;
-    };
+    // formattedTime() {
+    // const formatTime = (timeString) => {
+    //   let [hour, minute] = timeString.split(':');
+    //   hour = parseInt(hour, 10);
+    //   const ampm = hour >= 12 ? 'PM' : 'AM';
+    //   hour = hour % 12;
+    //   hour = hour || 12; // the hour '0' should be '12'
+    //   return `${hour}:${minute} ${ampm}`;
+    // };
 
-    const formattedStartTime = formatTime(this.startTime);
-    const formattedEndTime = formatTime(this.endTime);
+    // const formattedStartTime = formatTime(this.startTime);
+    // const formattedEndTime = formatTime(this.endTime);
 
-    return `${formattedStartTime} - ${formattedEndTime}`;
-    },
+    // return `${formattedStartTime} - ${formattedEndTime}`;
+    // },
+    timeRange() {
+        if (this.selectedDateTime && this.selectedDuration) {
+            const startDateTime = new Date(this.selectedDateTime);
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+            
+            const options = {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+                };
+            
+            const startTime = startDateTime.toLocaleString("en-UK", options);
+            const endTime = endDateTime.toLocaleString("en-UK", options);
 
+            const formatTime = (timeString) => {
+                let [hour, minute] = timeString.split(':');
+                hour = parseInt(hour, 10);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour || 12; // the hour '0' should be '12'
+                return `${hour}:${minute} ${ampm}`;
+            };
+
+            const formattedStartTime = formatTime(startTime);
+            const formattedEndTime = formatTime(endTime);
+
+            return `${formattedStartTime} - ${formattedEndTime}`;
+            }
+        },
     },
 }
 
 </script>
 
 
-<style>
+<style scoped>
 
     .your-details{
         margin-top:20px;
@@ -310,7 +316,7 @@ export default {
     }
 
     .price-details {
-        margin-top: 20px;
+        margin-top: 30px;
         margin-left: -400px
     }
 
@@ -325,17 +331,17 @@ export default {
     }
 
     .amount-to-pay {
-        margin-top: 10px;
+        margin-top: 20px;
         margin-left: -365px;
     }
 
     .amount {
-        margin-top: -35px;
+        margin-top: -30px;
         margin-left: 700px
     }
 
     .remarks {
-        margin-top: 15px;
+        margin-top: 25px;
         margin-left: -480px;
     }
 
@@ -348,6 +354,8 @@ export default {
     .flex-container {
         display: flex;
         margin-left: 150px;
+        gap: 150px;
+        margin-top: -50px;
     }
 
     .proceed-options {
@@ -363,11 +371,13 @@ export default {
         text-align: center;
         text-decoration: none;
         margin: 70px 0px 0px 0px;
+        justify-content: center;
+        display: flex;
     }
 
     .back-options {
         font-family:'Arial';
-        color:white;
+        /* color:white; */
         width: 300px;
         background-color: orange;
         border: none;
@@ -377,6 +387,9 @@ export default {
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
+        margin: 70px 0px 0px 0px;
+        display: flex;
+        justify-content: center;
     }
 
 </style>

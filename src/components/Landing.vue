@@ -29,7 +29,7 @@
                         </p>
                     </div>
                     <div class="landing-overlap-group">
-                        <div class="book-now">Book Now</div>
+                        <button class="book-now" @click="navigateToHomeByUser">Book Now</button>
                     </div>
                 </div>
                 <img class="jevi-web" src="../assets/jevi-web-studio-ar-vr-1.png" alt ="jevi"/>
@@ -40,9 +40,54 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import firebaseApp from "@/firebase.js";
+import { collection,  query, where, getFirestore, getDocs} from "firebase/firestore";
+
 
     export default {
         name: "Landing",
+        data() {
+            return { user: false, useremail: '' }
+        },
+        mounted() {
+            const auth = getAuth()
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user
+                this.useremail = user.email
+            }
+        })
+        },
+        methods: {
+            navigateToHomeByUser() {
+                const db = getFirestore(firebaseApp);
+                const employeeRef = collection(db, "Employees");
+                // const customerRef = collection(db, "User");
+
+                const email = this.useremail;
+
+                const queryEmployee = query(employeeRef, where('email', '==', email))
+                //Might change based on collection name changes
+                // const queryCustomer = query(customerRef, where('email', '==', email))
+
+                if (this.useremail == "") {
+                    this.$router.push("/");
+                }
+
+               getDocs(queryEmployee)
+                .then((QuerySnapshot) => {
+                    if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/employee-home");
+                    } else {
+                        // getDocs(queryEmployee)
+                            // .then((QuerySnapshot) => {
+                                // if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/customer-home");
+                    }
+                })
+            },
+        },
     }
 </script>
 
@@ -61,6 +106,7 @@
     position: relative;
     width: 1440px;
     justify-content: space-evenly;
+    
 }
 
 .landing-group-5{
