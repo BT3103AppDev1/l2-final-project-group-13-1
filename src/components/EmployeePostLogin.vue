@@ -5,7 +5,7 @@
             <div class="employee-overlap-group1">
                 <div class="employee-check poppins-medium-black-16px">Check/Delete <br />Customers' Existing Bookings</div>
                 <div class="employee-overlap-group">
-                    <router-link to="/employee-booking-system-page" class="employee-x-booking poppins-medium-white-16px">Check Existing Booking</router-link>
+                    <router-link to="/branchexistingbooking" class="employee-x-booking poppins-medium-white-16px">Check Existing Booking</router-link>
                 </div>
             </div>
             <div class="employee-overlap-group1">
