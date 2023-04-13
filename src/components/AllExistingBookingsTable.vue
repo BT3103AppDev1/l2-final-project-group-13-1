@@ -26,44 +26,52 @@ export default {
       return {branchID: [], branchLocation: [], bookingData: {}};
    },
 
-async created() {
-  this.fetchBranchName();
+   async created() {
   const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
-    let value = await getDocs(collection(db, "Bookings"))
-    let index = 1
-    value.forEach((d) => {
-          let documentData = d.data()
-          let bookingID = d.id
-          let userID =  documentData.userID
-          if (userID == currentUser.uid) {
-            let branchID = documentData.branchID
-            let date = documentData.date
-            let time = documentData.startTime + " - " + documentData.endTime
-            let numberOfPax = documentData.numberOfPax
-            let roomType = documentData.roomType
-            let location = this.branchLocation
-            //  create rows and cells in the table
-            let table = document.getElementById('table')
-            let row = table.insertRow(index)
-            let cell1 = row.insertCell(0)
-            let cell2 = row.insertCell(1)
-            let cell3 = row.insertCell(2)
-            let cell4 = row.insertCell(3)
-            let cell5 = row.insertCell(4)
-            let cell6 = row.insertCell(5)
-            let cell7 = row.insertCell(6)
-            let cell8 = row.insertCell(7)
-            cell1.innerHTML = index
-            cell2.innerHTML = bookingID
-            cell3.innerHTML = location[branchID - 1]
-            cell4.innerHTML = date
-            cell5.innerHTML = time
-            cell6.innerHTML = numberOfPax
-            cell7.innerHTML = roomType
-            cell8.innerHTML = `<a class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`
-            index += 1
-          }
-        })
+  let value = await getDocs(collection(db, "Bookings"));
+  let index = 1;
+  value.forEach((d) => {
+    let documentData = d.data();
+    let bookingID = d.id;
+    let userID = documentData.userID;
+    if (userID == currentUser.uid) {
+      let branchID = documentData.branchID;
+      let date = documentData.date;
+      let time = documentData.startTime + " - " + documentData.endTime;
+      let numberOfPax = documentData.numberOfPax;
+      let roomType = documentData.roomType;
+      this.fetchBranchLocation(branchID).then(location => {
+        // create rows and cells in the table
+        let table = document.getElementById('table');
+        let row = table.insertRow(index);
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+        let cell4 = row.insertCell(3);
+        let cell5 = row.insertCell(4);
+        let cell6 = row.insertCell(5);
+        let cell7 = row.insertCell(6);
+        let cell8 = row.insertCell(7);
+        cell1.innerHTML = index;
+        cell2.innerHTML = bookingID;
+        cell3.innerHTML = location;
+        cell4.innerHTML = date;
+        cell5.innerHTML = time;
+        cell6.innerHTML = numberOfPax;
+        cell7.innerHTML = roomType;
+        cell8.innerHTML = `<a class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`;
+        index += 1;
+      });
+    }
+  });
+},
+
+async fetchBranchLocation(branchID) {
+  const branchCollection = collection(db, 'Branch');
+  const branchQuery = query(branchCollection, where('branchID', '==', parseInt(branchID)));
+  const branchSnapshot = await getDocs(branchQuery);
+  const branchData = branchSnapshot.docs[0].data();
+  return branchData.branchLocation;
 },
 
 
@@ -96,17 +104,13 @@ async mounted() {
       });
     },
 
-    async fetchBranchName() {
-      let br = await getDocs(collection(db, "Branch"))
-      br.forEach(doc => {
-        let documentData = doc.data()
-        let id = documentData.branchID
-        let name = documentData.branchLocation
-
-        this.branchID.push(id);
-        this.branchLocation.push(name);
-                });
-    },
+    async fetchBranchLocation(branchID) {
+      const branchCollection = collection(db, 'Branch');
+      const branchQuery = query(branchCollection, where('branchID', '==', parseInt(branchID)));
+      const branchSnapshot = await getDocs(branchQuery);
+      const branchData = branchSnapshot.docs[0].data();
+      return branchData.branchLocation;
+    }
    },
 }
 
