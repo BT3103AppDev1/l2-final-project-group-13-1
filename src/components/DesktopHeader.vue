@@ -20,7 +20,7 @@
                 </div>
             </div>
             <header class="header">
-                <img class="nav-bar-logo" src="../assets/family-ktv-studio-png@2x.png" alt="Family-KTV-Studio.png" @click="navigateToHomeByUser"/>
+                <img class="nav-bar-logo" src="../assets/family-ktv-studio-png@2x.png" alt="Family-KTV-Studio.png" style="cursor:pointer;" @click="navigateToHomeByUser"/>
                 <div class="nav-bar-container">
                     <div class="nav-bar-container-1">
                         <!-- Add Button -->
