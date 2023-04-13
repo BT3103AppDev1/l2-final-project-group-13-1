@@ -17,6 +17,7 @@ import CheckProfileAndWalletPage from "@/views/CheckProfileWalletPage.vue"
 import EmployeePostLoginPage from "@/views/EmployeePostLoginPage.vue"
 import EmployeeSearchBookingPage from "@/views/EmployeeBookingSystemPage.vue"
 import TopUpWalletPage from "@/views/TopUpWalletPage.vue"
+import BranchExistingBookingsPage from "@/views/BranchExistingBookingsPage.vue"
 
 const routes = [
     {
@@ -106,6 +107,11 @@ const routes = [
     { path: '/top-up-wallet', 
     name: 'TopUpWallet', 
     component: TopUpWalletPage
+    },
+
+    { path: '/branchexistingbooking', 
+      name: 'BranchExistingBookingsPage', 
+      component: BranchExistingBookingsPage 
     },
     
 ]
