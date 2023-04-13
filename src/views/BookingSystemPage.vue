@@ -45,7 +45,8 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         overflow: hidden;
         justify-content: space-between;
         position: relative;
-        width: 100vw;
+        /* width: 100vw; */
+        width: 1440px;
         height: 100vh;
         gap: 50px;
         min-height: 1276px;

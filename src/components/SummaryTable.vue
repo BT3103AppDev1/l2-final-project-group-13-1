@@ -11,7 +11,7 @@
         <div class = "sbt-container">
             <div class = "box">
                 <p class="sbt-header">Time</p>
-                <p>{{formattedTime}}</p>
+                <p>{{timeRange}}</p>
             </div>
             <div class = "box">
                 <p class="sbt-header">Room Type</p>
@@ -65,10 +65,19 @@ export default {
             bookingID :'',
             bookingData: {},
             branchLocation:'',
+            selectedDuration:'',
+            selectedDateTime:null,
         };
     },
 
     mounted() {
+
+            const selectedDuration = sessionStorage.getItem('duration');
+            const selectedDateTime = sessionStorage.getItem('date');
+            this.selectedDuration = selectedDuration;
+            this.selectedDateTime = selectedDateTime;
+
+
             const auth = getAuth(firebaseApp)
             onAuthStateChanged(auth, (user) => {
                 if (!user) {
@@ -141,24 +150,55 @@ export default {
         });
         },
 
-        formattedTime() {
-            const formatTime = (timeString) => {
-                if (!timeString) return '';
+        // formattedTime() {
+        //     const formatTime = (timeString) => {
+        //         if (!timeString) return '';
 
-                let [hour, minute] = timeString.split(':');
-                hour = parseInt(hour, 10);
-                const ampm = hour >= 12 ? 'PM' : 'AM';
-                hour = hour % 12;
-                hour = hour || 12; // the hour '0' should be '12'
-                return `${hour}:${minute} ${ampm}`;
-            };
+        //         let [hour, minute] = timeString.split(':');
+        //         hour = parseInt(hour, 10);
+        //         const ampm = hour >= 12 ? 'PM' : 'AM';
+        //         hour = hour % 12;
+        //         hour = hour || 12; // the hour '0' should be '12'
+        //         return `${hour}:${minute} ${ampm}`;
+        //     };
 
-            const formattedStartTime = formatTime(this.bookingData.startTime);
-            const formattedEndTime = formatTime(this.bookingData.endTime);
+        //     const formattedStartTime = formatTime(this.bookingData.startTime);
+        //     const formattedEndTime = formatTime(this.bookingData.endTime);
 
-            return `${formattedStartTime} - ${formattedEndTime}`;
-        },
-    }
+        //     return `${formattedStartTime} - ${formattedEndTime}`;
+        // },
+        timeRange() {
+            if (this.selectedDateTime && this.selectedDuration) {
+
+                const startDateTime = new Date(this.selectedDateTime);
+                const endDateTime = new Date(startDateTime);
+                endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+                
+                const options = {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                    };
+                
+                const startTime = startDateTime.toLocaleString("en-UK", options);
+                const endTime = endDateTime.toLocaleString("en-UK", options);
+
+                const formatTime = (timeString) => {
+                    let [hour, minute] = timeString.split(':');
+                    hour = parseInt(hour, 10);
+                    const ampm = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12;
+                    hour = hour || 12; // the hour '0' should be '12'
+                    return `${hour}:${minute} ${ampm}`;
+                };
+
+                const formattedStartTime = formatTime(startTime);
+                const formattedEndTime = formatTime(endTime);
+
+                return `${formattedStartTime} - ${formattedEndTime}`;
+                }
+            },
+    },
 
 
 }

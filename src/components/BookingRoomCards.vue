@@ -93,23 +93,27 @@
                 const hour = dateTime.getHours();
 
                 if (type === 'Small') {
-                if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $13.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $19.00 w/GST"
-                }
-                } else if (type === 'Medium') {
                     if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $15.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $22.00 w/GST"
+                        return "Happy Hour $13.00 w/GST";
+                    } else {
+                        return "Peak Hours $19.00 w/GST"
+                    }
                 }
-                } else if (type === 'Large') {
+                
+                if (type === 'Medium') {
                     if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $17.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $25.00 w/GST"
+                        return "Happy Hour $15.00 w/GST";
+                    } else {
+                        return "Peak Hours $22.00 w/GST"
+                    }
                 }
+                
+                if (type === 'Large') {
+                    if (hour >= 12 && hour < 19) {
+                        return "Happy Hour $17.00 w/GST";
+                    } else {
+                        return "Peak Hours $25.00 w/GST"
+                    }
                 }
 
                 return '';

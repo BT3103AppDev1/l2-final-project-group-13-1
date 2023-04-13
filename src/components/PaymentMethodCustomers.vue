@@ -11,7 +11,7 @@
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Time</p>
-                <p>{{formattedTime}}</p>
+                <p>{{timeRange}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Room Type</p>
@@ -123,10 +123,18 @@ const auth = getAuth(firebaseApp)
             return {
                 bookingID:"",
                 branchLocation:'',
+                selectedDateTime:null,
+                selectedDuration:'',
             }
         },
 
         created() {
+            const selectedDuration = sessionStorage.getItem('duration');
+            const selectedDateTime = sessionStorage.getItem('date');
+
+            this.selectedDuration = selectedDuration;
+            this.selectedDateTime = selectedDateTime;
+
             this.name = sessionStorage.getItem('name') || '';
             this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
             this.email = sessionStorage.getItem('email') || '';
@@ -238,22 +246,51 @@ const auth = getAuth(firebaseApp)
     });
     },
 
-    formattedTime() {
-    const formatTime = (timeString) => {
-      let [hour, minute] = timeString.split(':');
-      hour = parseInt(hour, 10);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      hour = hour % 12;
-      hour = hour || 12; // the hour '0' should be '12'
-      return `${hour}:${minute} ${ampm}`;
-    };
+    // formattedTime() {
+    // const formatTime = (timeString) => {
+    //   let [hour, minute] = timeString.split(':');
+    //   hour = parseInt(hour, 10);
+    //   const ampm = hour >= 12 ? 'PM' : 'AM';
+    //   hour = hour % 12;
+    //   hour = hour || 12; // the hour '0' should be '12'
+    //   return `${hour}:${minute} ${ampm}`;
+    // };
 
-    const formattedStartTime = formatTime(this.startTime);
-    const formattedEndTime = formatTime(this.endTime);
+    // const formattedStartTime = formatTime(this.startTime);
+    // const formattedEndTime = formatTime(this.endTime);
 
-    return `${formattedStartTime} - ${formattedEndTime}`;
-    },
+    // return `${formattedStartTime} - ${formattedEndTime}`;
+    // },
+    timeRange() {
+        if (this.selectedDateTime && this.selectedDuration) {
+            const startDateTime = new Date(this.selectedDateTime);
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+            
+            const options = {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+                };
+            
+            const startTime = startDateTime.toLocaleString("en-UK", options);
+            const endTime = endDateTime.toLocaleString("en-UK", options);
 
+            const formatTime = (timeString) => {
+                let [hour, minute] = timeString.split(':');
+                hour = parseInt(hour, 10);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12;
+                hour = hour || 12; // the hour '0' should be '12'
+                return `${hour}:${minute} ${ampm}`;
+            };
+
+            const formattedStartTime = formatTime(startTime);
+            const formattedEndTime = formatTime(endTime);
+
+            return `${formattedStartTime} - ${formattedEndTime}`;
+            }
+        }   
     },
 
     }

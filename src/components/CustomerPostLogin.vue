@@ -160,8 +160,8 @@ export default {
     }
 
     .view-profile {
-        margin-top: 60px;
-        margin-bottom:700px;
+        margin-top: 50px;
+        margin-bottom:720px;
         margin-left: 7px;
         font-family:'Arial';
         color:white;

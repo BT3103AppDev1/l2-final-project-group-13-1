@@ -42,11 +42,12 @@ body {
         border: 1px none;
         display: flex;
         flex-direction: column;
-        height: 1276px;
-        overflow: hidden;
+        height: 100vh;
+        /* overflow: hidden; */
         position: relative;
         width: 1440px;
         justify-content: space-between;
+        gap: 80px;
     }
 
 </style>

@@ -1,4 +1,5 @@
 <template>
+    <div class="wallet-profile-page">
     <div class="wallet-profile">
         <div class="rectangle-check-wallet-balance">
             <span class="poppins-bold-black-10px"><br></span>
@@ -19,6 +20,7 @@
         <div class = "edit-profile"> 
             <button class='poppins-medium-white-16px' @click= "navigateToEditProfilePage" style="font-size:17px;color:white;">Edit profile</button> 
         </div>
+    </div>
     </div>
 </template>
 
@@ -68,6 +70,16 @@ export default {
 </script>
 
 <style>
+    .wallet-profile-page {
+        align-items: center;
+        background-color: var(--white);
+        border: 1px none;
+        display: flex;
+        flex-direction: column;
+        height:100vh;
+        position: relative;
+        width: 1440px;
+    }
 
     .wallet-profile {
         align-items: top;

@@ -107,23 +107,24 @@ import firebaseApp from "@/firebase.js";
                     const hour = dateTime.getHours();
 
                     if (type === 'Small') {
-                    if (hour >= 12 && hour < 19) {
-                        return "13.00";
-                    } else if (hour >= 19) {
-                        return "19.00"
-                    }
-                    } else if (type === 'Medium') {
                         if (hour >= 12 && hour < 19) {
-                        return "15.00";
-                    } else if (hour >= 19) {
+                            return "13.00";
+                        } 
+                        return "19.00";
+                    } 
+
+                    if (type === 'Medium') {
+                        if (hour >= 12 && hour < 19) {
+                            return "15.00";
+                        } 
                         return "22.00"
                     }
-                    } else if (type === 'Large') {
+                    
+                    if (type === 'Large') {
                         if (hour >= 12 && hour < 19) {
-                        return "17.00";
-                    } else if (hour >= 19) {
-                        return "25.00"
-                    }
+                            return "17.00"; 
+                        } 
+                        return "25.00";
                     }
 
                     return '';
@@ -264,7 +265,7 @@ import firebaseApp from "@/firebase.js";
     }
     .select-button-container {
         align-items: flex-start;
-        background-color: var(--flamingo);
+        background-color: orangered;
         border-radius: 10px;
         box-shadow: 0px 4px 19px #7793414c;
         display: flex;

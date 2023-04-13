@@ -1,23 +1,9 @@
 <template>       
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
         <div class="booking-system-search-results-page">
             <desktop-header/>
-            <!-- <desktop-header-welcome/>
-
-            <booking-system-search-form/> -->
-
-            <!-- <div class="cards">
-                <booking-room-card v-for="(card, index) in uniqueRoomTypes" :key="index" 
-                :room-type="card.roomType"
-                :num-pax="card.numPax"
-                :date="card.date"
-                :time="card.time"
-                :rate="card.rate"
-                />
-            </div> -->
+            <desktop-header-welcome/>
             <booking-room-cards v-if="uniqueRoomTypes" :uniqueRoomTypes="uniqueRoomTypes"/>
-            <!-- <h1> Results for {{ uniqueRoomTypes }}</h1> -->
-            <!-- <test-function/> -->
-            <!-- <booking-room-cards :uniqueRoomTypes="uniqueRoomTypes"/> -->
             <desktop-footer/>
 
         </div>
@@ -96,7 +82,8 @@ import BookingRoomCards from '../components/BookingRoomCards.vue';
         flex-direction: column;
         justify-content: space-between;
         position: relative;
-        width: 100vw;
+        /* width: 100vw; */
+        width: 1440px;
         height: 100vh;
         gap: 50px;
 

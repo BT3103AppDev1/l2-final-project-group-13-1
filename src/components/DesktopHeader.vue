@@ -33,7 +33,7 @@
                         <a href="https://ktvteoheng.com.sg/ktv-booking/" target="_blank" class="faq poppins-normal-black-16px">FAQ</a>
                     </div>
                     <div class="nav-bar-container-2">
-                        <button class="poppins-normal-white-13px" @click="navigateToLogin">Book Now</button>
+                        <button class="poppins-normal-white-13px" @click="navigateToHomeByUser">Book Now</button>
                     </div>
                     <div class="nav-bar-container-3">
                         <a href="https://ktvteoheng.com.sg/ktv-outlets/" target="_blank" class="poppins-normal-white-13px">Contact Us</a>
@@ -67,34 +67,31 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
             navigateToHome() {
                 this.$router.push("/");
             },
-            navigateToLogin() {
-                this.$router.push("LogIn");
-            },
             navigateToHomeByUser() {
                 const db = getFirestore(firebaseApp);
                 const employeeRef = collection(db, "Employees");
-                const customerRef = collection(db, "User");
+                // const customerRef = collection(db, "User");
 
                 const email = this.useremail;
 
                 const queryEmployee = query(employeeRef, where('email', '==', email))
                 //Might change based on collection name changes
-                const queryCustomer = query(customerRef, where('email', '==', email))
+                // const queryCustomer = query(customerRef, where('email', '==', email))
 
-                
-               getDocs(queryCustomer)
+                if (this.useremail == "") {
+                    this.$router.push("/");
+                }
+
+               getDocs(queryEmployee)
                 .then((QuerySnapshot) => {
                     if (QuerySnapshot.docs.length === 1) {
-                        this.$router.push("/customer-home");
+                        this.$router.push("/employee-home");
                     } else {
-                        getDocs(queryEmployee)
-                            .then((QuerySnapshot) => {
-                                if (QuerySnapshot.docs.length === 1) {
-                                    this.$router.push("/employee-home");
-                                }
-                            })
-                    } 
-                    this.$router.push("/");
+                        // getDocs(queryEmployee)
+                            // .then((QuerySnapshot) => {
+                                // if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/customer-home");
+                    }
                 })
             },
         }
@@ -180,6 +177,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
     }
 
     .nav-bar-container-2 {
+        justify-content: center;
         align-items: center;
         background-color: var(--flamingo);
         border-radius: 6px;

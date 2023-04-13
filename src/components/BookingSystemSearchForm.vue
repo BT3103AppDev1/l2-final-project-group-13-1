@@ -75,6 +75,7 @@
                 </div>
             </div> 
             
+            
             <div class="search-form-container-datetime">
                 <div class="search-form-container-datetime-box valign-text-middle roboto-medium-white-14px">
                     <label>
@@ -91,6 +92,9 @@
                         <vue-flatpickr v-model="selectedDateTime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
                     </div>
                 </div> 
+            </div>
+            <div class="search-button-container">
+                <button class="search-button valign-text-middle roboto-bold-concrete-16px"  @click="submit">Search</button>
             </div>
 <!--                         
             <div class="search-form-container-duration">
@@ -112,9 +116,7 @@
              -->
              
 
-            <div class="search-button-container">
-                <button class="search-button valign-text-middle roboto-bold-concrete-16px"  @click="submit">Search</button>
-            </div>
+            
          </form>
         </div>   
 </template>
@@ -348,13 +350,15 @@ export default {
         align-items: flex-start;
         display: flex;
         flex-direction: row;
-        min-width: 70%;
+        /* min-width: 70%; */
+        width: 1240px;
         padding: 10px 20px 20px 20px;
         justify-content: center;
         background-color: var(--concrete);
         box-shadow: 20px 20px 120px 15px #0000000d;
         border-radius: 10px;
         gap: 5px;
+        margin-bottom: 400px;
     }
 
 
@@ -584,7 +588,7 @@ export default {
         min-width: 15%;
         /* align-content: center; */
         /* I cant fix it */
-        margin-left: -110px;
+        /* margin-left: -110px; */
     }
 
     .search-button {
