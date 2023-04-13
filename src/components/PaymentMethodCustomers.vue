@@ -198,6 +198,7 @@ const auth = getAuth(firebaseApp)
         },
 
         async submitBooking() {
+            const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
             const bookingData = {
                 name: this.name,
                 phoneNumber: this.phoneNumber,
@@ -213,7 +214,7 @@ const auth = getAuth(firebaseApp)
                 branchID: this.location,
                 totalPrice: this.totalPrice,
                 remarks: this.remarks,
-                userID: "xP3rCXxtjg3aRWiTNtNx", //hard-coded. Need to change to current user
+                userID: currentUser.uid,
                 paymentMethod: "In Store",
                 paymentStatus: "Pending"
             };
