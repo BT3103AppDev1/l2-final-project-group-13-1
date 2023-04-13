@@ -2,11 +2,10 @@
     <div class="post-login">
         <div class="rectangle-previous-booking">
             <span class="poppins-bold-black-10px"><br></span>
-            <p>Made a booking previously?</p>
-            <span class="poppins-bold-black-20px"><br></span>
-            <p>Click below to check or edit your existing booking</p>
+            <span class="poppins-bold-black-10px"><br></span>
+            <p class="poppins-medium-black-16px">Made a booking previously? <br />Click below to check or edit your existing booking</p>
             <div class= "check-existing-bookings">
-                <button @click="navigateToNewBookingPage" style="font-size:17px;color:white;">Check Existing Booking</button> 
+                <router-link to="/allexistingbookingspage" class="poppins-medium-black-16px" style="font-size:17px;color:white;background-color:transparent;">Check Existing Booking</router-link> 
             </div>
             
         </div>
@@ -15,20 +14,18 @@
 
         <div class="rectangle-new-booking">
             <span class="poppins-bold-black-10px"><br></span>
-            <p>Want to make a new booking?</p>
-            <span class="poppins-bold-black-20px"><br></span>
-            <p>Click below to make a new booking today</p>
+            <span class="poppins-bold-black-10px"><br></span>
+            <p class="poppins-medium-black-16px">Want to make a new booking? <br />Click below to make a new booking today</p>
             <div class = "make-new-booking"> 
-                <button @click="navigateToNewBookingPage" style="font-size:17px;color:white;">Make New Booking</button> 
+                <router-link to="/customer-booking-system-page" class="poppins-medium-black-16px" style="font-size:17px;color:white;background-color:transparent;">Make New Booking</router-link> 
             </div>
         </div>
         <div class="rectangle-profile-wallet">
             <span class="poppins-bold-black-10px"><br></span>
-            <p>Want to check your profile and TEOHENG wallet balance?</p>
             <span class="poppins-bold-black-10px"><br></span>
-            <p>Click below to view!</p>
+            <p class="poppins-medium-black-16px">Want to check your profile and TEOHENG wallet balance? <br />Click below to view!</p>
             <div class = "view-profile">
-                <button @click="navigateToProfilePage" height:100px style="font-size:17px;color:white;">View Profile</button> 
+                <router-link to="/check-details" class="poppins-medium-black-16px" height:100px style="font-size:17px;color:white;background-color:transparent;">View Profile</router-link> 
             </div>
         </div>
     </div>

@@ -1,8 +1,11 @@
 <template>
-    <h1 class="poppins-bold-black-20px">Oops... We are still working on this page!</h1>
-    <h1 class="poppins-bold-black-20px">Sorry for any inconvenience caused! </h1>
-    <br>
+    <div class="sorry">
+        <h1 class="poppins-bold-black-20px" style="font-size:xx-large">Oops... We are still working on this page!</h1>
+        <h3 class="poppins-normal-black-16px" style="font-size:x-large">Sorry for any inconvenience caused! </h3>
+    </div>
 </template>
+
+
 
 <script>
 
@@ -37,3 +40,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.sorry {
+    text-align: center;
+}
+</style>

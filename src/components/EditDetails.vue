@@ -46,19 +46,19 @@
                 <span class="poppins-bold-black-17px">Want to change password?<br></span>
             </div> -->
             <div class = "change-password-options">
-            <button v-on:click="changePassword">Change Password</button> 
+            <button v-on:click="changePassword" class="poppins-medium-white-16px">Change Password</button> 
 
         </div>
         </div>
         
         <div class  = "options">
             <div class = "submit-options">
-            <button v-on:click="submitForm">Submit</button> 
+            <button v-on:click="submitForm" class="poppins-medium-white-16px">Submit</button> 
             
         </div>
 
         <div class = "back-options1">
-            <button v-on:click="">Back</button> 
+            <router-link to="/check-details" v-on:click="" class="poppins-medium-white-16px" style="background-color: transparent;">Back</router-link> 
 
         </div>
 
@@ -219,13 +219,15 @@ methods: {
     /* For Page Body */
     .customer-edit-details {
         align-items: left;
-        background-color: var(--concrete);;
+        background-color: var(--white);
         margin-top: 0px;
         display: flex;
         height: 600px;
         margin-top: 20px;
         width: 900px;
         flex-direction: column;
+        border-radius: 40px;
+        box-shadow: 0px 4px 35px #00000014;
     }
 
     .edit-details {
@@ -341,7 +343,7 @@ methods: {
         margin-left:  100px;
         font-family: 'Arial';
         width: 250px;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border: none;
         border-radius: 20px;
         font-size: 200px ;
@@ -358,7 +360,7 @@ methods: {
         margin-left:  100px;
         font-family: 'Arial';
         width: 250px;
-        background-color: orange;
+        background-color: #f5997b;
         border: none;
         border-radius: 20px;
         font-size: 200px ;

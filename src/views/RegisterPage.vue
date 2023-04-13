@@ -1,26 +1,17 @@
 <template>
     <div class="container-center-horizontal">
         <div class="landing-page">
-            <!-- <desktop-header/> -->
-            <!-- <desktop-header-welcome/> -->
             <register/>
-            <!-- <desktop-footer/> -->
         </div>
     </div>
 </template>
 
 <script>
-import DesktopHeader from '../components/DesktopHeader.vue';
-import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import DesktopFooter from '../components/DesktopFooter.vue';
 import Register from '../components/Register.vue';
     export default {
         name: "RegisterPage",
         components: {
-            //DesktopHeader,
-            //DesktopHeaderWelcome,
             Register,
-            //DesktopFooter,
         },
     }
 </script>

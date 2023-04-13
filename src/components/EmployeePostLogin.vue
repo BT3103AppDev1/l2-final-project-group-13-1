@@ -5,13 +5,13 @@
             <div class="employee-overlap-group1">
                 <div class="employee-check poppins-medium-black-16px">Check/Delete <br />Customers' Existing Bookings</div>
                 <div class="employee-overlap-group">
-                    <button class="employee-x-booking poppins-medium-white-16px">Check Existing Booking</button>
+                    <router-link to="/employee-booking-system-page" class="employee-x-booking poppins-medium-white-16px">Check Existing Booking</router-link>
                 </div>
             </div>
             <div class="employee-overlap-group1">
                 <p class="employee-check poppins-medium-black-16px">Check Available Timings and <br />Add Phone Call Bookings</p>
                 <div class="employee-overlap-group">
-                    <button class="employee-x-booking poppins-medium-white-16px">Make New Booking</button>
+                    <router-link to="/customer-booking-system-page" class="employee-x-booking poppins-medium-white-16px">Make New Booking</router-link>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@ export default {
     box-shadow: 0px 4px 19px #7793414c;
     display: flex;
     height: 40px;
-    justify-content: flex-end;
+    justify-content: center;
     min-width: 340px;
     padding: 7px 68px;
 }

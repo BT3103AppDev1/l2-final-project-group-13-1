@@ -19,6 +19,7 @@
     "@syncfusion/ej2-splitbuttons": "^21.1.35",
     "@syncfusion/ej2-vue-base": "^21.1.36",
     "@syncfusion/ej2-vue-calendars": "^21.1.35",
+    "firebase": "^9.19.1",
     "moment": "^2.29.4",
     "v-calendar": "^2.4.1",
     "vue": "^3.2.47",

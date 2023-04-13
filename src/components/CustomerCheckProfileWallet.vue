@@ -4,20 +4,20 @@
             <span class="poppins-bold-black-10px"><br></span>
             <span class="poppins-bold-black-10px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
-            <p>Check TEOHENG wallet balance</p>
+            <p class="employee-check poppins-medium-black-16px">Check TEOHENG wallet balance</p>
         </div>
         <div class = "check-wallet-balance">
-            <button @click= "navigateToWalletPage" style="font-size:17px; color:white;">Check TEOHENG wallet balance</button> 
+            <button class="poppins-medium-white-16px" @click= "navigateToWalletPage" style="font-size:17px; color:white;">Check TEOHENG wallet balance</button> 
         </div>
 
         <div class="rectangle-edit-profile">
             <span class="poppins-bold-black-10px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
             <span class="poppins-bold-black-20px"><br></span>
-            <p>Edit your profile</p>
+            <p class="employee-check poppins-medium-black-16px">Edit your profile</p>
         </div>
         <div class = "edit-profile"> 
-            <button @click= "navigateToEditProfilePage" style="font-size:17px;color:white;">Edit profile</button> 
+            <button class='poppins-medium-white-16px' @click= "navigateToEditProfilePage" style="font-size:17px;color:white;">Edit profile</button> 
         </div>
     </div>
 </template>
@@ -79,10 +79,9 @@ export default {
         width: 1000px;
     }
     .rectangle-check-wallet-balance {
-        background-color: #F5F5F5;
+        background-color: var(--white);
         color:  black;
-        font-family: Arial;
-        border-radius:50px;
+        border-radius:40px;
         padding: 10px 20px;
         height: 300px;
         width: 600px;
@@ -90,7 +89,7 @@ export default {
         margin-left: -60px;
         font-size: 19px;
         text-align:center;
-        
+        box-shadow: 0px 4px 35px #00000014;
     }
 
     .check-wallet-balance {
@@ -112,8 +111,6 @@ export default {
     }
 
     .rectangle-edit-profile {
-        background-color: #F5F5F5;
-        font-family: Arial;
         color: black;
         padding: 10px 20px;
         height: 300px;
@@ -121,9 +118,10 @@ export default {
         margin-left: 180px;
         margin-top: 25px;
         font-size:19px;
-        border-radius:50px;
+        border-radius:40px;
         text-align:center;
-        
+        background-color: var(--white);
+        box-shadow: 0px 4px 35px #00000014;
     }
 
     .edit-profile {

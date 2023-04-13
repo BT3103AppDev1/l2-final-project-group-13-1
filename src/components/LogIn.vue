@@ -9,7 +9,7 @@
                     <div class="login-group-49">
                         <div class="login-welcome-to-teoheng">Welcome to TEOHENG KTV</div>
                         <div class="login-no-account-sign-up">
-                            <span class="login-span0">No account?<br/></span><button class="login-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign up</button>
+                            <span class="login-span0">No account?<br/></span><router-link to="/register" class="login-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign up</router-link>
                         </div>
                     </div>
                     <div class="login-with-google login-with">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="login-with-facebook login-with">
                         <img class="login-vector" src="../assets/Vector.png" alt="facebook logo" />
-                        <button class="login-with-facebook-1 poppins-normal-thunder-16px" style="background-color: transparent; border-color: transparent; cursor:pointer;">Login with Facebook</button> 
+                        <button class="login-with-facebook-1 poppins-normal-thunder-16px" style="background-color: transparent; border-color: transparent; cursor:pointer;"  @click="signInWithFacebook" >Login with Facebook</button> 
                     </div>
                     <div class="login-or">
                         <img class="login-line-1-1" src="../assets/line-1-1.svg" alt="line 1" />
@@ -51,61 +51,86 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useRouter } from 'vue-router';
-
-
-const email = ref("");
-const password = ref("");
-
-const register = () => {
-    signInWithEmailAndPassword(getAuth(), email.value, password.value)
-        .then((data) => {
-            console.log("Successfully logged in!");
-            // router.push('/') redirect to page after sign up
-        })
-        .catch((error) => {
-            console.log(error.code);
-            switch(error.message) {
-                case "auth/invalid-email":
-                    errMsg.value = "Invalid email";
-                    break;
-                case "auth/user-not-found":
-                    errMsg.value = "No account with that email was found";
-                    break;
-                case "auth/wrong-password":
-                    errMsg.value = "Incorrect password";
-                    break;
-                default:
-                    errMsg.value = "Email or password is incorrect";
-                    break;
-            }
-        });
-};
-
-const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(getAuth(), provider)
-        .then((result) => {
-            console.log(result.user);
-            // router.push('/') push to home page
-        })
-        .catch((error) => {
-            //handle error 
-        })
-};
-</script>
-
 <script>
+import { ref } from "vue";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { useRouter } from 'vue-router';
+import router from '../router/router.js';
+
 export default {
-    name: "LogIn"
-}
+  name: "LogIn",
+  setup() {
+    const email = ref("");
+    const password = ref("");
+    const errMsg = ref("");
+    const router = useRouter();
+
+    const register = () => {
+      signInWithEmailAndPassword(getAuth(), email.value, password.value)
+        .then((data) => {
+          console.log("Successfully logged in!");
+          if (email.value.endsWith("@teoheng.com")) {
+            router.push({ name: 'EmployeePostLoginPage' });
+          } else {
+            router.push({ name: 'CustomerPostLoginPage' });
+          }
+        })
+        .catch((error) => {
+          console.log(error.code);    
+          switch(error.message) {
+            case "auth/invalid-email":
+              errMsg.value = "Invalid email";
+              break;
+            case "auth/user-not-found":
+              errMsg.value = "No account with that email was found";
+              break;
+            case "auth/wrong-password":
+              errMsg.value = "Incorrect password";
+              break;
+            default:
+              errMsg.value = "Email or password is incorrect";
+              break;
+          }
+        });
+    };
+
+    const signInWithGoogle = () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(getAuth(), provider)
+        .then((result) => {
+          console.log(result.user);
+          router.push('/customer-home');
+        })
+        .catch((error) => {
+          // handle error 
+        });
+    };
+
+    const signInWithFacebook = () => {
+      const provider = new FacebookAuthProvider();
+      signInWithPopup(getAuth(), provider)
+      .then((result) => {
+          console.log(result.user);
+          router.push('/customer-home');
+        })
+        .catch((error) => {
+          // handle error 
+        });
+    };
+
+    return {
+      email,
+      password,
+      errMsg,
+      register,
+      signInWithGoogle,
+      signInWithFacebook
+    };
+  }
+};
 </script>
 
-
-<style>
+<style scoped>
 .login-v1 {
 align-items: flex-start;
 background-color: #fffdf8;
