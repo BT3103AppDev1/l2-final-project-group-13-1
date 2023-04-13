@@ -77,6 +77,7 @@ export default {
             this.selectedDuration = selectedDuration;
             this.selectedDateTime = selectedDateTime;
 
+            sessionStorage.clear();
 
             const auth = getAuth(firebaseApp)
             onAuthStateChanged(auth, (user) => {
