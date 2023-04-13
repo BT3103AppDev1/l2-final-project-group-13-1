@@ -28,13 +28,14 @@ export default {
 
 async created() {
   this.fetchBranchName();
+  const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
     let value = await getDocs(collection(db, "Bookings"))
     let index = 1
     value.forEach((d) => {
           let documentData = d.data()
           let bookingID = d.id
           let userID =  documentData.userID
-          if (userID == "xP3rCXxtjg3aRWiTNtNx") {
+          if (userID == currentUser.uid) {
             let branchID = documentData.branchID
             let date = documentData.date
             let time = documentData.startTime + " - " + documentData.endTime
@@ -64,6 +65,8 @@ async created() {
           }
         })
 },
+
+
    
 async mounted() {
     const auth = getAuth(firebaseApp)
@@ -84,6 +87,15 @@ async mounted() {
    },
 
    methods: {
+    async getCurrentUser(auth) {
+      return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+          unsubscribe();
+          resolve(user);
+        }, reject);
+      });
+    },
+
     async fetchBranchName() {
       let br = await getDocs(collection(db, "Branch"))
       br.forEach(doc => {
