@@ -5,36 +5,60 @@
             <p>Made a booking previously?</p>
             <span class="poppins-bold-black-20px"><br></span>
             <p>Click below to check or edit your existing booking</p>
+            <div class= "check-existing-bookings">
+                <button @click="navigateToNewBookingPage" style="font-size:17px;color:white;">Check Existing Booking</button> 
+            </div>
+            
         </div>
-        <div class = "check-existing-booking">
-            <button @click="navigateToExistingBookingPage" style="font-size:17px; color:white;">Check Existing Booking</button> 
-        </div>
+        
+        
 
         <div class="rectangle-new-booking">
             <span class="poppins-bold-black-10px"><br></span>
             <p>Want to make a new booking?</p>
             <span class="poppins-bold-black-20px"><br></span>
             <p>Click below to make a new booking today</p>
-        </div>
-        <div class = "make-new-booking"> 
-            <button @click="navigateToNewBookingPage" style="font-size:17px;color:white;">Make New Booking</button> 
+            <div class = "make-new-booking"> 
+                <button @click="navigateToNewBookingPage" style="font-size:17px;color:white;">Make New Booking</button> 
+            </div>
         </div>
         <div class="rectangle-profile-wallet">
             <span class="poppins-bold-black-10px"><br></span>
             <p>Want to check your profile and TEOHENG wallet balance?</p>
             <span class="poppins-bold-black-10px"><br></span>
             <p>Click below to view!</p>
-        </div>
-        <div class = "view-profile"> 
-            <button @click="navigateToProfilePage" style="font-size:17px;color:white;">View Profile</button> 
+            <div class = "view-profile">
+                <button @click="navigateToProfilePage" height:100px style="font-size:17px;color:white;">View Profile</button> 
+            </div>
         </div>
     </div>
 </template>
 
 <script> 
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
 
 export default {
+    
     name: "CustomerPostLogin",
+    mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+        },
     methods: {
     navigateToProfilePage() {
         setTimeout(() => {
@@ -52,29 +76,30 @@ export default {
         background-color:white;
         margin-top: 0px;
         display: flex;
-        height: 1000px;
+        height:700px;
         margin-top: 100px;
         width: 1000px;
     }
     .rectangle-previous-booking {
-        background-color: #F5F5F5;
+        box-shadow: 0px 4px 35px #00000014;
+        background-color: var(--white);
+        border-radius: 40px;
+        font-family:Arial;
         color:  black;
         font-family: Arial;
-        border-radius:50px;
         padding: 10px 20px;
         height: 300px;
         width: 350px;
         margin-top: 25px;
-        margin-left: 0px;
+        margin-left: -100px;
         font-size: 17px;
         text-align:center;
         
     }
 
-    .check-existing-booking {
-        margin-top: 225px;
-        margin-bottom:700px;
-        margin-left: -300px;
+    .check-existing-bookings {
+        margin-top: 50px;
+        margin-left: 5px;
         font-family:'Arial';
         color:white;
         width: 300px;
@@ -89,7 +114,10 @@ export default {
     }
 
     .rectangle-new-booking {
-        background-color: #F5F5F5;
+        box-shadow: 0px 4px 35px #00000014;
+        background-color: var(--white);
+        border-radius: 40px;
+        font-family:Arial;
         font-family: Arial;
         color: black;
         padding: 10px 20px;
@@ -98,15 +126,13 @@ export default {
         margin-left: 50px;
         margin-top: 25px;
         font-size:17px;
-        border-radius:50px;
         text-align:center;
         
     }
 
     .make-new-booking {
-        margin-top: 225px;
-        margin-bottom:700px;
-        margin-left: -300px;
+        margin-top:50px;
+        margin-left: 7px;
         font-family:'Arial';
         color:white;
         width: 300px;
@@ -121,7 +147,9 @@ export default {
     }
 
     .rectangle-profile-wallet {
-        background-color: #F5F5F5;
+        box-shadow: 0px 4px 35px #00000014;
+        background-color: var(--white);
+        border-radius: 40px;
         font-family:Arial;
         color: black;
         text-align:center;
@@ -131,14 +159,13 @@ export default {
         margin-left:50px;
         margin-top:25px;
         font-size:17px;
-        border-radius:50px;
         
     }
 
     .view-profile {
-        margin-top: 225px;
+        margin-top: 60px;
         margin-bottom:700px;
-        margin-left: -300px;
+        margin-left: 7px;
         font-family:'Arial';
         color:white;
         width: 300px;
@@ -152,5 +179,6 @@ export default {
         text-decoration: none;
     }
 
+    
 
 </style>

@@ -85,15 +85,15 @@ const routes = [
         name: 'PaymentMethodCustomersPage',
         component: PaymentMethodCustomersPage
     },
-    { path: '/allexitingbookingspage', 
+    { path: '/allexistingbookingspage', 
       name: 'AllExistingBookingsPage', 
       component: AllExistingBookingsPage 
     },
-    { path: '/ExistingBookingDetails', 
+    { path: '/ExistingBookingDetails/:bookingID', 
     name: 'ExistingBookingDetails', 
     component: ExistingBookingDetails
     },
-    {path:'/BookingDeletedPage',
+    {path:'/BookingDeletedPage/:bookingID',
     name: 'BookingDeletedPage',
     component: BookingDeletedPage},
 

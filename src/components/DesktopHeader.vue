@@ -4,40 +4,39 @@
             <div class="notification-bar">
                 <p class="notification-bar-left valign-text-middle poppins-bold-white-22px">
                     <span>
-                        <span class="poppins-bold-flamingo-22px">Opening Soon @ </span>
-                        <span class="poppins-normal-white-22px">CENTREPOINT</span>
+                        <a href="https://ktvteoheng.com.sg/centrepoint/" target="_blank"  class="poppins-bold-flamingo-22px">NOW OPEN @ </a>
+                        <a href="https://ktvteoheng.com.sg/centrepoint/" target="_blank" class="poppins-normal-white-22px">CENTREPOINT</a>
                     </span>
                 </p>
                 <div class="notification-bar-right">
                     <div class="notification-bar-right-instagram">
                         <img class="icon-instagram" src="../assets/instagram-grey-svg.svg" alt="icon-instagram" />
-                        <!-- Add button -->
-                        <button class="instagram valign-text-middle poppins-normal-blaze-orange-22px">INSTAGRAM</button>
+                        <a href="https://www.instagram.com/teohengofficial/?hl=en" target="_blank" class="instagram valign-text-middle poppins-normal-blaze-orange-22px">INSTAGRAM</a>
                     </div>
                     <div class="notification-bar-right-facebook">
                         <img class="facebook-greysvg" src="../assets/facebook-grey-svg.svg" alt="facebook-grey.svg" />
-                        <button class="facebook valign-text-middle poppins-normal-blaze-orange-22px">FACEBOOK</button>
+                        <a href="https://www.facebook.com/teohengofficial/" target="_blank" class="facebook valign-text-middle poppins-normal-blaze-orange-22px">FACEBOOK</a>
                     </div>
                 </div>
             </div>
             <header class="header">
-                <img class="nav-bar-logo" src="../assets/family-ktv-studio-png@2x.png" alt="Family-KTV-Studio.png" />
+                <img class="nav-bar-logo" src="../assets/family-ktv-studio-png@2x.png" alt="Family-KTV-Studio.png" @click="navigateToHomeByUser"/>
                 <div class="nav-bar-container">
                     <div class="nav-bar-container-1">
                         <!-- Add Button -->
-                        <button class="home poppins-normal-stratos-16px">Home</button>
+                        <button class="home poppins-normal-stratos-16px" @click="navigateToHome">Home</button>
                         <!-- Add Button -->
-                        <button class="aboutUs poppins-normal-black-16px">About Us</button>
+                        <a href="https://ktvteoheng.com.sg/" target="_blank" class="aboutUs poppins-normal-black-16px">About Us</a>
                         <!-- Add Button -->
-                        <button class="pricing poppins-normal-black-16px">Pricing</button>
+                        <a href="https://ktvteoheng.com.sg/booking/" target="_blank" class="pricing poppins-normal-black-16px">Pricing</a>
                         <!-- Add Button -->
-                        <button class="faq poppins-normal-black-16px">FAQ</button>
+                        <a href="https://ktvteoheng.com.sg/ktv-booking/" target="_blank" class="faq poppins-normal-black-16px">FAQ</a>
                     </div>
                     <div class="nav-bar-container-2">
-                        <button @click="$router.push('LogIn')">Book Now</button>
+                        <button class="poppins-normal-white-13px" @click="navigateToLogin">Book Now</button>
                     </div>
                     <div class="nav-bar-container-3">
-                        <button class="contactUs poppins-normal-white-13px">Contact Us</button>
+                        <a href="https://ktvteoheng.com.sg/ktv-outlets/" target="_blank" class="poppins-normal-white-13px">Contact Us</a>
                     </div>
                 </div>
             </header>
@@ -46,8 +45,59 @@
 </template>
 
 <script>
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import firebaseApp from "@/firebase.js";
+import { collection,  query, where, getFirestore, getDocs} from "firebase/firestore";
+
     export default {
         name: "DesktopHeader",
+        data() {
+            return { user: false, useremail: '' }
+        },
+        mounted() {
+            const auth = getAuth()
+            onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user
+                this.useremail = user.email
+            }
+        })
+        },
+        methods: {
+            navigateToHome() {
+                this.$router.push("/");
+            },
+            navigateToLogin() {
+                this.$router.push("LogIn");
+            },
+            navigateToHomeByUser() {
+                const db = getFirestore(firebaseApp);
+                const employeeRef = collection(db, "Employees");
+                const customerRef = collection(db, "User");
+
+                const email = this.useremail;
+
+                const queryEmployee = query(employeeRef, where('email', '==', email))
+                //Might change based on collection name changes
+                const queryCustomer = query(customerRef, where('email', '==', email))
+
+                
+               getDocs(queryCustomer)
+                .then((QuerySnapshot) => {
+                    if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/customer-home");
+                    } else {
+                        getDocs(queryEmployee)
+                            .then((QuerySnapshot) => {
+                                if (QuerySnapshot.docs.length === 1) {
+                                    this.$router.push("/employee-home");
+                                }
+                            })
+                    } 
+                    this.$router.push("/");
+                })
+            },
+        }
     }
 </script>
 
@@ -71,7 +121,7 @@
         /* height: 120px; */
         /* margin-top: -26px; */
         position: relative;
-        width: 100vw;
+        width:100%;
         height: 10%;
         display: flex;
         flex-direction: column;
@@ -88,13 +138,14 @@
         /* height: 70px; */
         /* height: 5%; */
         left: 0;
-        min-width: 1440px;
-        width: 100vw;
+        /* min-width: 1440px; */
+        
         padding: 12.7px 26.2px;
         /* position: absolute; */
         position: relative;
         /* top: 50px; */
         /* width: auto; */
+        width:100%;
     }
 
     .nav-bar-container {
@@ -107,6 +158,7 @@
         justify-content: flex-end;
         margin-left: auto;
         gap: 2%;
+        width:100%;
 
     }
 
@@ -143,6 +195,7 @@
         min-height: 24px;
         text-align: center;
         width: 130px;
+        
     }
 
     .nav-bar-container-3 {
@@ -159,7 +212,8 @@
         line-height: normal;
         min-height: 24px;
         text-align: center;
-        width: 130px;
+        /* width: 130px; */
+        
     }
 
     .notification-bar {
@@ -177,6 +231,7 @@
         /* position:absolute; */
         position: relative;
         top: 0;
+        width:100%;
     }
 
     .notification-bar-left {
@@ -191,6 +246,7 @@
         white-space: nowrap;
         /* width: 351px; */
         position: relative;
+        width:100%;
     }
 
     .notification-bar-right {
@@ -203,6 +259,7 @@
         /* margin-top: 7px; */
         /* min-width: 570px; */
         position: relative;
+        width:100%;
 
     }
 

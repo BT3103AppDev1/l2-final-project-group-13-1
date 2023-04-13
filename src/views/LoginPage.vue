@@ -1,12 +1,12 @@
 <template>
-    <div class="container-center-horizontal">
-        <div class="landing-page">
+    <!-- <div class="container-center-horizontal"> -->
+        <!-- <div class="landing-page"> -->
             <!-- <desktop-header/> -->
             <!-- <desktop-header-welcome/> -->
             <log-in/>
             <!-- <desktop-footer/> -->
-        </div>
-    </div>
+        <!-- </div> -->
+    <!-- </div> -->
 </template>
 
 <script>
@@ -32,8 +32,8 @@ import LogIn from '../components/LogIn.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .landing-page {
@@ -46,6 +46,19 @@ import LogIn from '../components/LogIn.vue';
         overflow: hidden;
         position: relative;
         width: 1440px;
+                
+        /* max-width: 100vw;
+        align-items: center;
+        background-color: var(--white);
+        border: 1px none;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        justify-content: space-between;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        gap: 50px; */
     }
 
 </style>

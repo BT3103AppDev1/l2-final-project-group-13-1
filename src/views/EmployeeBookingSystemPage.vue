@@ -32,8 +32,8 @@ import EmployeeSearchBooking from '../components/EmployeeSearch.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .postlogin-page {

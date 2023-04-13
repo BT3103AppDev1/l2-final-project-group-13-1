@@ -3,35 +3,41 @@
         <div class="footer-container">
             <div class="footer-container-columns">
                 <div class="footer-container-columns-1">
-                    <span class="footer-container-columns-title-1 poppins-bold-white-25px">LOGO</span>
-                    <span class="poppins-normal-white-16px"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </span>            
-                    <span class="poppins-normal-white-16px">ktvteoheng.com</span>
+                    <span class="footer-container-columns-title-1 poppins-bold-white-25px">TEOHENG KTV</span>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJ07sR5K4Z2jERlYHI061H4Bc" target="_blank" class="vc_single_image-wrapper 
+                    vc_box_border_grey"><img width="372" height="116" src="https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review.png" class="vc_single_image-img attachment-full" alt="" decoding="async" loading="lazy" 
+                    title="google-review" srcset="https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review.png 372w, https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review-300x94.png 300w" 
+                    sizes="(max-width: 372px) 100vw, 372px"></a>
+                    <!-- <img width="372" height="116" src="https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review.png" class="vc_single_image-img attachment-full" alt="" decoding="async" loading="lazy" title="google-review" srcset="https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review.png 372w, https://ktvteoheng.com.sg/wp-content/uploads/2022/04/google-review-300x94.png 300w" sizes="(max-width: 372px) 100vw, 372px"> -->
+                    <a href="https://ktvteoheng.com.sg/" target="_blank" class="poppins-normal-white-16px">ktvteoheng.com</a>
                 </div>
                 <div class="footer-container-columns-2">
-                    <span class="footer-container-columns-title-2 poppins-medium-white-17px">About us</span>
-                    <span class="poppins-normal-white-16px" >Company</span>
-                    <span class="poppins-normal-white-16px" >Portfolio</span>
-                    <span class="poppins-normal-white-16px" >Careers</span>
-                    <span class="poppins-normal-white-16px" >Contact us</span>
+                    <a href="https://ktvteoheng.com.sg/" target="_blank" class="footer-container-columns-title-2 poppins-medium-white-17px">About us</a>
+                    <a href="https://ktvteoheng.com.sg/" target="_blank" class="poppins-normal-white-16px" >Company</a>
+                    <a href="https://ktvteoheng.com.sg/" target="_blank" class="poppins-normal-white-16px" >Portfolio</a>
+                    <a href="https://ktvteoheng.com.sg/" target="_blank" class="poppins-normal-white-16px" >Careers</a>
+                    <a href="https://ktvteoheng.com.sg/ktv-outlets/" target="_blank" class="poppins-normal-white-16px" >Contact us</a>
                 </div>
                 <div class="footer-container-columns-3">
                     <span class="footer-container-columns-title-3 poppins-medium-white-17px">Contact us</span>
-                    <span class="poppins-normal-white-16px">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                    <span class="poppins-normal-white-16px">6884 6266</span>
+                    <span class="poppins-normal-white-16px">Come visit our new branch at The CentrePoint!</span>
+                    <a href="tel:+6563342883" class="poppins-normal-white-16px">6334 2883</a>
                 </div>
                 <div class="footer-container-logos">
-                    <div class="footer-logo">
+                    <a href="https://www.facebook.com/teohengofficial/" target="_blank" class="footer-logo">
                         <img class="icon" src="../assets/facebook-1.svg" alt="icon-facebook" />
-                    </div>
-                    <div class="footer-logo">
+                    </a>
+                    <a href="https://www.instagram.com/teohengofficial/?hl=en" target="_blank" class="footer-logo">
                         <img class="icon" src="../assets/instagram-1.svg" alt="icon-instagram" />
-                    </div>
-                    <div class="footer-logo">
+                    </a>
+
+                    <!-- They dont have twitter -->
+                    <a href="" class="footer-logo">
                         <img class="icon" src="../assets/twitter-1.svg" alt="icon-twitter" />
-                    </div>
-                    <div class="footer-logo">
+                    </a>
+                    <a href="https://www.linkedin.com/company/teo-heng-ktv-studio/about/" target="_blank" class="footer-logo">
                         <img class="icon" src="../assets/linkedin-1.svg" alt="icon-linkedin" />
-                    </div>
+                    </a>
                 </div>
             </div>
             <img src="../assets/line-1.svg" alt="Line 1" />
@@ -50,7 +56,7 @@ export default {
 
 <style>
 .desktop-footer {
-    width: 100vw;
+
     /* bottom: 0; */
     /* top: 0; */
     position: relative;
@@ -58,20 +64,20 @@ export default {
     padding: 0;
     /* display: flex; */
     /* flex-direction: column; */
-    min-width: 1440px;
+    width:100%;
+    /* max-width:1440px; */
     /* left: 0; */
     margin-left: auto;
-
+    min-width:500px;
 }
 
 .footer-container {
     min-height: 20%;
     position: relative;
-    width: 100vw;
     background-color: var(--eerie-black);
     display: flex;
     flex-direction: column;
-    min-width: 1440px;
+    width:100%;
     /* left: 0; */
 
 
@@ -83,6 +89,7 @@ export default {
 
 .footer-container-columns-title-2 {
     padding-bottom: 8%;
+    padding-right:8%;
 }
 
 .footer-container-columns-title-3 {
@@ -96,9 +103,9 @@ export default {
     flex-direction: row;
     min-height: 20%;
     position: relative;
-    width: 100vw;
+    width: 100%;
     padding: 3%;
-    min-width: 1440px;
+    /* min-width: 1440px; */
     justify-content: flex-start;
 
 }
@@ -109,13 +116,13 @@ export default {
     min-height: 20%;
     justify-content: flex-start;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
     text-align: start;
     word-wrap: break-word;
     padding-left: 5%;
     padding-right: 5%;
     gap: 10px;
-    min-width: 576px;
+    /* min-width:400px; */
 }
 
 .footer-container-columns-2 {
@@ -125,10 +132,11 @@ export default {
     justify-content: flex-start;
     word-wrap: break-word;
     min-height: 20%;
-    width: 10%;
+    width: 30%;
     text-align: start;
     gap: 10px;
-    min-width: 144px;
+    margin-left:100px;
+    /* min-width:144px; */
 }
 
 .footer-container-columns-3 {
@@ -138,12 +146,12 @@ export default {
     justify-content: flex-start;
     word-wrap: break-word;
     min-height: 20%;
-    width: 25%;
+    width:40%;
     text-align: start;
     gap: 20px;
     padding-left: 2%;
     padding-right: 2%;
-    min-width: 360px;
+    /* min-width: 200px;  */
 }
 
 .footer-container-logos {
@@ -183,5 +191,39 @@ export default {
     min-width: 34px;
     padding: 0 11px;
 }
+@media screen and (max-width: 767px) and (max-height:1280px) {
+
+.desktop-footer {
+  position: static;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.footer-container-columns {
+  flex-direction: column;
+  padding: 3% 5%;
+}
+
+.footer-container-columns-1,
+.footer-container-columns-2,
+.footer-container-columns-3 {
+  width: 100%;
+  text-align: center;
+  padding: 5% 0;
+  gap: 5%;
+}
+
+.footer-container-logos {
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 8%;
+  margin-bottom: 5%;
+}
+
+}
+
+
+
 
 </style>
+

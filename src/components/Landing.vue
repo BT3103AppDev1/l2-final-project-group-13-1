@@ -1,5 +1,5 @@
 <template>
-    <DesktopHeader/>
+    <!-- <DesktopHeader/> -->
     <div class="landing">
         <div class="landing-overlap-group4">
             <img
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <desktop-footer/>
+    <!-- <desktop-footer/> -->
 </template>
 
 <script>
@@ -52,9 +52,10 @@
     align-items: center;
     background-color: var(--white);
     border: 1px none;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
-    height: 1276px;
+    /* height: 1276px; */
+    height:100vh;
     gap: 3130px;
     overflow: hidden;
     position: relative;
@@ -137,7 +138,7 @@
     height: 590px;
     left: 135px;
     position: absolute;
-    top: 180px;
+    top: 150px;
     width: 1190px;
 }
 

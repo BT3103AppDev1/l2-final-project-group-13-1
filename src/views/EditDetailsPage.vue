@@ -32,8 +32,8 @@ import EditProfile from '../components/EditDetails.vue';
     body {
         margin: 0;
         padding: 0;
-        left: -35px;
-        position: absolute;
+        /* left: -35px; */
+        /* position: absolute; */
     }
 
     .edit-page {
@@ -46,6 +46,7 @@ import EditProfile from '../components/EditDetails.vue';
         overflow: hidden;
         position: relative;
         width: 1440px;
+        justify-content: space-between;
     }
 
 </style>

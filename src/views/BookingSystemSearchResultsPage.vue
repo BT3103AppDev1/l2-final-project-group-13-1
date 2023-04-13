@@ -15,10 +15,10 @@
                 />
             </div> -->
             <booking-room-cards v-if="uniqueRoomTypes" :uniqueRoomTypes="uniqueRoomTypes"/>
-            <h1> Results for {{ uniqueRoomTypes }}</h1>
+            <!-- <h1> Results for {{ uniqueRoomTypes }}</h1> -->
             <!-- <test-function/> -->
             <!-- <booking-room-cards :uniqueRoomTypes="uniqueRoomTypes"/> -->
-            <!-- <desktop-footer/> -->
+            <desktop-footer/>
 
         </div>
 </template>

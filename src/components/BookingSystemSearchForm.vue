@@ -12,10 +12,37 @@
                     <div class="search-form-container-location-input">
                         <img class="image-location" src="../assets/location.svg" alt="image-location" />
                         <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
-                            <option v-for = "(location, index) in locations" :key="index">{{ location }}</option>
+                            <option value="1">Causeway Point</option>
+                            <option value="2">Jcube</option>
+                            <option value="3">Kallang Wave Mall</option>
+                            <option value="4">Suntec City</option>
+                            <option value="5">The Centrepoint</option>
+                            <option value="6">The Star Vista</option>
+                            <option value="7">White Sands</option>
                         </select>
                     </div>
             </div>
+            <!-- <div class ="search-form-container-location">
+                    <div class="search-form-container-location-box valign-text-middle">
+                        <label>
+                            <span class="roboto-medium-mine-shaft-14px">Location</span>
+                            <span class="roboto-medium-flamingo-14px">*</span>
+                        </label>
+                    </div>
+                    <div class="search-form-container-location-input">
+                        <img class="image-location" src="../assets/location.svg" alt="image-location" />
+                        <select v-model="selectedLocation" class="selectedLocation valign-text-middle roboto-normal-mine-shaft-14px" required>
+                            <option value="1">Causeway Point</option>
+                            <option value="2">Jcube</option>
+                            <option value="3">Kallang Wave Mall</option>
+                            <option value="4">Suntec City</option>
+                            <option value="5">The Centrepoint</option>
+                            <option value="6">The Star Vista</option>
+                            <option value="7">White Sands</option>
+                        </select>
+                    </div>
+            </div> -->
+            
             <div class ="search-form-container-numpax">
                     <div class="search-form-container-numpax-box valign-text-middle roboto-medium-white-14px">
                         <label>
@@ -31,6 +58,23 @@
                         </select>
                     </div>
             </div>
+            <div class="search-form-container-duration">
+                <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
+                    <span>
+                        <span class ="roboto-medium-mine-shaft-14px">Duration</span>
+                        <span class="roboto-medium-flamingo-14px">*</span>
+                    </span>
+                </div>
+                <div class="search-form-container-duration-input">
+                    <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hours</option>
+                                <option value="3">3 Hours</option>
+                                <option value="4">4 Hours</option>
+                    </select>
+                </div>
+            </div> 
+            
             <div class="search-form-container-datetime">
                 <div class="search-form-container-datetime-box valign-text-middle roboto-medium-white-14px">
                     <label>
@@ -44,10 +88,11 @@
                         <img class="line" src="../assets/line-3.svg" alt="Line" />
                         <img class="image-time" src="../assets/time.svg" alt="image-time" />
 
-                        <vue-flatpickr v-model="datetime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
+                        <vue-flatpickr v-model="selectedDateTime" :config="datetimeConfig" class="dateTimePicker valign-text-middle roboto-normal-mine-shaft-14px"></vue-flatpickr>
                     </div>
                 </div> 
             </div>
+<!--                         
             <div class="search-form-container-duration">
                 <div class="search-form-container-duration-box valign-text-middle roboto-medium-white-14px">
                     <span>
@@ -57,16 +102,18 @@
                 </div>
                 <div class="search-form-container-duration-input">
                     <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
-                        <!-- We cap at 4 hours first -->
                                 <option value="1">1 Hour</option>
                                 <option value="2">2 Hours</option>
                                 <option value="3">3 Hours</option>
                                 <option value="4">4 Hours</option>
                     </select>
                 </div>
-            </div>
+            </div> 
+             -->
+             
+
             <div class="search-button-container">
-                <button class="search-button valign-text-middle roboto-bold-concrete-16px" @click="navigateToResultsPage">Search</button>
+                <button class="search-button valign-text-middle roboto-bold-concrete-16px"  @click="submit">Search</button>
             </div>
          </form>
         </div>   
@@ -78,6 +125,7 @@ import 'flatpickr/dist/flatpickr.css';
 import firebaseApp from "@/firebase.js";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, query, orderBy} from "firebase/firestore";
+import { ref, computed } from 'vue';
 // import VueFlatpickr from 'vue-flatpickr-component';
 // import 'flatpickr/dist/flatpickr.css';
 const db = getFirestore(firebaseApp);
@@ -87,21 +135,34 @@ export default {
   components: {
     VueFlatpickr,
   },
+//   setup() {
+//     const selectedLocation = ref('')
+//     const selectedDuration = ref('')
+//     const selectedNumPax = ref('')
+//     const selectedDateTime = ref('')
+
+//     const isFormValid = computed(() => {
+//         return selectedLocation.value && selectedDuration.value && selectedNumPax.value && selectedDateTime.value
+//     })
+
+//     return {selectedLocation, selectedDuration, selectedNumPax, selectedDateTime, isFormValid}
+
+//   },
   props: ['locations'],
   data() {
-    return { locations: ['White Sands','The Centrepoint','Kallang Wave Mall','Suntec City','Jcube','Causeway Point','The Star Vista'],
+    return { 
              selectedLocation: '',
              selectedNumPax: '',
-             selectedDateTime: '',
              selectedDuration: '',
              roomType: [],
              uniqueRoomTypes: [],
-             datetime: null,
-                datetimeConfig: {
+             selectedDateTime: null,
+             datetimeConfig: {
                 enableTime: true,
                 dateFormat: 'Y-m-d H:i',
+                minTime: "12:00",
+                maxTime: "00:00",
              },
-             menu: false
            };
   },
   mounted() {
@@ -126,36 +187,36 @@ export default {
         this.uniqueRoomTypes = Array.from(roomTypesSet);
         }
         display.call(this);
-        }, 
-        methods: {
-            getPrice(type) {
+    }, 
+    methods: {
+        getPrice(type) {
 
-                const dateTime = new Date(this.datetime);
-                const hour = dateTime.getHours();
+            const dateTime = new Date(this.datetime);
+            const hour = dateTime.getHours();
 
-                if (type === 'Small') {
+            if (type === 'Small') {
+            if (hour >= 12 && hour < 19) {
+                return "Happy Hour $13.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $19.00 w/GST"
+            }
+            } else if (type === 'Medium') {
                 if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $13.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $19.00 w/GST"
-                }
-                } else if (type === 'Medium') {
-                    if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $15.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $22.00 w/GST"
-                }
-                } else if (type === 'Large') {
-                    if (hour >= 12 && hour < 19) {
-                    return "Happy Hour $17.00 w/GST";
-                } else if (hour >= 19) {
-                    return "Peak Hours $25.00 w/GST"
-                }
-                }
+                return "Happy Hour $15.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $22.00 w/GST"
+            }
+            } else if (type === 'Large') {
+                if (hour >= 12 && hour < 19) {
+                return "Happy Hour $17.00 w/GST";
+            } else if (hour >= 19) {
+                return "Peak Hours $25.00 w/GST"
+            }
+            }
 
-                return '';
-            },
-            navigateToResultsPage() {
+            return '';
+        },
+        navigateToResultsPage() {
             this.$router.push({
                 name: "BookingSystemSearchResultsPage",
                 query: {
@@ -163,43 +224,97 @@ export default {
                 },
             })
         },
-        },
-        computed: {
-            dateFormatted() {
-                if (this.datetime) {
-                const dateTime = new Date(this.datetime);
-                const options = {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                    
-                };
-                return dateTime.toLocaleString("en-UK", options);
-                }
-                return "No date selected";
-            },
-
-            timeRange() {
-            if (this.datetime && this.selectedDuration) {
-                const startDateTime = new Date(this.datetime);
-                const endDateTime = new Date(startDateTime);
+        checkFormValid() {
+            if (this.selectedLocation && this.selectedDateTime && this.selectedDuration && this.selectedNumPax)
+            {
+                const endDateTime = new Date(this.selectedDateTime);
                 endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
-                
+            
                 const options = {
                 hour: "2-digit",
                 minute: "2-digit",
-                hour12: true,
+                hour12: false,
                 };
-                
-                const startTime = startDateTime.toLocaleString("en-UK", options);
+            
                 const endTime = endDateTime.toLocaleString("en-UK", options);
                 
-                return `${startTime} - ${endTime}`;
-            }
-            return "No time selected";
-            },
+                let [hour, minute] = endTime.split(':');
+                
+                hour = parseInt(hour, 10);
+                
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                    
+                if(hour > 1 && ampm === 'AM') {
+                    alert("ERROR: Duration exceeds Opening Hours");
+                    return false;
+                } else {
+                    return true;
+                }
+             } else {
+                alert("ERROR: Form is not complete");
+                return false;
+             }
         },
-    }
+        submit() {
+            if (this.checkFormValid()) {
+                //Save Selected Field Values in Session Storage
+                sessionStorage.setItem('date', this.selectedDateTime);
+                sessionStorage.setItem('noOfPax', this.selectedNumPax);
+                sessionStorage.setItem('duration', this.selectedDuration);
+                sessionStorage.setItem('location', this.selectedLocation);
+                
+                //Moves to Next Page
+                this.navigateToResultsPage();
+            } 
+        },
+    },
+        
+    computed: {
+        dateFormatted() {
+            if (this.datetime) {
+            const dateTime = new Date(this.datetime);
+            const options = {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+                
+            };
+            return dateTime.toLocaleString("en-UK", options);
+            }
+            return "No date selected";
+        },
+
+        timeRange() {
+        if (this.datetime && this.selectedDuration) {
+            const startDateTime = new Date(this.datetime);
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
+            
+            const options = {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+            };
+            
+            const startTime = startDateTime.toLocaleString("en-UK", options);
+            const endTime = endDateTime.toLocaleString("en-UK", options);
+            
+            return `${startTime} - ${endTime}`;
+        }
+        return "No time selected";
+        },
+
+        roomType() {
+            if (this.selectedNumPax == 4) {
+                return "Small"
+            } else if (this.selectedNumPax == 6) {
+                return "Medium"
+            } else if (this.selectedNumPax == 10) {
+                return "Large"
+            }
+        }
+    },
+}
 
 
 </script>
@@ -421,15 +536,15 @@ export default {
 
 
     .search-form-container-duration-input {
-        align-items: flex-start;
+        padding: 18.4px 5px;
+        align-items: center;
         background-color: var(--bon-jour);
         border-radius: 5px;
         display: flex;
+        flex-direction: row;
         height: 51px;
-        /* min-width: 161px; */
-        padding: 18.4px 5px;
-        align-items: center;
-        margin: 0;
+        min-width: 161px;
+        justify-content: center;
     }
 
     .selectedDuration {
@@ -452,6 +567,9 @@ export default {
         position: relative;
         width: 153px;
         min-width: 15%;
+        /* align-content: center; */
+        /* I cant fix it */
+        margin-left: -110px;
     }
 
     .search-button {

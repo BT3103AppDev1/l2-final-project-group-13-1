@@ -6,13 +6,15 @@
         </div>
 
         <div class = "name-details">
-            <div class = "name-entry">
+            <span class="poppins-bold-black-17px">Enter your name<br></span>
+            <input type = "text" v-model="name" size = 112 placeholder="Amy" >
+            <!-- <div class = "name-entry">
                 <span class="poppins-bold-black-17px">Enter your name<br></span>
             </div>
             <div class = "name-textbox">
                 <input type = "text" v-model="name" size = 112 placeholder="Amy" >
                 
-            </div>
+            </div> -->
         </div>
         
         <!-- <div class = "email-details">
@@ -26,33 +28,42 @@
         </div> -->
 
         <div class = "number-details">
-            <div class = "number-entry">
+            <span class="poppins-bold-black-17px">Enter your 8-digit phone number (+65 numbers only)<br></span>
+            <input type = "text" v-model = "phoneNumber" size  = 112 placeholder="98473825" maxlength="8" pattern="^[0-9]+$" >
+        </div>
+            <!-- <div class = "number-entry">
                 <span class="poppins-bold-black-17px">Enter your 8-digit phone number (+65 numbers only)<br></span>
             </div>
             <div class = "number-textbox">
                 <input type = "text" v-model = "phoneNumber"  placeholder="98473825" maxlength="8" pattern="^[0-9]+$" >
             </div>
-        </div>
+        </div> -->
 
         <div class = "change-password-details">
-            <div class = "password-entry">
+            
+            <span class="poppins-bold-black-17px">Want to change password?<br></span>
+            <!-- <div class = "password-entry">
                 <span class="poppins-bold-black-17px">Want to change password?<br></span>
-            </div>
-        </div>
-        <div class = "change-password-options">
+            </div> -->
+            <div class = "change-password-options">
             <button v-on:click="changePassword">Change Password</button> 
 
         </div>
-
-        <div class = "submit-options">
+        </div>
+        
+        <div class  = "options">
+            <div class = "submit-options">
             <button v-on:click="submitForm">Submit</button> 
-
+            
         </div>
 
-        <div class = "back-options">
+        <div class = "back-options1">
             <button v-on:click="">Back</button> 
 
         </div>
+
+        </div>
+        
 
     </div>
 
@@ -68,7 +79,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
 import { getFirestore, getDoc } from "firebase/firestore";
 import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+// import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
+
 
 const db = getFirestore(firebaseApp); 
 const customerRef = collection(db, "User"); 
@@ -81,6 +95,23 @@ export default {
             name:'', email:'', phoneNumber:'', 
         };
     },
+
+    mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+        },
 
     
 
@@ -109,18 +140,32 @@ methods: {
     },
   },
 
+    checkuser(){
+        const user = auth.currentUser;
+    },
+
     changePassword() { 
-        sendPasswordResetEmail(auth, this.email)
-    .then(() => {
-      alert(
-        "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
-      );
-    })
-    .catch((error) => {
-      alert(
-        "User not found in our database. Please sign up for an account instead."
-      );
-    });
+        const user = auth.currentUser;
+        if (!user) {
+        // Redirect to login page or any other page
+            this.$router.push('/login'); // Replace '/login' with the desired route
+            return;
+        } else if (user) {
+
+            sendPasswordResetEmail(auth, this.useremail)
+                .then(() => {
+                    alert(
+                        "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
+                    );
+                    this.$router.push('/login');
+
+                })
+            .catch((error) => {
+                alert(
+                    "User not found in our database. Please sign up for an account instead."
+                );
+            });
+        }
     },
 
     async submitForm() {
@@ -173,39 +218,45 @@ methods: {
 <style>
     /* For Page Body */
     .customer-edit-details {
-        align-items: center;
+        align-items: left;
         background-color: var(--concrete);;
         margin-top: 0px;
         display: flex;
         height: 600px;
         margin-top: 20px;
         width: 900px;
+        flex-direction: column;
     }
 
     .edit-details {
         display: flex;
-        margin-top: -450px;
+        /* margin-top: -450px; */
         margin-left: 320px;
-        height: 20px;
+        height: px;
+        margin-right:20px;
         min-width: 300px;
         padding: 6px 23px;
-        position: center;
+        position: left;
+        
     }
 
     .name-details {
-        margin-top: 230px;
+        display:flex;
+        flex-direction: column;
+        margin-top: 50px;
+        padding: 10px 20px;
     }
 
     .name-entry {
-        margin-top: -280px;
-        margin-left: -570px;
+        /* margin-top: -280px; */
+        display:flex;
         height: 30px
     }
 
-    .name-textbox {
+    /* .name-textbox {
         text-align: left;
         margin-left: -570px;
-    }
+    } */
 
 
     textarea, input {
@@ -231,30 +282,38 @@ methods: {
     } */
 
     .number-details {
-        margin-top: 680px;
-        margin-left: -800px;
+        display:flex;
+        flex-direction:column;
+        margin-top: 30px;
+        width:100%;
+        padding: 10px 20px;
+    
     }
 
     .number-entry {
-        margin-top: -390px;
-        margin-left: 20px;
+        /* margin-top: -390px;
+        margin-left: 20px; */
         height: 30px;
     }
 
     .number-textbox {
-        height: 100px;
+        height: 70px;
         text-align: left;
         margin-left: 20px;
     }
 
     .change-password-details {
-        margin-top: 150px;
-        margin-left: -465px;
+        display:flex;
+        flex-direction:column;
+        /* margin-right:550px; */
+        margin-top:40px;
+        padding: 10px 20px;
+        
     }
 
     .change-password-options {
-        margin-top: 250px;
-        margin-left: -240px;
+        margin-top: 0px;
+        /* margin-left: -240px; */
         height:50px;
         font-family: 'Arial';
         width: 250px;
@@ -268,12 +327,18 @@ methods: {
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
+        
     }
 
+    .options{
+        flex-direction:row;
+        display:flex;
+        gap:100px;
+    }
 
     .submit-options {
-        margin-top: 490px;
-        margin-left: -100px;
+        margin-top:70px;
+        margin-left:  100px;
         font-family: 'Arial';
         width: 250px;
         background-color: orangered;
@@ -288,9 +353,9 @@ methods: {
         text-decoration: none;
     }
 
-    .back-options {
-        margin-top: 490px;
-        margin-left: 50px;
+    .back-options1 {
+        margin-top:70px;
+        margin-left:  100px;
         font-family: 'Arial';
         width: 250px;
         background-color: orange;
