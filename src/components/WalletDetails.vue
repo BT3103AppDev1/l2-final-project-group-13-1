@@ -4,10 +4,12 @@
             <span class="poppins-bold-black-16px"><strong>Your TEOHENG Wallet Balance</strong><br></span>
         </div>
         <div class = "value">
-            <span class="poppins-bold-black-16px">$20.00<br></span>
+            <span class="poppins-bold-black-16px">${{ walletBalance }}<br></span>
         </div>
         <div class = "Top-Up-options">
-            <button class='poppins-medium-white-16px' style="color:white; background-color:transparent;" v-on:click="">Top-Up</button> 
+            <router-link to="/top-up-wallet">
+                <button class="poppins-medium-white-16px" style="color:white; background-color:transparent;">Top-Up</button>
+            </router-link>
         </div>
 
         <div class = "back-options">
@@ -74,26 +76,42 @@ const auth = getAuth(firebaseApp)
 export default {
     name: "WalletDetails",
 
-    mounted() {
-            const auth = getAuth(firebaseApp)
-            onAuthStateChanged(auth, (user) => {
-                if (!user) {
-            // Redirect to login page or any other page
-                this.$router.push('/logIn'); // Replace '/login' with the desired route
-                return;
-            }
-            else if (user) {
-                console.log(user)
-                this.user = user
-                this.useremail = user.email
-            }
+    data() {
+        return {
+            walletBalance: 0,
+        }
+    },
 
-        })
-        },
+    async created() {
+  const db = getFirestore(firebaseApp);
+  const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
+  const userDocRef = doc(db, 'User', currentUser.uid);
+  try {
+    const docSnap = await getDoc(userDocRef);
+    if (docSnap.exists()) {
+      // Set the wallet balance in your component data
+      this.walletBalance = docSnap.data().walletBalance;
+      console.log(this.walletBalance);
+    } else {
+      console.log('No such document');
+    }
+  } catch (error) {
+    console.error('Error getting document:', error);
+  }
+},
+
+methods:
+{
+    async getCurrentUser(auth) {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      unsubscribe();
+      resolve(user);
+    }, reject);
+  });
+},
 }
-
-
-
+}
 
 </script>
 
