@@ -23,17 +23,15 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 const db = getFirestore(firebaseApp)
 export default {
  data() {
-    return {branchID: [], branchLocation: [], bookingData: {}};
+    return {branchID: '', location:'',bookingData: {}};
  },
 
  async created() {
-  this.fetchBranchName();
   const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
   const branchQuerySnapshot = await getDocs(query(collection(db, 'Branch'), where('email', '==', currentUser.email)));
   const branchSnapshot = branchQuerySnapshot.docs[0];
   const branchData = branchSnapshot.data();
   const branchID = branchData.branchID;
-  console.log(branchID);
   const bookingQuerySnapshot = await getDocs(collection(db, 'Bookings'));
   let index = 1;
   bookingQuerySnapshot.forEach((d) => {
@@ -45,7 +43,6 @@ export default {
       const time = documentData.startTime + ' - ' + documentData.endTime;
       const numberOfPax = documentData.numberOfPax;
       const roomType = documentData.roomType;
-      const location = this.branchLocation;
       //  create rows and cells in the table
       const table = document.getElementById('table');
       const row = table.insertRow(index);
@@ -59,7 +56,7 @@ export default {
       const cell8 = row.insertCell(7);
       cell1.innerHTML = index;
       cell2.innerHTML = bookingID;
-      cell3.innerHTML = location[branchID - 1];
+      cell3.innerHTML = branchData.branchLocation;
       cell4.innerHTML = date;
       cell5.innerHTML = time;
       cell6.innerHTML = numberOfPax;
@@ -100,18 +97,6 @@ async mounted() {
         resolve(user);
       }, reject);
     });
-  },
-
-  async fetchBranchName() {
-    let br = await getDocs(collection(db, "Branch"))
-    br.forEach(doc => {
-      let documentData = doc.data()
-      let id = documentData.branchID
-      let name = documentData.branchLocation
-
-      this.branchID.push(id);
-      this.branchLocation.push(name);
-              });
   },
  },
 }
