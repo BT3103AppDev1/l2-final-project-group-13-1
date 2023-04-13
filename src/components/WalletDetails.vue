@@ -1,36 +1,36 @@
 <template>
     <div class = "wallet-balance">
         <div class = "teoheng-wallet">
-            <span class="poppins-bold-black-10px"><strong>Your TEOHENG Wallet Balance</strong><br></span>
+            <span class="poppins-bold-black-16px"><strong>Your TEOHENG Wallet Balance</strong><br></span>
         </div>
         <div class = "value">
-            <span class="poppins-bold-black-10px">$20.00<br></span>
+            <span class="poppins-bold-black-16px">$20.00<br></span>
         </div>
         <div class = "Top-Up-options">
-            <button style="color:white" v-on:click="">Top-Up</button> 
+            <button class='poppins-medium-white-16px' style="color:white; background-color:transparent;" v-on:click="">Top-Up</button> 
         </div>
 
         <div class = "back-options">
-            <button style="color:white" v-on:click="">Back</button> 
+            <router-link to="/check-details" class='poppins-medium-white-16px' style="color:white;background-color:transparent;">Back</router-link> 
         </div>  
     </div>
 
     <div class = "wallet-history">
         <label>
-            <span class="poppins-bold-black-10px">Wallet History<br></span>
+            <span class="poppins-bold-black-24px">Wallet History<br></span>
         </label>
     </div>
 
     <div class="rectangle">
     </div>
-    <div class="rectangle-date">
-        <p>Date</p>
+    <div class="rectangle-date" style="color: black">
+        <p class="poppins-bold-black-24px">Date</p>
     </div>
-    <div class="rectangle-action">
-        <p>Action</p>
+    <div class="rectangle-action poppins-medium-black-16px" style="color: black">
+        <p class="poppins-bold-black-24px">Action</p>
     </div>
-    <div class="rectangle-amount1">
-        <p>Amount</p>
+    <div class="rectangle-amount1" style="color: black">
+        <p class="poppins-bold-black-24px">Amount</p>
     </div> 
 
     <div class = "table-container">
@@ -121,23 +121,23 @@ export default {
         margin-left: 270px;
         font-size: 30px;
         font-weight:bold;
-
+        color: black;
     }
 
     .value{
         margin-left: -250px;
         margin-top: 40px;
         font-size: 20px;
+        color: black;
     }
 
     .Top-Up-options {
         margin-top: 75px;
         margin-left: -385px;
-        font-family: 'Arial';
         width: 300px;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         height:50px;
         font-size: 200px ;
         color: white;
@@ -146,17 +146,17 @@ export default {
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
+        box-shadow: 0px 4px 19px #7793414c;
     }
 
     .back-options {
         margin-top: 75px;
         margin-left: 100px;
-        font-family: 'Arial';
         width: 300px;
         height:50px;
-        background-color: orange;
+        background-color: #f5997b;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
@@ -164,6 +164,7 @@ export default {
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
+        box-shadow: 0px 4px 19px #7793414c;
     }
 
     .wallet-history{

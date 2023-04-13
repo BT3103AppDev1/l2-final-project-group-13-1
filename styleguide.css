@@ -171,6 +171,14 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     font-style: normal;
 }
 
+/* .poppins-bold-black-16px {
+    color: var(--black);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    font-style: normal;
+} */
+
 .roboto-medium-mine-shaft-14px {
     color: var(--mine-shaft);
     font-family: var(--font-family-roboto);
