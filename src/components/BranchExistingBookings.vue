@@ -26,45 +26,50 @@ export default {
     return {branchID: [], branchLocation: [], bookingData: {}};
  },
 
-async created() {
-this.fetchBranchName();
-const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
-  let value = await getDocs(collection(db, "Bookings"))
-  let index = 1
-  value.forEach((d) => {
-        let documentData = d.data()
-        let bookingID = d.id
-        let userID =  documentData.userID
-        if (userID == currentUser.uid) {
-          let branchID = documentData.branchID
-          let date = documentData.date
-          let time = documentData.startTime + " - " + documentData.endTime
-          let numberOfPax = documentData.numberOfPax
-          let roomType = documentData.roomType
-          let location = this.branchLocation
-          //  create rows and cells in the table
-          let table = document.getElementById('table')
-          let row = table.insertRow(index)
-          let cell1 = row.insertCell(0)
-          let cell2 = row.insertCell(1)
-          let cell3 = row.insertCell(2)
-          let cell4 = row.insertCell(3)
-          let cell5 = row.insertCell(4)
-          let cell6 = row.insertCell(5)
-          let cell7 = row.insertCell(6)
-          let cell8 = row.insertCell(7)
-          cell1.innerHTML = index
-          cell2.innerHTML = bookingID
-          cell3.innerHTML = location[branchID - 1]
-          cell4.innerHTML = date
-          cell5.innerHTML = time
-          cell6.innerHTML = numberOfPax
-          cell7.innerHTML = roomType
-          cell8.innerHTML = `<a class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`
-          index += 1
-        }
-      })
+ async created() {
+  this.fetchBranchName();
+  const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
+  const branchQuerySnapshot = await getDocs(query(collection(db, 'Branch'), where('email', '==', currentUser.email)));
+  const branchSnapshot = branchQuerySnapshot.docs[0];
+  const branchData = branchSnapshot.data();
+  const branchID = branchData.branchID;
+  console.log(branchID);
+  const bookingQuerySnapshot = await getDocs(collection(db, 'Bookings'));
+  let index = 1;
+  bookingQuerySnapshot.forEach((d) => {
+    const documentData = d.data();
+    const bookingID = d.id;
+    const userID = documentData.userID;
+    if (documentData.branchID === branchID) {
+      const date = documentData.date;
+      const time = documentData.startTime + ' - ' + documentData.endTime;
+      const numberOfPax = documentData.numberOfPax;
+      const roomType = documentData.roomType;
+      const location = this.branchLocation;
+      //  create rows and cells in the table
+      const table = document.getElementById('table');
+      const row = table.insertRow(index);
+      const cell1 = row.insertCell(0);
+      const cell2 = row.insertCell(1);
+      const cell3 = row.insertCell(2);
+      const cell4 = row.insertCell(3);
+      const cell5 = row.insertCell(4);
+      const cell6 = row.insertCell(5);
+      const cell7 = row.insertCell(6);
+      const cell8 = row.insertCell(7);
+      cell1.innerHTML = index;
+      cell2.innerHTML = bookingID;
+      cell3.innerHTML = location[branchID - 1];
+      cell4.innerHTML = date;
+      cell5.innerHTML = time;
+      cell6.innerHTML = numberOfPax;
+      cell7.innerHTML = roomType;
+      cell8.innerHTML = `<a class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`;
+      index += 1;
+    }
+  });
 },
+
 
 
  
