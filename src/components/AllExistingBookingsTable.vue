@@ -60,7 +60,7 @@ async created() {
             cell5.innerHTML = time
             cell6.innerHTML = numberOfPax
             cell7.innerHTML = roomType
-            cell8.innerHTML = "<button id = 'cell8' @click = 'this.changePage()'>More Details</button>"
+            cell8.innerHTML = `<a class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`
             index += 1
           }
         })
@@ -107,10 +107,6 @@ async mounted() {
         this.branchLocation.push(name);
                 });
     },
-
-    changePage() {
-      this.$router.push('/ExistingBookingDetails:bookingID');
-    },
    },
 }
 
@@ -144,6 +140,10 @@ td {
   border: 1px solid black;
 }
 
+.details-link {
+  color: black;
+  text-decoration: underline;
+}
 
 
 </style>
