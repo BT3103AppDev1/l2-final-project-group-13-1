@@ -197,6 +197,15 @@ const auth = getAuth(firebaseApp)
             }
         },
 
+        async getCurrentUser(auth) {
+            return new Promise((resolve, reject) => {
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                unsubscribe();
+                resolve(user);
+            }, reject);
+            });
+        },
+
         async submitBooking() {
             const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
             const bookingData = {
