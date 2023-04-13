@@ -1,8 +1,10 @@
-<script setup>
+<script>
 import { ref } from "vue";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,FacebookAuthProvider } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc, addDoc, orderBy, query,onSnapshot, deleteDoc } from "firebase/firestore";
 import { initializeApp } from "@firebase/app";
+import { useRouter } from 'vue-router';
+import router from '../router/router.js';
 
 
 const firebaseConfig = {
@@ -17,54 +19,87 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const email = ref("");
-const password = ref("");
-
-const registerAndAddUser = () => {
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-    const name = document.getElementById("registerName").value;
-    const phoneNumber = document.getElementById("registerNumber").value;
-    const username = document.getElementById("registerUsername").value;
-
-    createUserWithEmailAndPassword(getAuth(), email, password)
-        .then((data) => {
-            console.log("Successfully registered!");
-            setDoc(doc(db, 'User', data.user.uid), {
-                email: email,
-                name: name,
-                phoneNumber: phoneNumber,
-                username: username,
-                walletBalance: 0
-            });
-            // router.push('/') redirect to page after sign up
-        })
-        .catch((error) => {
-            console.log(error.code);
-            alert(error.message);
-        });
-};
-
-
-const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(getAuth(), provider)
-        .then((result) => {
-            console.log(result.user);
-            // router.push('/') push to home page
-        })
-        .catch((error) => {
-            //handle error 
-        })
-};
-
-</script>
-
-<script>
-
 export default {
-    name: "Register"
-}
+  name: "Register",
+  setup() {
+    const name = ref("");
+    const phoneNumber = ref("");
+    const username = ref("");
+    const email = ref("");
+    const password = ref("");
+    const errMsg = ref("");
+
+    const registerAndAddUser = () => {
+      createUserWithEmailAndPassword(getAuth(), email.value, password.value)
+        .then((data) => {
+          console.log("Successfully registered!");
+          setDoc(doc(db, 'User', data.user.uid), {
+            email: email.value,
+            name: name.value,
+            phoneNumber: phoneNumber.value,
+            username: username.value,
+            walletBalance: 0
+          });
+          router.push('/customer-home');
+        })
+        .catch((error) => {
+          console.log(error.code);
+          switch (error.code) {
+            case "auth/invalid-email":
+              errMsg.value = "Invalid email";
+              break;
+            case "auth/email-already-in-use":
+              errMsg.value = "Email already in use";
+              break;
+            case "auth/weak-password":
+              errMsg.value = "Weak password";
+              break;
+            default:
+              errMsg.value = "Failed to register";
+              break;
+          }
+        });
+    };
+    const signInWithGoogle = () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(getAuth(), provider)
+        .then(() => {
+          console.log("Successfully signed in with Google!");
+          router.push("/edit-profile");
+        })
+        .catch((error) => {
+          console.log(error.code);
+          alert(error.message);
+        });
+    };
+
+    const signInWithFacebook = () => {
+      const provider = new FacebookAuthProvider();
+      signInWithPopup(getAuth(), provider)
+        .then(() => {
+          console.log("Successfully signed in with Facebook!");
+          router.push("/edit-profile");
+        })
+        .catch((error) => {
+          console.log(error.code);
+          alert(error.message);
+        });
+    };
+
+
+    return {
+      email,
+      password,
+      name,
+      phoneNumber,
+      username,
+      errMsg,
+      signInWithGoogle,
+      signInWithFacebook,
+      registerAndAddUser
+    };
+  }
+};
 </script>
 
 <template>
@@ -77,19 +112,20 @@ export default {
                 <div class="register-flex-row">
                     <h1 class="register-title">Sign Up</h1>
                     <p class="register-have-an-account-sign-in">
-                        <span class="register-span0">Have an Account?<br/></span><button class="register-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="registerAndAddUser">Sign in</button>
+                        <span class="register-span0">Have an Account?<br/></span><router-link to="/login" class="register-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign in</router-link>
+
                     </p>
                 </div>
                 <div class="register-continue-with-google-center-fixed">
                     <div class="register-frame-6">
                         <img class="register-x-logo" src="../assets/google-logo.svg" alt="google logo" />
-                        <button class="register-continue-with-google register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithGoogle">Sign Up with Google</button>
+                        <button class="register-continue-with-google register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithGoogle()">Sign Up with Google</button>
                     </div>
                 </div>
                 <div class="register-continue-with-facebook-centre-fixed">
                     <div class="register-frame-6-1">
                         <img class="register-x-logo" src="../assets/facebook-logo.svg" alt="facebook logo" />
-                        <button class="register-continue-with-facebook register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" >Sign Up with Facebook</button>
+                        <button class="register-continue-with-facebook register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithFacebook()" >Sign Up with Facebook</button>
                     </div>
                 </div>
                 <div class="register-or">
@@ -102,7 +138,7 @@ export default {
             <div class="register-welcome-to-teoheng-ktv">Welcome to TEOHENG KTV</div>
             <img class="register-family-ktv-studiopng" src="../assets/family-ktv-studio-png@2x.png" alt="Family-ktv-studio"/>
             <div class="register-overlap-group-2 register-overlap-group-3">
-                <button class="register-sign-up" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="register">Sign up</button>
+                <button class="register-sign-up" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="registerAndAddUser()">Sign up</button>
             </div>
             <div class="register-group-56 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your Password</div>
@@ -110,7 +146,7 @@ export default {
             </div>
             <div class="register-group-55 register-group">
                 <p class="register-enter-your poppins-normal-black-16px">Enter Your 8-digit phone number(+65 numbers only)</p>
-                <input type="tel" class="register-overlap-group" id="registerNumber" placeholder="Phone Number" pattern="[0-9]{8}" required v-model="phone"/>
+                <input type="tel" class="register-overlap-group" id="registerNumber" placeholder="Phone Number" pattern="[0-9]{8}" required v-model="phoneNumber"/>
             </div>
             <div class="register-group-58 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your email address</div>

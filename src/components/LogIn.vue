@@ -9,7 +9,7 @@
                     <div class="login-group-49">
                         <div class="login-welcome-to-teoheng">Welcome to TEOHENG KTV</div>
                         <div class="login-no-account-sign-up">
-                            <span class="login-span0">No account?<br/></span><button class="login-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign up</button>
+                            <span class="login-span0">No account?<br/></span><router-link to="/register" class="login-span1" style="background-color: transparent; border-color: transparent; cursor:pointer;">Sign up</router-link>
                         </div>
                     </div>
                     <div class="login-with-google login-with">
