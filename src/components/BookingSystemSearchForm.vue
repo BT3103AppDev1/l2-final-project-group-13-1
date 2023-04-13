@@ -275,7 +275,8 @@ export default {
         submit() {
             if (this.checkFormValid()) {
                 //Save Selected Field Values in Session Storage
-                sessionStorage.setItem('date', this.selectedDateTime);
+                const selectedDate = this.selectedDateTime.split(' ')[0];
+                sessionStorage.setItem('date', selectedDate);
                 sessionStorage.setItem('noOfPax', this.selectedNumPax);
                 sessionStorage.setItem('duration', this.selectedDuration);
                 sessionStorage.setItem('location', this.selectedLocation);
@@ -296,7 +297,7 @@ export default {
                 year: "numeric"
                 
             };
-            return dateTime.toLocaleString("en-UK", options);
+            return dateTime.toLocaleString("en-SG", options);
             }
             return "No date selected";
         },
