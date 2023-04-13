@@ -123,8 +123,9 @@
 import VueFlatpickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 import firebaseApp from "@/firebase.js";
-import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, query, orderBy} from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs,doc, query, orderBy} from "firebase/firestore";
 import { ref, computed } from 'vue';
 // import VueFlatpickr from 'vue-flatpickr-component';
 // import 'flatpickr/dist/flatpickr.css';
@@ -166,6 +167,20 @@ export default {
            };
   },
   mounted() {
+        const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
         async function display() {
         const roomRef = collection(db, "Room");
         const sortedQuery = query(roomRef, orderBy("roomType", "desc"));

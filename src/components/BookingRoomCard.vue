@@ -28,6 +28,12 @@
 </template>
 
 <script>
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getFirestore, getDoc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
+import firebaseApp from "@/firebase.js";
+
     export default {
         name: "BookingRoomCard",
         props: {
@@ -64,6 +70,21 @@
             };
         },
         mounted() {
+            const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+            // Redirect to login page or any other page
+                this.$router.push('/logIn'); // Replace '/login' with the desired route
+                return;
+            }
+            else if (user) {
+                console.log(user)
+                this.user = user
+                this.useremail = user.email
+            }
+
+        })
+
             //Retrieve Session Storage Items
             const selectedLocation = sessionStorage.getItem('location');
             // const selectedNumPax = sessionStorage.getItem('noOfPax');
