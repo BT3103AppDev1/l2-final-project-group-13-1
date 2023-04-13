@@ -16,7 +16,7 @@ import WalletDetailsPage from "@/views/WalletDetailsPage.vue"
 import CheckProfileAndWalletPage from "@/views/CheckProfileWalletPage.vue"
 import EmployeePostLoginPage from "@/views/EmployeePostLoginPage.vue"
 import EmployeeSearchBookingPage from "@/views/EmployeeBookingSystemPage.vue"
-// import TopUpWalletPage from "@/views/TopUpWalletPage.vue"
+import TopUpWalletPage from "@/views/TopUpWalletPage.vue"
 
 const routes = [
     {
@@ -102,10 +102,11 @@ const routes = [
     name: 'BookingSummary', 
     component: SummaryDetails
     },
-    // { path: '/TopUpWallet', 
-    // name: 'TopUpWalletPage', 
-    // component: WorkInProg
-    // },
+
+    { path: '/top-up-wallet', 
+    name: 'TopUpWallet', 
+    component: TopUpWalletPage
+    },
     
 ]
 const router = createRouter({

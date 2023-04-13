@@ -14,6 +14,7 @@ import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
 import WorkInProg from '../components/workInProg.vue';
+
     export default {
         name: "TopUpWalletPage",
         components: {
