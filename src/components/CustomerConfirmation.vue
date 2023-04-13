@@ -152,9 +152,9 @@ export default {
         console.error('Error getting document:', error);
     }
 
-    this.name = this.userData.name || sessionStorage.getItem('name') ;
-    this.phoneNumber = this.userData.phoneNumber || sessionStorage.getItem('phoneNumber')
-    this.email = this.userData.email || sessionStorage.getItem('email')
+    this.name = sessionStorage.getItem('name') || this.userData.name ;
+    this.phoneNumber = sessionStorage.getItem('phoneNumber') || this.userData.phoneNumber;
+    this.email = sessionStorage.getItem('email') || this.userData.email
     this.date = sessionStorage.getItem('date') || '';
     this.startTime = sessionStorage.getItem('startTime') || '';
     this.endTime = sessionStorage.getItem('endTime') || '';
