@@ -127,17 +127,34 @@ export default {
 
         })
         },
-
-    created() {
     
+        
+    async created() {
+    const db = getFirestore(firebaseApp);
     const selectedDuration = sessionStorage.getItem('duration');
     const selectedDateTime = sessionStorage.getItem('date');
+    const userData = {};
     this.selectedDuration = selectedDuration;
     this.selectedDateTime = selectedDateTime;
 
-    this.name = sessionStorage.getItem('name') || '';
-    this.phoneNumber = sessionStorage.getItem('phoneNumber') || '';
-    this.email = sessionStorage.getItem('email') || '';
+    const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
+    const userDocRef = doc(db, 'User', currentUser.uid);
+    try {
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+        // Set the wallet balance in your component data
+        this.userData = docSnap.data();
+        console.log(this.userData);
+        } else {
+        console.log('No such document');
+        }
+    } catch (error) {
+        console.error('Error getting document:', error);
+    }
+
+    this.name = this.userData.name || sessionStorage.getItem('name') ;
+    this.phoneNumber = this.userData.phoneNumber || sessionStorage.getItem('phoneNumber')
+    this.email = this.userData.email || sessionStorage.getItem('email')
     this.date = sessionStorage.getItem('date') || '';
     this.startTime = sessionStorage.getItem('startTime') || '';
     this.endTime = sessionStorage.getItem('endTime') || '';
@@ -166,6 +183,14 @@ export default {
 },
 
     methods : {
+        async getCurrentUser(auth) {
+            return new Promise((resolve, reject) => {
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                unsubscribe();
+                resolve(user);
+            }, reject);
+            });
+        },
     redirectToPayment(){
     router.push({ path: '/customer-payment-page'})
     },
@@ -199,21 +224,6 @@ export default {
         }
     },
 
-    // formattedTime() {
-    // const formatTime = (timeString) => {
-    //   let [hour, minute] = timeString.split(':');
-    //   hour = parseInt(hour, 10);
-    //   const ampm = hour >= 12 ? 'PM' : 'AM';
-    //   hour = hour % 12;
-    //   hour = hour || 12; // the hour '0' should be '12'
-    //   return `${hour}:${minute} ${ampm}`;
-    // };
-
-    // const formattedStartTime = formatTime(this.startTime);
-    // const formattedEndTime = formatTime(this.endTime);
-
-    // return `${formattedStartTime} - ${formattedEndTime}`;
-    // },
     timeRange() {
         if (this.selectedDateTime && this.selectedDuration) {
             const startDateTime = new Date(this.selectedDateTime);
