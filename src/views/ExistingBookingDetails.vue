@@ -8,7 +8,7 @@
             <existing-booking-table/>
             <div class="ebt-buttons">
                 <button class = "ebt-button" @click = this.deleteBooking>Delete</button>
-                <button class = "ebt-button" ><router-link to="/allexistingbookingspage" color="white">Cancel</router-link></button>
+                <button class="ebt-button" @click="$router.go(-1)">Cancel</button>
             </div>
             <desktop-footer/>
         </div>
