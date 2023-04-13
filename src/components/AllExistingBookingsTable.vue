@@ -19,6 +19,7 @@
 <script>
 import firebaseApp from '../firebase.js'
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 const db = getFirestore(firebaseApp)
 export default {
    data() {
@@ -33,7 +34,7 @@ async created() {
           let documentData = d.data()
           let bookingID = d.id
           let userID =  documentData.userID
-          if (userID == "E2HEyNJWY5maFTIu6YEs") {
+          if (userID == "xP3rCXxtjg3aRWiTNtNx") {
             let branchID = documentData.branchID
             let date = documentData.date
             let time = documentData.startTime + " - " + documentData.endTime
@@ -96,7 +97,7 @@ async mounted() {
     },
 
     changePage() {
-      this.$router.push('/ExistingBookingDetails');
+      this.$router.push('/ExistingBookingDetails:bookingID');
     },
    },
 }

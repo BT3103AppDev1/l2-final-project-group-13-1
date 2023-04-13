@@ -5,58 +5,57 @@
         </div>
         <div class = "ebt-date">
             <p class="ebt-header">Date</p>
-            <p>{{formattedDate}}</p>
+            <p>{{this.date}}</p>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Time</p>
-                <p>{{documentData[1]}}</p>
+                <p>{{this.time}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Room Type</p>
-                <p>{{documentData[2]}}</p>
+                <p>{{this.room}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Payment</p>
-                <p>{{documentData[3]}}</p>
+                <p>{{this.pay}}</p>
             </div>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Name</p>
-                <p>{{documentData[4]}}</p>
+                <p>{{this.name}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Location</p>
-                <p>{{this.branchLocation}}</p>
+                <p>{{this.location}}</p>
             </div>
             <div class = "box">
                 <p class="ebt-header">Phone Number</p>
-                <p>{{documentData[5]}}</p>
+                <p>{{this.number}}</p>
             </div>
         </div>
         <br>
         <div class = "ebt-container">
             <div class = "box">
                 <p class="ebt-header">Remarks</p>
-                <p>{{documentData[6]}}</p>
+                <p>{{this.remarks}}</p>
             </div>
         </div>
     </div>
     <br>
     <br>
-    <div class="ebt-buttons">
-        <button class = "ebt-button" @click = this.deleteBooking>Delete</button>
-         <button class = "ebt-button" ><router-link to="/allexistingbookingspage" color="white">Cancel</router-link></button>
-    </div>
   </template>
 
 <script>
 const db = getFirestore(firebaseApp)
 import firebaseApp from "@/firebase.js";
 import { getFirestore, doc, getDoc, collection, deleteDoc, query, where, getDocs } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+var bookingDetails = []
+
 export default {
     data() {
         return {
@@ -64,6 +63,15 @@ export default {
             documentData: [],
             branchLocation:'',
             branchID: 0,
+            details: [],
+            date: '',
+            time: '',
+            room: '',
+            pay: '',
+            name: '',
+            location: '',
+            number: '',
+            remarks: ''
         };
     },
 
@@ -94,13 +102,48 @@ export default {
                 let remarks = documentData.remarks
                 this.documentData.push(remarks)
             }
-        this.fetchBranchName();
-        })
 
+        })
+        await this.fetchBranchName();
+        const date = this.formattedDate
+        this.details.push(date)
+        const time = this.documentData[1]
+        this.details.push(time)
+        const room = this.documentData[2]
+        this.details.push(room)
+        const pay = this.documentData[3]
+        this.details.push(pay)
+        const name = this.documentData[4]
+        this.details.push(name)
+        const location = this.branchLocation
+        this.details.push(location)
+        const number = this.documentData[5]
+        this.details.push(number)
+        const remarks = this.documentData[6]
+        this.details.push(remarks)
+        console.log(this.details)
+        if (this.details[1] != null) {
+            sessionStorage.setItem('date', this.details[0])
+            sessionStorage.setItem('time', this.details[1])
+            sessionStorage.setItem('room', this.details[2])
+            sessionStorage.setItem('pay', this.details[3])
+            sessionStorage.setItem('name', this.details[4])
+            sessionStorage.setItem('location', this.details[5])
+            sessionStorage.setItem('number', this.details[6])
+            sessionStorage.setItem('remarks', this.details[7])
+        }
+        this.date = sessionStorage.getItem('date')
+        this.time = sessionStorage.getItem('time')
+        this.room = sessionStorage.getItem('room')
+        this.pay = sessionStorage.getItem('pay')
+        this.name = sessionStorage.getItem('name')
+        this.location = sessionStorage.getItem('location')
+        this.number = sessionStorage.getItem('number')
+        this.remarks = sessionStorage.getItem('remarks')
         
     },
 
-    mounted() {
+    async mounted() {
             const auth = getAuth(firebaseApp)
             onAuthStateChanged(auth, (user) => {
                 if (!user) {
@@ -128,14 +171,8 @@ export default {
             this.branchLocation = name;
         }
                 });
-    },
-    deleteBooking() {
-        console.log('he');
-        this.$router.push('/BookingDeletedPage')
-        deleteDoc(doc(db, "Bookings", this.bookingID));
-        console.log("Document successfully deleted!" );
-    },
-    
+    },       
+
     },
 
     computed: {
@@ -161,7 +198,8 @@ export default {
             const formattedEndTime = formatTime(this.documentData.endTime);
             return `${formattedStartTime} - ${formattedEndTime}`;
         },
-    }
+    },
+
 }
 
 </script>

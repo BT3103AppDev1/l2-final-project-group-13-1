@@ -5,7 +5,8 @@
             <desktop-header-welcome/>
             <br>
             <p class="poppins-bold-black-24px">Booking Deleted!</p>
-            <booking-deleted-table/>
+            <existing-booking-table/>
+            <button class = "dbt-button" style="color: ;"><router-link to="/allexistingbookingspage" color="white">Back to Home</router-link></button>
             <desktop-footer/>
         </div>
     </div>
@@ -14,14 +15,14 @@
 <script>
 import DesktopHeader from '../components/DesktopHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
-import BookingDeletedTable from '../components/BookingDeletedTable.vue';
+import ExistingBookingTable from '../components/ExistingBookingTable.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
     export default {
         name: "ExistingBookingDetails",
         components: {
             DesktopHeader,
             DesktopHeaderWelcome,
-            BookingDeletedTable,
+            ExistingBookingTable,
             DesktopFooter,
         },
     }
@@ -49,4 +50,13 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         justify-content: space-between;
     }
 
+    .dbt-button{
+    background-color: var(--flamingo);
+    width: 20%;
+    padding: 0.2em;
+    font-family: poppins;
+    display: inline-block;
+    border-radius: 8px;
+    color: white
+}
 </style>

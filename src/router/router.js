@@ -93,7 +93,7 @@ const routes = [
     name: 'ExistingBookingDetails', 
     component: ExistingBookingDetails
     },
-    {path:'/BookingDeletedPage',
+    {path:'/BookingDeletedPage/:bookingID',
     name: 'BookingDeletedPage',
     component: BookingDeletedPage},
 
