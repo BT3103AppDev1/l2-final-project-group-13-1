@@ -400,8 +400,9 @@ export default {
         margin: 70px 0px 0px 0px;
         display: flex;
         justify-content: center;
-        margin-top:-45px;
+        margin-top:-40px;
         margin-left: 550px;
+        height:40px;
     }
 
 </style>
