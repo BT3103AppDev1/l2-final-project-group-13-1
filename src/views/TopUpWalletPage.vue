@@ -47,6 +47,7 @@ import WorkInProg from '../components/workInProg.vue';
         overflow: hidden;
         position: relative;
         width: 1440px;
+        justify-content: space-between;
     }
 
 </style>

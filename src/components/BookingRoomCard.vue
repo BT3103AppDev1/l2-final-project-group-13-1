@@ -89,7 +89,7 @@ import firebaseApp from "@/firebase.js";
             const selectedLocation = sessionStorage.getItem('location');
             // const selectedNumPax = sessionStorage.getItem('noOfPax');
             const selectedDuration = sessionStorage.getItem('duration');
-            const selectedDateTime = sessionStorage.getItem('date');
+            const selectedDateTime = sessionStorage.getItem('dateTime');
 
             //Update Component Data with Retrieved Items
             this.selectedLocation = selectedLocation;
@@ -137,7 +137,7 @@ import firebaseApp from "@/firebase.js";
                 choose() {
                     
                     //Save Selected Field Values in Session Storage
-                    sessionStorage.setItem('date', this.selectedDateTime);
+                    sessionStorage.setItem('dateTime', this.selectedDateTime);
                     sessionStorage.setItem('startTime', this.getStartTime);
                     sessionStorage.setItem('endTime', this.getEndTime);
                     sessionStorage.setItem('selectedRoomType', this.roomType);
@@ -145,8 +145,7 @@ import firebaseApp from "@/firebase.js";
                     sessionStorage.setItem('price', this.getPrice(this.roomType));
                     sessionStorage.setItem('duration', this.selectedDuration);
                     sessionStorage.setItem('location', this.selectedLocation);
-                    //I think the function cant choose roomID yet
-                    // sessionStorage.setItem('roomID', roomID);
+
 
                     //Moves to Next Page
                     this.navigateToConfirmationPage();
@@ -184,7 +183,7 @@ import firebaseApp from "@/firebase.js";
                         let [hour, minute] = timeString.split(':');
                         hour = parseInt(hour, 10);
                         const ampm = hour >= 12 ? 'PM' : 'AM';
-                        hour = hour || 12; // the hour '0' should be '12'
+                        // hour = hour || 12; // the hour '0' should be '12'
                         return `${hour}:${minute}`;
                         };
 
@@ -265,7 +264,7 @@ import firebaseApp from "@/firebase.js";
     }
     .select-button-container {
         align-items: flex-start;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border-radius: 10px;
         box-shadow: 0px 4px 19px #7793414c;
         display: flex;
