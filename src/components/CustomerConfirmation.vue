@@ -79,11 +79,11 @@
                 <div class="flex-container">
             </div>
             <div class="proceed-options">
-                    <button @click="redirectToPayment()" style="color:white"> Proceed to Payment Method</button>
+                    <button class="poppins-medium-white-16px" @click="redirectToPayment()" style="color:white"> Proceed to Payment Method</button>
                 </div>
 
-                <div class= "back-options">
-                    <button style="font-size:17px;color:white;" @click="goBack">Back</button>
+                <div class= "back-options ">
+                    <button class="poppins-medium-black-16px" @click="goBack" style="background-color: lightgray; color: black">Back</button>
                 </div>
             </div>
     
@@ -369,7 +369,6 @@ export default {
     }
 
     .proceed-options {
-        font-family:'Arial';
         color:white;
         width: 300px;
         background-color: var(--flamingo);
@@ -387,14 +386,13 @@ export default {
     }
 
     .back-options {
-        font-family:'Arial';
         /* color:white; */
         width: 300px;
-        background-color: #f5997b;
+        /* background-color: #f5997b; */
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 17px;
+        font-size: var(--font-size-m);
         padding: 10px 20px;
         text-align: center;
         text-decoration: none;
@@ -404,6 +402,9 @@ export default {
         margin-top:-40px;
         margin-left: 550px;
         height:40px;
+        background-color: lightgray;
+        color: black;
+        font-family: var(--font-family-poppins);
     }
 
 </style>

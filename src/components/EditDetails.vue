@@ -58,7 +58,7 @@
         </div>
 
         <div class = "back-options1">
-            <router-link to="/check-details" v-on:click="" class="poppins-medium-white-16px" style="background-color: transparent;">Back</router-link> 
+            <router-link to="/check-details" v-on:click="" class="poppins-medium-black-16px" style="background-color: transparent;">Back</router-link> 
 
         </div>
 
@@ -372,7 +372,7 @@ methods: {
         margin-left:  100px;
         font-family: 'Arial';
         width: 250px;
-        background-color: #f5997b;
+        background-color: lightgray;
         border: none;
         border-radius: 10px;
         font-size: 200px ;

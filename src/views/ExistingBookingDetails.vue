@@ -7,8 +7,8 @@
             <p class="poppins-bold-black-24px">Your Booking Details</p>
             <existing-booking-table/>
             <div class="ebt-buttons">
-                <button class = "ebt-button" @click = this.deleteBooking>Delete</button>
-                <button class="ebt-button" @click="$router.go(-1)">Back</button>
+                <button class = "ebt-button poppins-medium-white-16px" @click = this.deleteBooking>Delete</button>
+                <button class="ebt-button poppins-medium-black-16px" style="background-color: lightgray;color: black; font-family: var(--font-family-poppins);" @click="$router.go(-1)">Back</button>
             </div>
             <desktop-footer/>
         </div>
@@ -76,10 +76,9 @@ import { getFirestore, doc, getDoc, collection, deleteDoc, query, where, getDocs
 }
 
 .ebt-button{
-    background-color: var(--flamingo);
     width: 32%;
     padding: 0.2em;
-    font-family: poppins;
+    font-family: var(--font-family-poppins);
     display: inline-block;
     border-radius: 8px;
     color: white

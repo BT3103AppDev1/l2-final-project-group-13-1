@@ -1,6 +1,6 @@
 <template>
     <div class="container-center-horizontal">
-        <div class="postlogin-page">
+        <div class="topupwallet-page">
             <desktop-header/>
             <desktop-header-welcome/>
             <work-in-prog/>
@@ -37,7 +37,7 @@ import WorkInProg from '../components/workInProg.vue';
         /* position: absolute; */
     }
 
-    .postlogin-page {
+    .topupwallet-page {
         align-items: center;
         background-color: var(--white);
         border: 1px none;

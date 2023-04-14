@@ -102,7 +102,7 @@
             <button v-on:click="submitBooking" style="color:white;">Next</button> 
         </div>
         <div class ="back-button">
-            <button style="font-size:17px;color:white;" @click="goBack">Back</button>
+            <button style="color:black;" @click="goBack">Back</button>
         </div>
         
     </div>
@@ -412,7 +412,7 @@ const auth = getAuth(firebaseApp)
     }
 
     .next-button {
-        margin-top: 26px;
+        margin-top: 30px;
         margin-left: -125px;
         font-family: 'Arial';
         width: 250px;
@@ -429,15 +429,15 @@ const auth = getAuth(firebaseApp)
     }
 
     .back-button {
-        margin-top: -50px;
+        margin-top: -52px;
         margin-left: 200px;
         font-family: 'Arial';
         width: 250px;
-        background-color: #f5997b;
+        background-color: lightgray;
         border: none;
         border-radius: 10px;
         font-size: 200px ;
-        color: white;
+        color: black;
         cursor: pointer;
         font-size: 20px;
         padding: 10px 20px;

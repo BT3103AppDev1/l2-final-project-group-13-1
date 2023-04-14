@@ -13,7 +13,7 @@
         </div>
 
         <div class = "back-options">
-            <router-link to="/check-details" class='poppins-medium-white-16px' style="color:white;background-color:transparent;">Back</router-link> 
+            <router-link to="/check-details" class='poppins-medium-black-16px' style="color:black;background-color:transparent;">Back</router-link> 
         </div>  
     </div>
 
@@ -176,11 +176,11 @@ methods:
         margin-left: 120px;
         width: 300px;
         height:50px;
-        background-color: #f5997b;
+        background-color: lightgray;
         border: none;
         border-radius: 10px;
         font-size: 200px ;
-        color: white;
+        color: black;
         cursor: pointer;
         font-size: 20px;
         padding: 10px 20px;
