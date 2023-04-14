@@ -136,7 +136,17 @@ export default {
     const userData = {};
     this.selectedDuration = selectedDuration;
     this.selectedDateTime = selectedDateTime;
+    this.date = sessionStorage.getItem('date') || '';
+    this.price = sessionStorage.getItem('price') || 0;
+    this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
+    this.startTime = sessionStorage.getItem('startTime') || '';
+    this.endTime = sessionStorage.getItem('endTime') || '';
+    this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
+    this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
+    this.location = parseFloat(sessionStorage.getItem('location')) || 0;
+    this.location = sessionStorage.getItem('location') || '';
 
+    
     const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
     const userDocRef = doc(db, 'User', currentUser.uid);
     try {
@@ -151,19 +161,10 @@ export default {
     } catch (error) {
         console.error('Error getting document:', error);
     }
+    
     this.name = sessionStorage.getItem('name') || this.userData.name ;
     this.phoneNumber = sessionStorage.getItem('phoneNumber') || this.userData.phoneNumber;
     this.email = sessionStorage.getItem('email') || this.userData.email
-    this.date = sessionStorage.getItem('date') || '';
-    this.startTime = sessionStorage.getItem('startTime') || '';
-    this.endTime = sessionStorage.getItem('endTime') || '';
-    this.selectedRoomType = sessionStorage.getItem('selectedRoomType') || '';
-    this.noOfPax = parseFloat(sessionStorage.getItem('noOfPax')) || 0;
-    this.price = sessionStorage.getItem('price') || 0;
-    this.duration = parseFloat(sessionStorage.getItem('duration')) || 0;
-    this.location = parseFloat(sessionStorage.getItem('location')) || 0;
-    this.location = sessionStorage.getItem('location') || '';
-    
   },
   
   watch: {
@@ -178,7 +179,7 @@ export default {
     },
     remarks(newValue){
         sessionStorage.setItem('remarks', newValue);
-    }
+    },
 },
 
     methods : {
