@@ -277,6 +277,7 @@ export default {
                 //Save Selected Field Values in Session Storage
                 const selectedDate = this.selectedDateTime.split(' ')[0];
                 sessionStorage.setItem('date', selectedDate);
+                sessionStorage.setItem('dateTime', this.selectedDateTime);
                 sessionStorage.setItem('noOfPax', this.selectedNumPax);
                 sessionStorage.setItem('duration', this.selectedDuration);
                 sessionStorage.setItem('location', this.selectedLocation);

@@ -55,7 +55,7 @@
         const selectedLocation = sessionStorage.getItem('location');
         const selectedNumPax = sessionStorage.getItem('noOfPax');
         const selectedDuration = sessionStorage.getItem('duration');
-        const selectedDateTime = sessionStorage.getItem('date');
+        const selectedDateTime = sessionStorage.getItem('dateTime');
 
         //Update Component Data with Retrieved Items
         this.selectedLocation = selectedLocation;

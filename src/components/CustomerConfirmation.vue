@@ -132,7 +132,7 @@ export default {
     async created() {
     const db = getFirestore(firebaseApp);
     const selectedDuration = sessionStorage.getItem('duration');
-    const selectedDateTime = sessionStorage.getItem('date');
+    const selectedDateTime = sessionStorage.getItem('dateTime');
     const userData = {};
     this.selectedDuration = selectedDuration;
     this.selectedDateTime = selectedDateTime;
@@ -151,7 +151,6 @@ export default {
     } catch (error) {
         console.error('Error getting document:', error);
     }
-
     this.name = sessionStorage.getItem('name') || this.userData.name ;
     this.phoneNumber = sessionStorage.getItem('phoneNumber') || this.userData.phoneNumber;
     this.email = sessionStorage.getItem('email') || this.userData.email
