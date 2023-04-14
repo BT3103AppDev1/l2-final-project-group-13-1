@@ -5,7 +5,7 @@
         </div>
         <div class = "ebt-date">
             <p class="ebt-header">Date</p>
-            <p>{{this.date}}</p>
+            <p style="color: black;">{{this.date}}</p>
         </div>
         <br>
         <div class = "ebt-container">
@@ -223,6 +223,7 @@ td {
 .ebt-container{
     display:flex;
     justify-content:space-between;
+    color: black;
 }
 
 .box{
@@ -231,6 +232,7 @@ td {
 
 .ebt-header{
     font-weight: bold;
+    color: black;
 }
 
 .existing-booking-table{
