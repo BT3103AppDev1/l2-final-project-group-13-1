@@ -51,11 +51,11 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         justify-content: space-between;
     }
 
-    .aebt-button{
+    .aebt-button:not(.nohover){
     background-color: var(--flamingo);
     width: 15%;
     padding: 0.2em;
-    font-family: poppins;
+    font-family: var(--font-family-poppins);
     display: inline-block;
     border-radius: 8px;
     color: white;
