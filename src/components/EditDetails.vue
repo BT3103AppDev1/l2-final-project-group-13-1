@@ -129,6 +129,16 @@ export default {
 
 methods: {   
 
+
+    async getCurrentUser(auth) {
+      return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+          unsubscribe();
+          resolve(user);
+        }, reject);
+      });
+    },
+    
     validateEmail() {
       const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
       return regex.test(this.email);
@@ -174,7 +184,9 @@ methods: {
     //         return;
     //     }
 
-  const documentID = "xP3rCXxtjg3aRWiTNtNx"; // replace with actual customer ID
+//   const documentID = "xP3rCXxtjg3aRWiTNtNx"; // replace with actual customer ID
+  const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
+  const documentID = currentUser.uid;
   const customerDocRef = doc(customerRef, documentID);
   const userDoc = await getDoc(customerDocRef); // Add 'await' here
   const userData = userDoc.data();
