@@ -5,7 +5,7 @@
         </div>
         <div class = "ebt-date">
             <p class="ebt-header">Date</p>
-            <p>{{formattedDate}}</p>
+            <p style="color:black">{{formattedDate}}</p>
         </div>
         <br>
         <div class = "ebt-container">

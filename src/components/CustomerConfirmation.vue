@@ -28,7 +28,7 @@
                 <div class = "date-details">
                     <span class="poppins-bold-black-20px">Date:<br></span>
                     <div class = "the-date">
-                        <span class="poppins-normal-black-20px">{{ formattedDate }}<br></span>
+                        <span style="color: black;" class="poppins-normal-black-20px">{{ formattedDate }}<br></span>
                     </div>
                 </div>
 
