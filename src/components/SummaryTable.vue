@@ -73,7 +73,7 @@ export default {
     mounted() {
 
             const selectedDuration = sessionStorage.getItem('duration');
-            const selectedDateTime = sessionStorage.getItem('date');
+            const selectedDateTime = sessionStorage.getItem('dateTime');
             this.selectedDuration = selectedDuration;
             this.selectedDateTime = selectedDateTime;
 
@@ -151,26 +151,8 @@ export default {
         });
         },
 
-        // formattedTime() {
-        //     const formatTime = (timeString) => {
-        //         if (!timeString) return '';
-
-        //         let [hour, minute] = timeString.split(':');
-        //         hour = parseInt(hour, 10);
-        //         const ampm = hour >= 12 ? 'PM' : 'AM';
-        //         hour = hour % 12;
-        //         hour = hour || 12; // the hour '0' should be '12'
-        //         return `${hour}:${minute} ${ampm}`;
-        //     };
-
-        //     const formattedStartTime = formatTime(this.bookingData.startTime);
-        //     const formattedEndTime = formatTime(this.bookingData.endTime);
-
-        //     return `${formattedStartTime} - ${formattedEndTime}`;
-        // },
         timeRange() {
             if (this.selectedDateTime && this.selectedDuration) {
-
                 const startDateTime = new Date(this.selectedDateTime);
                 const endDateTime = new Date(startDateTime);
                 endDateTime.setHours(endDateTime.getHours() + parseInt(this.selectedDuration));
@@ -197,6 +179,7 @@ export default {
                 const formattedEndTime = formatTime(endTime);
 
                 return `${formattedStartTime} - ${formattedEndTime}`;
+
                 }
             },
     },
@@ -244,7 +227,7 @@ td {
 .back-to-home {
     font-family: poppins;
     color: white;
-    background-color: orangered;
+    background-color: var(--flamingo);
     border: none;
     border-radius: 5px;
     padding: 10px 20px;

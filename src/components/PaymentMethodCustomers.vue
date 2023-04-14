@@ -130,7 +130,7 @@ const auth = getAuth(firebaseApp)
 
         created() {
             const selectedDuration = sessionStorage.getItem('duration');
-            const selectedDateTime = sessionStorage.getItem('date');
+            const selectedDateTime = sessionStorage.getItem('dateTime');
 
             this.selectedDuration = selectedDuration;
             this.selectedDateTime = selectedDateTime;
