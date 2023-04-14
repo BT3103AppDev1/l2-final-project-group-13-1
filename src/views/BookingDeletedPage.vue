@@ -6,7 +6,7 @@
             <br>
             <p class="poppins-bold-black-24px">Booking Deleted!</p>
             <existing-booking-table/>
-            <button class = "dbt-button" style="color: ;"><router-link to="/allexistingbookingspage" color="white">Back to Home</router-link></button>
+            <a class = 'dbt-button' href="/allexistingbookingspage" >Back to Home</a>
             <desktop-footer/>
         </div>
     </div>
@@ -57,6 +57,8 @@ import DesktopFooter from '../components/DesktopFooter.vue';
     font-family: poppins;
     display: inline-block;
     border-radius: 8px;
-    color: white
+    color: white;
+    text-align: center;
+    pointer-events: default;
 }
 </style>

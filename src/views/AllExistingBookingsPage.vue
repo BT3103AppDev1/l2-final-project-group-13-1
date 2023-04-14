@@ -5,6 +5,7 @@
             <desktop-header-welcome/>
             <p class="poppins-bold-black-24px">Your Existing Bookings</p>
             <all-existing-bookings-table/>
+            <a class = 'aebt-button' href="/customer-home" >Back to Home</a>
             <desktop-footer/>
         </div>
     </div>
@@ -49,5 +50,17 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         width: 1440px;
         justify-content: space-between;
     }
+
+    .aebt-button{
+    background-color: var(--flamingo);
+    width: 15%;
+    padding: 0.2em;
+    font-family: poppins;
+    display: inline-block;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    pointer-events: default;
+}
 
 </style>
