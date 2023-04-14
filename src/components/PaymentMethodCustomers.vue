@@ -416,9 +416,9 @@ const auth = getAuth(firebaseApp)
         margin-left: -125px;
         font-family: 'Arial';
         width: 250px;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
@@ -433,9 +433,9 @@ const auth = getAuth(firebaseApp)
         margin-left: 200px;
         font-family: 'Arial';
         width: 250px;
-        background-color: orange;
+        background-color: #f5997b;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;

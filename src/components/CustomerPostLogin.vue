@@ -100,9 +100,9 @@ export default {
         font-family:'Arial';
         color:white;
         width: 300px;
-        background-color: orangered;
+        background-color:var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         cursor: pointer;
         font-size: 20px;
         padding: 10px 20px;
@@ -133,9 +133,9 @@ export default {
         font-family:'Arial';
         color:white;
         width: 300px;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         cursor: pointer;
         font-size: 20px;
         padding: 10px 20px;
@@ -166,9 +166,9 @@ export default {
         font-family:'Arial';
         color:white;
         width: 300px;
-        background-color: orangered;
+        background-color: var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         cursor: pointer;
         font-size: 20px;
         padding: 10px 20px;

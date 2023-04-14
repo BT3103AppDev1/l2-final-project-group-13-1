@@ -219,7 +219,7 @@ export default {
         margin-left: 250px;
         font-family: 'Arial';
         width: 250px;
-        background-color: orange;
+        background-color:#f5997b;
         border: none;
         border-radius: 20px;
         font-size: 200px ;

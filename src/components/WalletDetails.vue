@@ -125,6 +125,7 @@ methods:
     }
     .wallet-balance {
         align-items: top;
+        justify-content:center;
         box-shadow: 0px 4px 35px #00000014;
         background-color: var(--white);
         border-radius: 40px;
@@ -133,13 +134,16 @@ methods:
         height: 130px;
         margin-top: 20px;
         width: 1000px;
+        
     }
 
     .teoheng-wallet{
-        margin-left: 270px;
+        margin-left: 160px;
         font-size: 30px;
+        justify-content: center;
         font-weight:bold;
         color: black;
+        display:flex;
     }
 
     .value{
@@ -151,7 +155,7 @@ methods:
 
     .Top-Up-options {
         margin-top: 75px;
-        margin-left: -385px;
+        margin-left: -375px;
         width: 300px;
         background-color: var(--flamingo);
         border: none;
@@ -169,7 +173,7 @@ methods:
 
     .back-options {
         margin-top: 75px;
-        margin-left: 100px;
+        margin-left: 120px;
         width: 300px;
         height:50px;
         background-color: #f5997b;
@@ -229,7 +233,7 @@ methods:
         padding: 10px 20px;
         height: 50px;
         width: 200px;
-        margin-top:-105px;
+        margin-top:-100px;
         margin-left: -370px;
         font-size: 30px
         
@@ -243,7 +247,7 @@ methods:
         height: 50px;
         width: 100px;
         margin-left:70px;
-        margin-top:-95px;
+        margin-top:-90px;
         font-size:30px;
         
     }

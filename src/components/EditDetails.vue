@@ -321,7 +321,7 @@ methods: {
         width: 250px;
         background-color: grey;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
@@ -345,7 +345,7 @@ methods: {
         width: 250px;
         background-color: var(--flamingo);
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
@@ -362,7 +362,7 @@ methods: {
         width: 250px;
         background-color: #f5997b;
         border: none;
-        border-radius: 20px;
+        border-radius: 10px;
         font-size: 200px ;
         color: white;
         cursor: pointer;
