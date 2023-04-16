@@ -31,7 +31,7 @@
                     <div class="login-group-215">
                         <div class="login-group-55">
                             <div class="login-enter-your poppins-normal-black-16px">Enter your password</div>
-                                <input type="password" class="login-overlap-group-1" id="loginPassword" placeholder="Password" v-model="password"/>
+                                <input :type="passwordFieldType" class="login-overlap-group-1" id="loginPassword" placeholder="Password" v-model="password"/>
                         </div>
                         <div>
                           <button class="login-forgot-password" @click="showModal = true">Forgot Password</button>
@@ -54,6 +54,7 @@
                         <button class="login-sign-in" style="background-color: transparent; border-color: transparent; cursor:pointer; white-space: nowrap;" @click="register"> Sign in</button>
                     </div>
                 </div>
+                <img class="login-eye-1" src="../assets/eye-1.svg" alt="Toggle password visibility" @click="togglePasswordVisibility"/> 
             </div>
             <h1 class="login-title">Sign in</h1>
             <div class="login-saly-2 saly"></div> 
@@ -80,6 +81,24 @@ import router from '../router/router.js';
 
 export default {
   name: "LogIn",
+  data() {
+    return {
+      password: "",
+      passwordVisible: false,
+    };
+  },
+  computed: {
+    passwordFieldType() {
+      return this.passwordVisible ? "text" : "password";
+    },
+  },
+  methods: {
+    togglePasswordVisibility() {
+      this.passwordVisible = !this.passwordVisible;
+    },
+  },
+
+
   setup() {
     const email = ref("");
     const password = ref("");
@@ -546,7 +565,10 @@ left: 455px;
 position: absolute;
 top: 555px;
 width: 22px;
+cursor: pointer;
 }
+
+
 
 .login-title {
 color: var(--black);
