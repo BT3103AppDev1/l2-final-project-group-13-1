@@ -66,7 +66,7 @@ const routes = [
         component: WalletDetailsPage
     },
     {
-        path: '/customer-booking-system-page',
+        path: '/booking-system-page',
         name: 'BookingSystemPage',
         component: BookingSystemPage
     },
