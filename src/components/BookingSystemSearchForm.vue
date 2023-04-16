@@ -51,11 +51,7 @@
                         </label>
                     </div>
                     <div class="search-form-container-numpax-input">
-                        <select v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" required>
-                            <option value="4">4</option>
-                            <option value="6">6</option>
-                            <option value="10">10</option>
-                        </select>
+                        <input v-model="selectedNumPax" class="selectedNumPax valign-text-middle roboto-normal-mine-shaft-14px" type="number" min="1" max="99" maxlength="2" required>
                     </div>
             </div>
             <div class="search-form-container-duration">
@@ -67,10 +63,7 @@
                 </div>
                 <div class="search-form-container-duration-input">
                     <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
-                                <option value="1">1 Hour</option>
-                                <option value="2">2 Hours</option>
-                                <option value="3">3 Hours</option>
-                                <option value="4">4 Hours</option>
+                        <option v-for="(hour, index) in 12" :key="index" :value="hour">{{ hour }} Hour{{ hour > 1 ? 's' : '' }}</option>
                     </select>
                 </div>
             </div> 
