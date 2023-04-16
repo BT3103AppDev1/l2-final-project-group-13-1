@@ -17,47 +17,13 @@
         </div>  
     </div>
 
-    <div class = "wallet-history">
+    <div class = "wallet-history" style="text-align: center;">
         <label>
             <span class="poppins-bold-black-24px">Wallet History<br></span>
+            <span class="poppins-normal-black-24px" >This feature will be available soon!<br></span>
         </label>
     </div>
 
-    <div class="rectangle">
-    </div>
-    <div class="rectangle-date" style="color: black">
-        <p class="poppins-bold-black-24px">Date</p>
-    </div>
-    <div class="rectangle-action poppins-medium-black-16px" style="color: black">
-        <p class="poppins-bold-black-24px">Action</p>
-    </div>
-    <div class="rectangle-amount1" style="color: black">
-        <p class="poppins-bold-black-24px">Amount</p>
-    </div> 
-
-    <div class = "table-container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>10 Feb 2023</th>
-                    <th>Top-Up</th>
-                    <th>$5.00</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>08 Feb 2023</td>
-                    <td>Refund</td>
-                    <td>$15.00</td>
-                </tr>
-                <!-- <tr>
-                    <td>07 Feb 2023</td>
-                    <td>Booking Transaction</td>
-                    <td>$15.00</td>
-                </tr> -->
-            </tbody>
-        </table>
-    </div>
 
     
 
