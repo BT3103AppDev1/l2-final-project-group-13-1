@@ -1,10 +1,10 @@
 <template>
     <div class = "wallet-balance">
         <div class = "teoheng-wallet">
-            <span class="poppins-bold-black-16px"><strong>Your TEOHENG Wallet Balance</strong><br></span>
+            <span class="poppins-bold-black-24px" style="font-weight:700;">Your TEOHENG Wallet Balance :<br></span>
         </div>
         <div class = "value">
-            <span class="poppins-bold-black-16px">${{ walletBalance }}<br></span>
+            <span class="poppins-bold-black-24px">${{ walletBalance }}<br></span>
         </div>
         <div class = "Top-Up-options">
             <router-link to="/top-up-wallet">
@@ -107,9 +107,10 @@ methods:
         margin-left: 160px;
         font-size: 30px;
         justify-content: center;
-        font-weight:bold;
+        font-weight:700;
         color: black;
         display:flex;
+        font-family: var(--font-family-poppins);
     }
 
     .value{
@@ -145,11 +146,9 @@ methods:
         background-color: lightgray;
         border: none;
         border-radius: 10px;
-        font-size: 200px ;
         color: black;
         cursor: pointer;
-        font-size: 20px;
-        padding: 10px 20px;
+        padding: 15px 20px;
         text-align: center;
         text-decoration: none;
         box-shadow: 0px 4px 19px #7793414c;
