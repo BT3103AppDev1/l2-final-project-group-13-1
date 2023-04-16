@@ -75,7 +75,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
             navigateToHome() {
                 this.$router.push("/");
             },
-            navigateToHomeByUser() {
+            navigateToHomeByUser() {    
                 const db = getFirestore(firebaseApp);
                 const employeeRef = collection(db, "Employees");
                 // const customerRef = collection(db, "User");
