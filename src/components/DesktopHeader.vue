@@ -26,17 +26,19 @@
                         <!-- Add Button -->
                         <button class="home poppins-normal-stratos-16px" @click="navigateToHome">Home</button>
                         <!-- Add Button -->
-                        <a href="https://ktvteoheng.com.sg/" target="_blank" class="aboutUs poppins-normal-black-16px">About Us</a>
+                        <a href="https://ktvteoheng.com.sg/" target="_blank" class="aboutUs poppins-normal-black-16px" style="background-color: transparent;">About Us</a>
                         <!-- Add Button -->
-                        <a href="https://ktvteoheng.com.sg/booking/" target="_blank" class="pricing poppins-normal-black-16px">Pricing</a>
+                        <a href="https://ktvteoheng.com.sg/booking/" target="_blank" class="pricing poppins-normal-black-16px" style="background-color: transparent;">Pricing</a>
                         <!-- Add Button -->
-                        <a href="https://ktvteoheng.com.sg/ktv-booking/" target="_blank" class="faq poppins-normal-black-16px">FAQ</a>
+                        <a href="https://ktvteoheng.com.sg/ktv-booking/" target="_blank" class="faq poppins-normal-black-16px" style="background-color: transparent;">FAQ</a>
+                        <!-- Add Button -->
+                        <a href="https://ktvteoheng.com.sg/ktv-outlets/" target="_blank" class="poppins-normal-black-16px" style="color:black;background-color: transparent;">Contact Us</a>
                     </div>
                     <div class="nav-bar-container-2">
                         <button class="poppins-normal-white-13px" @click="navigateToHomeByUser">Book Now</button>
                     </div>
                     <div class="nav-bar-container-3">
-                        <a href="https://ktvteoheng.com.sg/ktv-outlets/" target="_blank" class="poppins-normal-white-13px">Contact Us</a>
+                        <button @click="handleSignOut" class="poppins-normal-white-13px">Log out</button>
                     </div>
                 </div>
             </header>
@@ -45,7 +47,7 @@
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import firebaseApp from "@/firebase.js";
 import { collection,  query, where, getFirestore, getDocs} from "firebase/firestore";
 
@@ -64,6 +66,12 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         })
         },
         methods: {
+            handleSignOut() {
+                const auth = getAuth()
+                signOut(auth).then(() => {
+                router.push("/");
+                })
+            },
             navigateToHome() {
                 this.$router.push("/");
             },
@@ -200,12 +208,12 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         align-items: flex-start;
         background-color: var(--flamingo);
         border-radius: 6px;
-        display: flex;
+        /* display: flex; */
         height: 41px;
         min-width: 132px;
         /* left: 340px; */
         position: relative;
-        padding: 10.1px 27.4px;
+        padding: 8px 27.4px;
         letter-spacing: 0;
         line-height: normal;
         min-height: 24px;
