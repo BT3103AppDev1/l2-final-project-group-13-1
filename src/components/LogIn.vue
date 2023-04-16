@@ -41,7 +41,7 @@
                               <h2 class="poppins-bold-black-24px">Forgot Password</h2>
                               <form @submit.prevent="changePassword" style="text-align: center;">
                                 <label class="poppins-medium-black-16px" style="margin-right: 10px;" for="email">Email: </label>
-                                <input type="email" id="email" name="email" v-model="useremail" required>
+                                <input type="email" id="email" name="email" v-model="email" required>
                                 <br>
                                 <button class="submit-button poppins-medium-white-16px" style="text-align: center;" type="submit">Submit</button>
                               </form>
@@ -85,6 +85,7 @@ export default {
     const password = ref("");
     const errMsg = ref("");
     const router = useRouter();
+    const useremail = ref("");
 
     const register = () => {
       signInWithEmailAndPassword(getAuth(), email.value, password.value)
@@ -143,6 +144,7 @@ export default {
       const auth = getAuth();
       sendPasswordResetEmail(auth, email.value)
         .then(() => {
+          console.log('Email:', email.value);
           alert(
             "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
           );
@@ -150,11 +152,17 @@ export default {
           showModal.value = false; // Close the modal
         })
         .catch((error) => {
-          alert(
-            "User not found in our database. Please sign up for an account instead."
-          );
-        });
-    };
+      if (error.code === "auth/user-not-found") {
+        alert(
+          "User not found in our database. Please sign up for an account instead."
+        );
+      } else {
+        alert("An error occurred while resetting your password. Please try again later.");
+        console.log(error);
+      }
+    });
+
+  };
 
 
     const showModal = ref(false);
