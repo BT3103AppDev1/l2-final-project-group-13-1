@@ -33,7 +33,22 @@
                             <div class="login-enter-your poppins-normal-black-16px">Enter your password</div>
                                 <input type="password" class="login-overlap-group-1" id="loginPassword" placeholder="Password" v-model="password"/>
                         </div>
-                        <button class="login-forgot-password" style="background-color: transparent; border-color: transparent; cursor:pointer;">Forgot Password</button>
+                        <div>
+                          <button class="login-forgot-password" @click="showModal = true">Forgot Password</button>
+                          <div v-if="showModal" class="modal">
+                            <div class="modal-content">
+                              <span class="close" @click="showModal = false">&times;</span>
+                              <h2 class="poppins-bold-black-24px">Forgot Password</h2>
+                              <form @submit.prevent="changePassword" style="text-align: center;">
+                                <label class="poppins-medium-black-16px" style="margin-right: 10px;" for="email">Email: </label>
+                                <input type="email" id="email" name="email" v-model="useremail" required>
+                                <br>
+                                <button class="submit-button poppins-medium-white-16px" style="text-align: center;" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                     </div>
                     <div class="login-overlap-group1">
                         <button class="login-sign-in" style="background-color: transparent; border-color: transparent; cursor:pointer; white-space: nowrap;" @click="register"> Sign in</button>
@@ -53,7 +68,14 @@
 
 <script>
 import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  FacebookAuthProvider,
+  sendPasswordResetEmail // add import statement here
+} from "firebase/auth";
 import { useRouter } from 'vue-router';
 import router from '../router/router.js';
 
@@ -118,19 +140,92 @@ export default {
         });
     };
 
+    const changePassword = () => {
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, email.value)
+        .then(() => {
+          alert(
+            "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
+          );
+          console.log("Password reset!");
+          showModal.value = false; // Close the modal
+        })
+        .catch((error) => {
+          alert(
+            "User not found in our database. Please sign up for an account instead."
+          );
+        });
+    };
+
+
+    const showModal = ref(false);
+
     return {
       email,
       password,
       errMsg,
       register,
       signInWithGoogle,
-      signInWithFacebook
+      signInWithFacebook,
+      changePassword, // add changePassword to the return object
+      showModal,
+
     };
   }
 };
 </script>
 
 <style scoped>
+.submit-button {
+    /* align-items: flex-start; */
+    background-color: var(--flamingo);
+    border-radius: 10px;
+    box-shadow: 0px 4px 19px #7793414c;
+    /* display: flex; */
+    height: 40px;
+    /* justify-content: center; */
+    /* min-width: 340px; */
+    padding: 5px 15px;
+    margin-top: 5%;
+    
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 40px;
+  box-shadow: 0px 4px 35px #00000014;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 33px 0;
+  width: 406px;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  margin: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+
 .login-v1 {
 align-items: flex-start;
 background-color: #fffdf8;
