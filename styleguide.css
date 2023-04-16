@@ -115,6 +115,14 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     font-style: normal;
 }
 
+.poppins-light-gray-17px {
+    color: var(--gray);
+    font-family: var(--font-family-poppins);
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    font-style: normal;
+}
+
 .poppins-normal-white-22px {
     color: var(--white);
     font-family: var(--font-family-poppins);
@@ -250,13 +258,13 @@ url("http://fonts.googleapis.com/css?family=Poppins:400,700,500|Roboto:400,700,5
     font-style: normal;
 }
 
-.poppins-light-gray-14px {
+/* .poppins-light-gray-14px {
     color: var(--gray);
     font-family: var(--font-family-poppins-light);
     font-size: var(--font-size-s);
     font-weight: 300;
     font-style: normal;
-}
+} */
 
 .poppins-normal-blaze-orange-22px {
     color: var(--blaze-orange);
