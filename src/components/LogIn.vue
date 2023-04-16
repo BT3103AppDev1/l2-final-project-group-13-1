@@ -171,6 +171,8 @@ export default {
           showModal.value = false; // Close the modal
         })
         .catch((error) => {
+        console.log('Email:', email.value);
+
       if (error.code === "auth/user-not-found") {
         alert(
           "User not found in our database. Please sign up for an account instead."
