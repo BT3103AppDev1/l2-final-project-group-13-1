@@ -1,7 +1,7 @@
 <template>
     <div class="container-center-horizontal">
         <div class="landing-page">
-            <desktop-header/>
+            <landing-header/>
             <!-- <desktop-header-welcome/> -->
             <landing/>
             <desktop-footer/>
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import DesktopHeader from '../components/DesktopHeader.vue';
+import LandingHeader from '../components/LandingHeader.vue';
 import DesktopHeaderWelcome from '../components/DesktopHeaderWelcome.vue';
 import DesktopFooter from '../components/DesktopFooter.vue';
 import Landing from '../components/Landing.vue';
     export default {
         name: "LandingPage",
         components: {
-            DesktopHeader,
+            LandingHeader,
             DesktopHeaderWelcome,
             Landing,
             DesktopFooter,
