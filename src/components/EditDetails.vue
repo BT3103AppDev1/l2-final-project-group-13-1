@@ -157,8 +157,7 @@ methods: {
     changePassword() { 
         const user = auth.currentUser;
         if (!user) {
-        // Redirect to login page or any other page
-            this.$router.push('/login'); // Replace '/login' with the desired route
+            this.$router.push('/login'); 
             return;
         } else if (user) {
 
@@ -167,7 +166,7 @@ methods: {
                     alert(
                         "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
                     );
-                    this.$router.push('/login');
+                    this.$router.push('/');
 
                 })
             .catch((error) => {
