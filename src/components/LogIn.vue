@@ -54,7 +54,6 @@
                         <button class="login-sign-in" style="background-color: transparent; border-color: transparent; cursor:pointer; white-space: nowrap;" @click="register"> Sign in</button>
                     </div>
                 </div>
-                <img class="login-eye-1" src="../assets/eye-1.svg" alt="icon-eye"/> 
             </div>
             <h1 class="login-title">Sign in</h1>
             <div class="login-saly-2 saly"></div> 
