@@ -58,7 +58,7 @@
         </div>
 
         <div class = "back-options1">
-            <router-link to="/check-details" v-on:click="" class="poppins-medium-black-16px" style="background-color: transparent;">Back</router-link> 
+            <router-link to="/check-details" class="poppins-medium-black-16px" style="background-color: transparent;">Back</router-link> 
 
         </div>
 
@@ -80,7 +80,7 @@ import {
 import { getFirestore, getDoc } from "firebase/firestore";
 import { collection, addDoc, updateDoc, getDocs, doc} from "firebase/firestore";
 // import { getAuth } from "firebase/auth";
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 
 
 
@@ -111,7 +111,7 @@ export default {
             }
 
         })
-        },
+    },
 
     
 
@@ -127,9 +127,7 @@ export default {
 // });
 
 
-methods: {   
-
-
+methods: {
     async getCurrentUser(auth) {
       return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -155,27 +153,46 @@ methods: {
     },
 
     changePassword() { 
-        const user = auth.currentUser;
-        if (!user) {
-            this.$router.push('/login'); 
-            return;
-        } else if (user) {
-
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+        this.$router.push('/login'); 
+        return;
+    } else if (user) {
+        this.customAlert("Are you sure you want to change your password? You will automatically be signed out if you choose to proceed.", () => {
             sendPasswordResetEmail(auth, this.useremail)
                 .then(() => {
                     alert(
                         "Password reset link has been sent to your email. Please check your email (especially your spam folder!) for further instructions."
                     );
-                    this.$router.push('/');
-
+                    console.log("Password reset!")
+                    this.handleSignOut();
                 })
             .catch((error) => {
                 alert(
                     "User not found in our database. Please sign up for an account instead."
                 );
             });
-        }
-    },
+        });
+    }
+},
+
+handleSignOut() {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        this.$router.push("/");
+    })
+},
+
+customAlert(message, action) {
+  if (confirm(message)) {
+      action();
+  } else {
+      console.log("User cancelled the action.");
+  }
+},
+
+
 
     async submitForm() {
     //     if (this.currentPassword === '') {
@@ -209,7 +226,6 @@ methods: {
         updateData.phoneNumber = userData.phoneNumber;
     }
     
-  
     updateDoc(customerDocRef, updateData)
       .then(() => {
         console.log("Customer information updated successfully!");
