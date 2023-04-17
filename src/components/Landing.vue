@@ -25,7 +25,7 @@
                             <h1 class="title">Book Your Room &amp; Sing With Us Today!</h1>
                         </div>
                         <p class="desc">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt illum voluptas odio labore omnis quaerat inventore soluta vel aperiam deleniti.
+                            Unleash your inner superstar at Teo Heng KTV, Singapore's ultimate karaoke destination! With over 30 outlets across the island, book your private karaoke room online anytime, anywhere. 
                         </p>
                     </div>
                     <div class="landing-overlap-group">
