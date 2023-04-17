@@ -62,6 +62,7 @@
                     </span>
                 </div>
                 <div class="search-form-container-duration-input">
+
                     <select v-model="selectedDuration" class="selectedDuration valign-text-middle roboto-normal-mine-shaft-14px" required>
                         <option v-for="(hour, index) in 12" :key="index" :value="hour">{{ hour }} Hour{{ hour > 1 ? 's' : '' }}</option>
                     </select>
