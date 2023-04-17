@@ -50,7 +50,7 @@ import DesktopFooter from '../components/DesktopFooter.vue';
         justify-content: space-between;
     }
 
-    .dbt-button{
+    .dbt-button:not(.nohover){
     background-color: var(--flamingo);
     width: 20%;
     padding: 0.2em;
