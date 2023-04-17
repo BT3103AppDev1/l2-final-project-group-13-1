@@ -69,6 +69,7 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
             handleSignOut() {
                 const auth = getAuth()
                 signOut(auth).then(() => {
+                sessionStorage.clear();
                 router.push("/");
                 })
             },
