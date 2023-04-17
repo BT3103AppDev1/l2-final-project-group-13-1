@@ -17,6 +17,7 @@ jobs:
           projectId: bt3103l2g13
 
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
