@@ -205,10 +205,10 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
     }
 
     .nav-bar-container-3 {
-        align-items: flex-start;
+        align-items: center;
         background-color: var(--flamingo);
         border-radius: 6px;
-        /* display: flex; */
+        display: flex;
         height: 41px;
         min-width: 132px;
         /* left: 340px; */
@@ -218,7 +218,9 @@ import { collection,  query, where, getFirestore, getDocs} from "firebase/firest
         line-height: normal;
         min-height: 24px;
         text-align: center;
-        /* width: 130px; */
+        width: 130px;
+        justify-content: center;
+
         
     }
 

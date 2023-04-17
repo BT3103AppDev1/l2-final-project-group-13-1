@@ -17,7 +17,7 @@
             <span class="poppins-bold-black-10px"><br></span>
             <p class="poppins-medium-black-16px">Want to make a new booking? <br />Click below to make a new booking today</p>
             <div class = "make-new-booking"> 
-                <router-link to="/customer-booking-system-page" class="poppins-medium-black-16px" style="font-size:17px;color:white;background-color:transparent;">Make New Booking</router-link> 
+                <router-link to="/booking-system-page" class="poppins-medium-black-16px" style="font-size:17px;color:white;background-color:transparent;">Make New Booking</router-link> 
             </div>
         </div>
         <div class="rectangle-profile-wallet">

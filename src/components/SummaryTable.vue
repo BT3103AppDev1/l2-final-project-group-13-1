@@ -47,7 +47,7 @@
     </div>
     <br>
 
-    <button class="back-to-home" @click="goToHome">Back to Home</button>
+    <button class="back-to-home" @click="navigateToHomeByUser">Back to Home</button>
   </template>
 
 <script>
@@ -135,10 +135,34 @@ export default {
             }
         },
 
-    goToHome() {
-        this.$router.push('/customer-home');
-    },
-    },
+    navigateToHomeByUser() {    
+                const db = getFirestore(firebaseApp);
+                const employeeRef = collection(db, "Employees");
+                // const customerRef = collection(db, "User");
+
+                const email = this.useremail;
+
+                const queryEmployee = query(employeeRef, where('email', '==', email))
+                //Might change based on collection name changes
+                // const queryCustomer = query(customerRef, where('email', '==', email))
+
+                if (this.useremail == "") {
+                    this.$router.push("/");
+                }
+
+               getDocs(queryEmployee)
+                .then((QuerySnapshot) => {
+                    if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/employee-home");
+                    } else {
+                        // getDocs(queryEmployee)
+                            // .then((QuerySnapshot) => {
+                                // if (QuerySnapshot.docs.length === 1) {
+                        this.$router.push("/customer-home");
+                    }
+                })
+            },
+        },
 
     computed: {
 

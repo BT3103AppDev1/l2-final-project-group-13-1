@@ -11,7 +11,7 @@
             <div class="employee-overlap-group1">
                 <p class="employee-check poppins-medium-black-16px">Check Available Timings and <br />Add Phone Call Bookings</p>
                 <div class="employee-overlap-group">
-                    <router-link to="/customer-booking-system-page" class="employee-x-booking poppins-medium-white-16px">Make New Booking</router-link>
+                    <router-link to="/booking-system-page" class="employee-x-booking poppins-medium-white-16px">Make New Booking</router-link>
                 </div>
             </div>
         </div>

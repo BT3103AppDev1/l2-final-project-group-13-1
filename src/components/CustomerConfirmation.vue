@@ -8,11 +8,11 @@
                 <div class = "name-phonenumber-email-fields">
                     <div class ="name" style="margin-left: 200px;">
                         <span class="poppins-normal-black-20px">Name:<br></span>
-                        <input type = "text" v-model="name" placeholder="  Amy">
+                        <input type = "text" v-model="name" placeholder="  Name">
                     </div>
                     <div class ="phonenumber" style="margin-left: 100px;">
                         <span class="poppins-normal-black-20px">Phone Number:<br></span>
-                        <input type = "text"  v-model="phoneNumber" placeholder="  98237486">
+                        <input type = "text"  v-model="phoneNumber" placeholder="  Phone Number">
                     </div>
                     <div class ="email" style="margin-left: 100px;">
                         <span class="poppins-normal-black-20px">Email Address:<br></span>
