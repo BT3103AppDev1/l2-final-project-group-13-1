@@ -5,19 +5,10 @@ import { getFirestore, collection, doc, setDoc, addDoc, orderBy, query,onSnapsho
 import { initializeApp } from "@firebase/app";
 import { useRouter } from 'vue-router';
 import router from '../router/router.js';
+import firebaseApp from "@/firebase.js";
+const db = getFirestore(firebaseApp); 
+const auth = getAuth(firebaseApp);
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDwoM56GhJCUw-dguqvF5gDXuXAl3Ay7To",
-  authDomain: "bt3103l2g13.firebaseapp.com",
-  projectId: "bt3103l2g13",
-  storageBucket: "bt3103l2g13.appspot.com",
-  messagingSenderId: "495008255418",
-  appId: "1:495008255418:web:edc2e3eb46fd4c47cca183"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export default {
   name: "Register",
@@ -60,7 +51,7 @@ export default {
           }
         });
     };
-    const signInWithGoogle = () => {
+    const signUpWithGoogle = () => {
       const provider = new GoogleAuthProvider();
       signInWithPopup(getAuth(), provider)
         .then(() => {
@@ -73,7 +64,7 @@ export default {
         });
     };
 
-    const signInWithFacebook = () => {
+    const signUpWithFacebook = () => {
       const provider = new FacebookAuthProvider();
       signInWithPopup(getAuth(), provider)
         .then(() => {
@@ -94,8 +85,8 @@ export default {
       phoneNumber,
       username,
       errMsg,
-      signInWithGoogle,
-      signInWithFacebook,
+      signUpWithGoogle,
+      signUpWithFacebook,
       registerAndAddUser
     };
   }
@@ -119,13 +110,13 @@ export default {
                 <div class="register-continue-with-google-center-fixed">
                     <div class="register-frame-6">
                         <img class="register-x-logo" src="../assets/google-logo.svg" alt="google logo" />
-                        <button class="register-continue-with-google register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithGoogle()">Sign Up with Google</button>
+                        <button class="register-continue-with-google register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signUpWithGoogle">Sign Up with Google</button>
                     </div>
                 </div>
                 <div class="register-continue-with-facebook-centre-fixed">
                     <div class="register-frame-6-1">
                         <img class="register-x-logo" src="../assets/facebook-logo.svg" alt="facebook logo" />
-                        <button class="register-continue-with-facebook register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signInWithFacebook()" >Sign Up with Facebook</button>
+                        <button class="register-continue-with-facebook register-continue-with" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="signUpWithFacebook" >Sign Up with Facebook</button>
                     </div>
                 </div>
                 <div class="register-or">
@@ -138,7 +129,7 @@ export default {
             <div class="register-welcome-to-teoheng-ktv">Welcome to TEOHENG KTV</div>
             <img class="register-family-ktv-studiopng" src="../assets/family-ktv-studio-png@2x.png" alt="Family-ktv-studio"/>
             <div class="register-overlap-group-2 register-overlap-group-3">
-                <button class="register-sign-up" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="registerAndAddUser()">Sign up</button>
+                <button class="register-sign-up" style="background-color: transparent; border-color: transparent; cursor:pointer;" @click="registerAndAddUser">Sign up</button>
             </div>
             <div class="register-group-56 register-group">
                 <div class="register-enter-your poppins-normal-black-16px">Enter Your Password</div>
