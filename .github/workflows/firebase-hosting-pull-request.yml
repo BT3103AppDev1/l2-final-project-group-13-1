@@ -16,7 +16,8 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BT3103L2G13 }}'
           projectId: bt3103l2g13
-
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
   test:
     name: Test
     runs-on: ubuntu-latest
