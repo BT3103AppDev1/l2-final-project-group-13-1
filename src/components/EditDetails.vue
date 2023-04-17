@@ -7,7 +7,7 @@
 
         <div class = "name-details">
             <span class="poppins-bold-black-17px">Enter your name<br></span>
-            <input type = "text" v-model="name" size = 112 placeholder="Amy" >
+            <input type = "text" v-model="name" size = 112 placeholder="Name" >
             <!-- <div class = "name-entry">
                 <span class="poppins-bold-black-17px">Enter your name<br></span>
             </div>
@@ -29,7 +29,7 @@
 
         <div class = "number-details">
             <span class="poppins-bold-black-17px">Enter your 8-digit phone number (+65 numbers only)<br></span>
-            <input type = "text" v-model = "phoneNumber" size  = 112 placeholder="98473825" maxlength="8" pattern="^[0-9]+$" >
+            <input type = "text" v-model = "phoneNumber" size  = 112 placeholder="Phone Number" maxlength="8" pattern="^[0-9]+$" >
         </div>
             <!-- <div class = "number-entry">
                 <span class="poppins-bold-black-17px">Enter your 8-digit phone number (+65 numbers only)<br></span>
@@ -96,6 +96,34 @@ export default {
         };
     },
 
+    async created() {
+        const auth = getAuth(firebaseApp)
+            onAuthStateChanged(auth, (user) => {
+                this.name = user.name
+            })
+    },
+
+    async created() {
+        const currentUser = await this.getCurrentUser(getAuth(firebaseApp));
+        const userDocRef = doc(db,'User',currentUser.uid);
+        try {
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+        // Set the wallet balance in your component data
+        this.userData = docSnap.data();
+        console.log(this.userData);
+        } else {
+        console.log('No such document');
+        }
+    } catch (error) {
+        console.error('Error getting document:', error);
+    }
+    
+    this.name = this.userData.name ;
+    this.phoneNumber = this.userData.phoneNumber;
+
+    },
+
     mounted() {
             const auth = getAuth(firebaseApp)
             onAuthStateChanged(auth, (user) => {
@@ -112,6 +140,8 @@ export default {
 
         })
     },
+    
+    
 
     
 
