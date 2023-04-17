@@ -121,15 +121,19 @@ export default {
           switch(error.message) {
             case "auth/invalid-email":
               errMsg.value = "Invalid email";
+              alert(errMsg.value);
               break;
             case "auth/user-not-found":
               errMsg.value = "No account with that email was found";
+              alert(errMsg.value);
               break;
             case "auth/wrong-password":
               errMsg.value = "Incorrect password";
+              alert(errMsg.value);
               break;
             default:
               errMsg.value = "Email or password is incorrect";
+              alert(errMsg.value);
               break;
           }
         });
