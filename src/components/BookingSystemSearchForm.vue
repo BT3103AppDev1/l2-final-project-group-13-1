@@ -267,6 +267,7 @@ export default {
              }
         },
         submit() {
+            sessionStorage.clear();
             if (this.checkFormValid()) {
                 //Save Selected Field Values in Session Storage
                 const selectedDate = this.selectedDateTime.split(' ')[0];
