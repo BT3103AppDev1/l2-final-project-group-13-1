@@ -5,7 +5,7 @@
             <desktop-header-welcome/>
             <p class="poppins-bold-black-24px">Your Branch's Bookings</p>
             <all-existing-bookings-table/>
-            <a class = 'aebt-button' href="/customer-home" >Back to Home</a>
+            <a class = 'aebt-button' href="/employee-home" >Back to Home</a>
             <desktop-footer/>
         </div>
     </div>
