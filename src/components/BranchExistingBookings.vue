@@ -61,7 +61,7 @@ export default {
       cell5.innerHTML = time;
       cell6.innerHTML = numberOfPax;
       cell7.innerHTML = roomType;
-      cell8.innerHTML = `<a style="background-color: transparent;" class="details-link" href="/ExistingBookingDetails/${bookingID}">More Details</a>`;
+      cell8.innerHTML = `<a style="background-color: transparent;" class="details-link" href="/EmployeeBookingDetails/${bookingID}">More Details</a>`;
       index += 1;
     }
   });

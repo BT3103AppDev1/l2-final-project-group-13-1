@@ -18,6 +18,8 @@ import EmployeePostLoginPage from "@/views/EmployeePostLoginPage.vue"
 import EmployeeSearchBookingPage from "@/views/EmployeeBookingSystemPage.vue"
 import TopUpWalletPage from "@/views/TopUpWalletPage.vue"
 import BranchExistingBookingsPage from "@/views/BranchExistingBookingsPage.vue"
+import EmployeeBookingDetails from "@/views/EmployeeBookingDetails.vue"
+import EmployeeBookingDeletedPage from "@/views/EmployeeBookingDeletedPage.vue"
 
 const routes = [
     {
@@ -113,6 +115,14 @@ const routes = [
       name: 'BranchExistingBookingsPage', 
       component: BranchExistingBookingsPage 
     },
+    { path: '/EmployeeBookingDetails/:bookingID',
+    name: 'EmployeeBookingDetaiils',
+    component: EmployeeBookingDetails
+    },
+    { path: '/EmployeeBookingDeletedPage/:bookingID',
+    name: 'EmployeeBookingDeletedPage',
+    component: EmployeeBookingDeletedPage
+    }
     
 ]
 const router = createRouter({
